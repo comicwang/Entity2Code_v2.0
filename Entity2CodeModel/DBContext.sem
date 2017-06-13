@@ -1,0 +1,47 @@
+﻿namespace $Infrastructure$
+{
+    using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
+    using System.Linq;
+    using System.Collections.Generic;
+
+    using $Infrastructure$.Map;
+    using iTelluro.Explorer.Infrastruct.CodeFirst.Seedwork;
+    using iTelluro.Explorer.Domain.CodeFirst.Seedwork;
+    using System.Data;
+    using System.Data.SqlClient;
+    using System;
+    using System.Data.Common;
+
+    public partial class $ContextName$ : DbContext, IQueryableUnitOfWork
+    {
+        public string DBSchema { get; set; }
+
+        public $ContextName$(string dbSchema)
+            : base("name=$ContextName$")
+        {
+            DBSchema = dbSchema;
+        }
+
+          public $ContextName$(string nameOrConnectionString, string dbSchema)
+            : base(nameOrConnectionString) 
+        {
+            DBSchema = dbSchema;
+        }
+
+          public $ContextName$(DbConnection existingConnection, string dbSchema)
+            : base(existingConnection, true) 
+        {
+            DBSchema = dbSchema;
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<MetaDataSqlContext>());
+            modelBuilder.Conventions.Remove<ModelNamespaceConvention>();
+            modelBuilder.Conventions.Remove<ModelContainerConvention>();
+        $DBContextContent$
+            base.OnModelCreating(modelBuilder);
+        }
+     }
+}

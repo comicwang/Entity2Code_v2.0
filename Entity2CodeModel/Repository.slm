@@ -1,0 +1,20 @@
+﻿using $DomainContext$;
+using iTelluro.Explorer.Infrastruct.CodeFirst.Seedwork;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using $DomainEntity$;
+
+namespace $Infrastructure$.Repository
+{
+    public class $Data2Obj$Repository : Repository<$Entity$>, I$Data2Obj$Repository
+    {
+        public $Data2Obj$Repository(IQueryableUnitOfWork unitOfWork)
+            : base(unitOfWork)
+        {
+
+        }
+
+    }
+}

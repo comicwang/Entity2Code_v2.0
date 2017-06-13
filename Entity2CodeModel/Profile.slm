@@ -1,0 +1,2 @@
+﻿            Mapper.CreateMap<$Entity$, $Data2Obj$DTO>();
+			Mapper.CreateMap<$Data2Obj$DTO, $Entity$>();

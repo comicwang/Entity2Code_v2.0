@@ -1,0 +1,20 @@
+﻿        /// <summary>
+        /// $Comment$
+        /// Author：$Author$
+        /// Organize：$Organize$
+        /// </summary>
+        $ParamComment$
+        $ReturnComment$
+        public $Return$ $Data2Obj$$MethodName$($Param$)
+        {
+            try
+            {
+                $NeedReturn$ _$Data2Obj$App.$MethodName$($InnerParam$);
+            }
+            catch (Exception ex)
+            {
+                ILog log = LogManager.GetLogger("$ProjectName$Serice-" + this.GetType().Name + "-" + MethodBase.GetCurrentMethod().Name);
+                log.Error(ex.Message);
+                $NeedReturn2$
+            }
+        }

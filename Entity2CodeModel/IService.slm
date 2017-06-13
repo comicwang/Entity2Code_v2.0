@@ -1,0 +1,42 @@
+﻿        #region $Data2Obj$
+
+        /// <summary>
+        /// 新增一条$Data2Obj$记录
+        /// </summary>
+        /// <param name="$Data2Obj$DTO">$Data2Obj$实体</param>
+        /// <returns>是否新增成功</returns>
+		[OperationContract]
+        bool $Data2Obj$Add( $Data2Obj$DTO $Data2Obj$DTO);
+
+        /// <summary>
+        /// 更新一条$Data2Obj$记录
+        /// </summary>
+        /// <param name="$Data2Obj$DTO">$Data2Obj$实体</param>
+        /// <returns>是否更新成功</returns>
+		[OperationContract]
+        bool $Data2Obj$Update( $Data2Obj$DTO $Data2Obj$DTO);
+
+        /// <summary>
+        /// 根据主键删除一条$Data2Obj$记录
+        /// </summary>
+        /// <param name="guid">主键值</param>
+        /// <returns>是否删除成功</returns>
+		[OperationContract]
+        bool $Data2Obj$Delete( string guid);
+
+        /// <summary>
+        /// 根据主键查询一条$Data2Obj$记录
+        /// </summary>
+        /// <param name="guid">主键值</param>
+        /// <returns>查询的结果</returns>
+		[OperationContract]
+        $Data2Obj$DTO $Data2Obj$QueryById( string guid);
+
+        /// <summary>
+        /// 查询$Data2Obj$所有的记录
+        /// </summary>
+        /// <returns>$Data2Obj$的所有记录集合</returns>
+		[OperationContract]
+        List<$Data2Obj$DTO> $Data2Obj$QueryAll();
+
+		#endregion

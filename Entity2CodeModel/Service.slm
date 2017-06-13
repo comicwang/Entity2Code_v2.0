@@ -1,0 +1,103 @@
+﻿        #region $Data2Obj$
+
+        /// <summary>
+        /// 属性注入$Data2Obj$App
+        /// </summary>
+        [Dependency]
+        public I$Data2Obj$App _$Data2Obj$App { get; set; }
+
+        /// <summary>
+        /// 新增一条$Data2Obj$记录
+        /// </summary>
+        /// <param name="$Data2Obj$DTO">$Data2Obj$实体</param>
+        /// <returns>是否新增成功</returns>
+        public bool $Data2Obj$Add($Data2Obj$DTO $Data2Obj$DTO)
+        {
+            try
+            {
+                return _$Data2Obj$App.Add($Data2Obj$DTO);
+            }
+            catch (Exception ex)
+            {
+                ILog log = LogManager.GetLogger("$ProjectName$Serice-" + this.GetType().Name + "-" + MethodBase.GetCurrentMethod().Name);
+                log.Error(ex.Message);
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 根据主键删除一条$Data2Obj$记录
+        /// </summary>
+        /// <param name="guid">主键值</param>
+        /// <returns>是否删除成功</returns>
+        public bool $Data2Obj$Delete(string guid)
+        {
+            try
+            {
+                return _$Data2Obj$App.Remove(guid);
+            }
+            catch (Exception ex)
+            {
+                ILog log = LogManager.GetLogger("$ProjectName$Serice-" + this.GetType().Name + "-" + MethodBase.GetCurrentMethod().Name);
+                log.Error(ex.Message);
+                return false;
+            }
+        }
+
+		  /// <summary>
+        /// 更新一条$Data2Obj$记录
+        /// </summary>
+        /// <param name="$Data2Obj$DTO">$Data2Obj$实体</param>
+        /// <returns>是否更新成功</returns>
+        public bool $Data2Obj$Update($Data2Obj$DTO $Data2Obj$DTO)
+        {
+            try
+            {
+                return _$Data2Obj$App.Update($Data2Obj$DTO);
+            }
+            catch (Exception ex)
+            {
+                ILog log = LogManager.GetLogger("$ProjectName$Serice-" + this.GetType().Name + "-" + MethodBase.GetCurrentMethod().Name);
+                log.Error(ex.Message);
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 根据主键查询一条$Data2Obj$记录
+        /// </summary>
+        /// <param name="guid">主键值</param>
+        /// <returns>查询的实体结果</returns>
+        public $Data2Obj$DTO $Data2Obj$QueryById(string guid)
+        {
+            try
+            {
+                return _$Data2Obj$App.Get(guid);
+            }
+            catch (Exception ex)
+            {
+                ILog log = LogManager.GetLogger("$ProjectName$Serice-" + this.GetType().Name + "-" + MethodBase.GetCurrentMethod().Name);
+                log.Error(ex.Message);
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 查询所有的$Data2Obj$记录
+        /// </summary>
+        /// <returns>所有的$Data2Obj$结果集</returns>
+        public List<$Data2Obj$DTO> $Data2Obj$QueryAll()
+        {
+            try
+            {
+                return _$Data2Obj$App.GetAll();
+            }
+            catch (Exception ex)
+            {
+                ILog log = LogManager.GetLogger("$ProjectName$Serice-" + this.GetType().Name + "-" + MethodBase.GetCurrentMethod().Name);
+                log.Error(ex.Message);
+                return null;
+            }
+        }
+
+        #endregion
