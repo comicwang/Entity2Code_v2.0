@@ -1,0 +1,2 @@
+﻿            _currentContainer.RegisterType<I$Data2Obj$Repository,$Data2Obj$Repository>();
+			_currentContainer.RegisterType<I$Data2Obj$App,$Data2Obj$App>();

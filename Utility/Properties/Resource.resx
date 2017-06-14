@@ -124,4 +124,152 @@
   <data name="img" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\img.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="RootPath" xml:space="preserve">
+    <value>D:\Entity2CodeModel</value>
+    <comment>模板文件路径</comment>
+  </data>
+  <data name="AttachDataSignBehavior" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AttachDataSignBehavior.sem;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Container" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Container.sem;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ContextUnit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ContextUnit.sem;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="DBContext" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DBContext.sem;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="DbContextExtensions" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DbContextExtensions.sem;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Entities" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Entities.sem;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="IService" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\IService.sem;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Profile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Profile.sem;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Service" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Service.sem;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UnityInstanceProvider" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\UnityInstanceProvider.sem;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="UnityInstanceProviderServiceBehavior" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\UnityInstanceProviderServiceBehavior.sem;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="WebConfig" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WebConfig.sem;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Application" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Application.slm;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="AutoMapper" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AutoMapper.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="AutoMapper_Net4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AutoMapper.Net4.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Container1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Container.slm;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Data2Obj" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Data2Obj.slm;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="DBContext1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DBContext.slm;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Entity" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Entity.slm;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="EntityFramework" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EntityFramework.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="IApplication" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\IApplication.slm;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="IRepository" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\IRepository.slm;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="IService1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\IService.slm;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="iTelluro_Explorer_Application_CodeFirst_Seedwork" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iTelluro.Explorer.Application.CodeFirst.Seedwork.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="iTelluro_Explorer_Domain_CodeFirst_Seedwork" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iTelluro.Explorer.Domain.CodeFirst.Seedwork.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="iTelluro_Explorer_InfoUtility" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iTelluro.Explorer.InfoUtility.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="iTelluro_Explorer_Infrastructure_CrossCutting" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iTelluro.Explorer.Infrastructure.CrossCutting.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="iTelluro_Explorer_Infrastructure_CrossCutting_NetFramework" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iTelluro.Explorer.Infrastructure.CrossCutting.NetFramework.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="iTelluro_Explorer_Infrastruct_CodeFirst_Seedwork" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iTelluro.Explorer.Infrastruct.CodeFirst.Seedwork.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="iTelluro_SSO" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iTelluro.SSO.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="iTelluro_SSO_Common" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iTelluro.SSO.Common.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="iTelluro_SSO_WebServices" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iTelluro.SSO.WebServices.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="iTelluro_SYS_Entity" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iTelluro.SYS.Entity.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="iTelluro_Utility" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iTelluro.Utility.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="log4net" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\log4net.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Map" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Map.slm;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="MethodApp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MethodApp.slm;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="MethodIApp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MethodIApp.slm;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="MethodIServer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MethodIServer.slm;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="MethodServer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MethodServer.slm;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Microsoft_Practices_Unity" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Microsoft.Practices.Unity.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Profile1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Profile.slm;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Repository" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Repository.slm;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Service1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Service.slm;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="GenerateOutput" xml:space="preserve">
+    <value>代码生成</value>
+  </data>
+  <data name="StateFail" xml:space="preserve">
+    <value>失败!</value>
+  </data>
+  <data name="StateSuccess" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="BeginGenerate" xml:space="preserve">
+    <value>开始创建代码</value>
+  </data>
 </root>

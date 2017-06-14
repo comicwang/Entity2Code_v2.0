@@ -1,0 +1,25 @@
+﻿using $DomainEntity$;
+using System;
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Linq.Expressions;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
+using System.Data;
+using System.Data.SqlClient;
+using System.Data.Entity.ModelConfiguration;
+
+namespace $Infrastructure$.Map
+{
+    internal class $Data2Obj$Map : EntityTypeConfiguration<$Entity$>
+    {
+        public $Data2Obj$Map(string schema = "$Schema$")
+        {
+            ToTable("$Entity$", schema);
+            HasKey($PrimaryKey$);
+$Property$$ForeignKey$          
+        }
+    }
+}

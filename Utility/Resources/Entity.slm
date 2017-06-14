@@ -1,0 +1,11 @@
+﻿using System;
+using System.Collections.Generic;
+using iTelluro.Explorer.Domain.CodeFirst.Seedwork;
+
+namespace $DomainEntity$
+{
+    public class $Entity$ : Entity
+    {
+$Property$$Navigation$$ForeignKey$$Constructor$
+    }
+}

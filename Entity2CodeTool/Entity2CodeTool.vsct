@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!--  This is the file that defines the actual layout and type of the commands.
+        It is divided in different sections (e.g. command definition, command
+        placement, ...), with each defining a specific set of properties.
+        See the comment before each section for more details about how to
+        use it. -->
+
+  <!--  The VSCT compiler (the tool that translates this file into the binary 
+        format that VisualStudio will consume) has the ability to run a preprocessor 
+        on the vsct file; this preprocessor is (usually) the C++ preprocessor, so 
+        it is possible to define includes and macros with the same syntax used 
+        in C++ files. Using this ability of the compiler here, we include some files 
+        defining some of the constants that we will use inside the file. -->
+
+  <!--This is the file that defines the IDs for all the commands exposed by VisualStudio. -->
+  <Extern href="stdidcmd.h"/>
+
+  <!--This header contains the command ids for the menus provided by the shell. -->
+  <Extern href="vsshlids.h"/>
+
+
+
+
+  <!--The Commands section is where we the commands, menus and menu groups are defined.
+      This section uses a Guid to identify the package that provides the command defined inside it. -->
+  <Commands package="guidEntity2CodeToolPkg">
+    <!-- Inside this section we have different sub-sections: one for the menus, another  
+    for the menu groups, one for the buttons (the actual commands), one for the combos 
+    and the last one for the bitmaps used. Each element is identified by a command id that  
+    is a unique pair of guid and numeric identifier; the guid part of the identifier is usually  
+    called "command set" and is used to group different command inside a logically related  
+    group; your package should define its own command set in order to avoid collisions  
+    with command ids defined by other packages. -->
+
+    
+    <!-- In this section you can define new menu groups. A menu group is a container for 
+         other menus or buttons (commands); from a visual point of view you can see the 
+         group as the part of a menu contained between two lines. The parent of a group 
+         must be a menu. -->
+
+    <Menus>
+      <Menu guid="guidEntity2CodeToolCmdSet" id="guidEntity2CodeToolCmdIDSet" priority="0x0700" type="Menu">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_MM_TOOLSADDINS"/>
+        <Strings>
+          <CommandName>&amp;Entity2Code</CommandName>
+          <ButtonText>&amp;Entity2Code</ButtonText>
+        </Strings>
+      </Menu>
+    </Menus>
+
+    <Groups>
+
+      <Group guid="guidEntity2CodeToolGroup" id="guidEntity2CodeToolIDGroup" priority="0x0100">
+        <Parent guid="guidEntity2CodeToolCmdSet" id="guidEntity2CodeToolCmdIDSet"/>
+      </Group>
+
+    </Groups>
+    
+    <!--Buttons section. -->
+    <!--This section defines the elements the user can interact with, like a menu command or a button 
+        or combo box in a toolbar. -->
+    <Buttons>
+      <!--To define a menu group you have to specify its ID, the parent menu and its display priority. 
+          The command is visible and enabled by default. If you need to change the visibility, status, etc, you can use
+          the CommandFlag node.
+          You can add more than one CommandFlag node e.g.:
+              <CommandFlag>DefaultInvisible</CommandFlag>
+              <CommandFlag>DynamicVisibility</CommandFlag>
+          If you do not want an image next to your command, remove the Icon node />--> 
+
+      <Button guid="guidEntity2CodeMain" id="guidEntity2CodeIDMain" priority="0x0100" type="Button">
+
+        <Icon guid="guidImages" id="bmpPic1" />
+        <Strings>
+          <ButtonText>开始创建</ButtonText>
+        </Strings>
+      </Button>
+
+      <Button guid="guidEntity2CodeAddMethod" id="guidEntity2CodeAddMethodIDManager" priority="0x0103" type="Button">
+        <Icon guid="guidImages" id="bmpPicArrows" />
+        <Strings>
+          <ButtonText>增加方法</ButtonText>
+        </Strings>
+      </Button>
+
+      <Button guid="guidEntity2CodeModelManager" id="guidEntity2CodeModelIDManager" priority="0x0101" type="Button">
+        <Icon guid="guidImages" id="bmpPicArrows" />
+        <Strings>
+          <ButtonText>模型管理</ButtonText>
+        </Strings>
+      </Button>
+
+      <Button guid="guidEntity2CodeReferManager" id="guidEntity2CodeReferIDManager" priority="0x0102" type="Button">
+        <Icon guid="guidImages" id="bmpPicArrows" />
+        <Strings>
+          <ButtonText>引用管理</ButtonText>
+        </Strings>
+      </Button>
+
+
+    </Buttons>
+    
+    <!--The bitmaps section is used to define the bitmaps that are used for the commands.-->
+    <Bitmaps>
+      <!--  The bitmap id is defined in a way that is a little bit different from the others: 
+            the declaration starts with a guid for the bitmap strip, then there is the resource id of the 
+            bitmap strip containing the bitmaps and then there are the numeric ids of the elements used 
+            inside a button definition. An important aspect of this declaration is that the element id 
+            must be the actual index (1-based) of the bitmap inside the bitmap strip. -->
+      <Bitmap guid="guidImages" href="Resources\Images.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows"/>
+      
+    </Bitmaps>
+ 
+  </Commands>
+
+  <CommandPlacements>
+    <CommandPlacement guid="guidEntity2CodeMain" id="guidEntity2CodeIDMain" priority="0x0100">
+      <Parent guid="guidEntity2CodeToolGroup" id="guidEntity2CodeToolIDGroup"/>
+    </CommandPlacement>
+    <CommandPlacement guid="guidEntity2CodeModelManager" id="guidEntity2CodeModelIDManager" priority="0x0101">
+      <Parent guid="guidEntity2CodeToolGroup" id="guidEntity2CodeToolIDGroup"/>
+    </CommandPlacement>
+     <CommandPlacement guid="guidEntity2CodeReferManager" id="guidEntity2CodeReferIDManager" priority="0x0101">
+      <Parent guid="guidEntity2CodeToolGroup" id="guidEntity2CodeToolIDGroup"/>
+    </CommandPlacement>
+    <CommandPlacement guid="guidEntity2CodeAddMethod" id="guidEntity2CodeAddMethodIDManager" priority="0x0101">
+      <Parent guid="guidEntity2CodeToolGroup" id="guidEntity2CodeToolIDGroup"/>
+    </CommandPlacement>
+    <CommandPlacement guid="guidEntity2CodeToolSetting" id="guidEntity2CodeToolIDSetting" priority="0x0101">
+      <Parent guid="guidEntity2CodeToolGroup" id="guidEntity2CodeToolIDGroup"/>
+    </CommandPlacement>
+  </CommandPlacements>
+
+
+
+  <Symbols>
+    <!-- This is the package guid. -->
+    <GuidSymbol name="guidEntity2CodeToolPkg" value="{e6183a32-ed9c-41e8-977c-38b9ee911151}" />
+    
+    <!-- This is the guid used to group the menu commands together -->
+    <GuidSymbol name="guidEntity2CodeToolCmdSet" value="{af924f2f-1b02-4340-b5d1-8da8fe8e531a}">
+      <IDSymbol name="guidEntity2CodeToolCmdIDSet" value="0x1020" />
+    </GuidSymbol>
+
+    <GuidSymbol name="guidEntity2CodeToolGroup" value="{c5112e48-fe9b-445c-b2b3-2c2052153f03}">
+      <IDSymbol name="guidEntity2CodeToolIDGroup" value="0x01010"/>
+    </GuidSymbol>
+
+    <GuidSymbol name="guidEntity2CodeMain" value="{0f7fb20e-a0cc-47a9-893a-7f55a85d37ff}">
+      <IDSymbol name="guidEntity2CodeIDMain" value="0x1300"/>
+    </GuidSymbol>
+
+    <GuidSymbol name="guidEntity2CodeModelManager" value="{a7754210-46da-491a-80e3-6f9674689632}">
+      <IDSymbol name="guidEntity2CodeModelIDManager" value="0x1400"/>
+    </GuidSymbol>
+
+    <GuidSymbol name="guidEntity2CodeAddMethod" value="{d7757210-46da-481a-80e3-6f9674189632}">
+      <IDSymbol name="guidEntity2CodeAddMethodIDManager" value="0x1700"/>
+    </GuidSymbol>
+
+    <GuidSymbol name="guidEntity2CodeReferManager" value="{85078341-f4cd-4ac7-8331-d3d9931bb2a5}">
+      <IDSymbol name="guidEntity2CodeReferIDManager" value="0x1500"/>
+    </GuidSymbol>
+
+    <GuidSymbol name="guidEntity2CodeToolSetting" value="{6D8AC12E-59C4-4708-9947-840880B5402F}">
+      <IDSymbol name="guidEntity2CodeToolIDSetting" value="0x1600"/>
+    </GuidSymbol>
+    
+    <GuidSymbol name="guidImages" value="{cacf368a-c017-44cd-88a4-47916765f995}" >
+      <IDSymbol name="bmpPic1" value="1" />
+      <IDSymbol name="bmpPic2" value="2" />
+      <IDSymbol name="bmpPicSearch" value="3" />
+      <IDSymbol name="bmpPicX" value="4" />
+      <IDSymbol name="bmpPicArrows" value="5" />
+      <IDSymbol name="bmpPicStrikethrough" value="6" />
+    </GuidSymbol>
+  </Symbols>
+
+</CommandTable>

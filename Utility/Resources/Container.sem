@@ -1,0 +1,71 @@
+﻿using iTelluro.Explorer.Infrastruct.CodeFirst.Seedwork;
+using iTelluro.Explorer.Infrastructure.CrossCutting.Adapter;
+using iTelluro.Explorer.Infrastructure.CrossCutting.Caching;
+using iTelluro.Explorer.Infrastructure.CrossCutting.Logging;
+using iTelluro.Explorer.Infrastructure.CrossCutting.NetFramework.Adapter;
+using iTelluro.Explorer.Infrastructure.CrossCutting.NetFramework.Logging;
+using iTelluro.Explorer.Infrastructure.CrossCutting.NetFramework.SSO;
+using iTelluro.Explorer.Infrastructure.CrossCutting.NetFramework.Caching;
+using iTelluro.Explorer.Infrastructure.CrossCutting.SSO;
+using $Application$;
+using $DomainContext$;
+using $IApplication$;
+using $Infrastructure$;
+using $Infrastructure$.Repository;
+using Microsoft.Practices.Unity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Configuration;
+
+namespace $Service$.InstanceProviders
+{
+    public static class Container
+    {
+        #region Properties
+
+        static IUnityContainer _currentContainer;
+
+        public static IUnityContainer Current
+        {
+            get { return _currentContainer; }
+        }
+
+        #endregion
+
+        #region Constructor
+
+        static Container()
+        {
+            ConfigureContainer();
+
+            ConfigureFactories();
+        }
+
+        #endregion
+
+        #region methods
+
+        static void ConfigureContainer()
+        {
+            _currentContainer = new UnityContainer();
+
+			$DBAppContent$
+			_currentContainer.RegisterType<IQueryableUnitOfWork,$ContextName$>($DBConstr$);
+        $ContainerContent$        
+            _currentContainer.RegisterType<ITypeAdapterFactory, AutomapperTypeAdapterFactory>(new ContainerControlledLifetimeManager());
+            _currentContainer.RegisterType<ICache, MemoryCache>(new ContainerControlledLifetimeManager());
+            _currentContainer.RegisterType<ISSO, WebSSO>(new ContainerControlledLifetimeManager());
+        }
+
+        static void ConfigureFactories()
+        {
+            LoggerFactory.SetCurrent(new Log4netFactory());//使用log4net
+            var typeAdapterFactory = _currentContainer.Resolve<ITypeAdapterFactory>();
+            TypeAdapterFactory.SetCurrent(typeAdapterFactory);
+        }
+        #endregion
+
+    }
+}

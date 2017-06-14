@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+  <Metadata>
+    <Identity Id="e6183a32-ed9c-41e8-977c-38b9ee911151" Version="2.0" Language="zh-Hans" Publisher="Comic Wang" />
+    <DisplayName>Entity2CodeTool</DisplayName>
+    <Description xml:space="preserve">Entity2CodeTool is an open source Visual Studio extension to help you to ceate DatabaseFirst or CodeFirst EntityFramework fastly</Description>
+    <MoreInfo>http://www.infoearth.com</MoreInfo>
+    <License>Lisence.rtf</License>
+    <ReleaseNotes>Lisence-2.0.rtf</ReleaseNotes>
+    <Icon>Resources\Package.ico</Icon>
+    <PreviewImage>Resources\preview.png</PreviewImage>
+  </Metadata>
+  <Installation InstalledByMsi="false" AllUsers="true">
+    <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[9.0,13.0)" />
+  </Installation>
+  <Dependencies>
+    <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.0,4.5]" />
+    <Dependency d:Source="Installed" Id="Microsoft.VisualStudio.MPF.11.0" DisplayName="Visual Studio MPF 11.0" Version="[11.0,13.0)" />
+  </Dependencies>
+  <Assets>
+    <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
+  </Assets>
+</PackageManifest>

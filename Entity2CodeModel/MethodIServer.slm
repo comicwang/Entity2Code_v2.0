@@ -1,9 +1,0 @@
-﻿        /// <summary>
-        /// $Comment$
-        /// Author：$Author$
-        /// Organize：$Organize$
-        /// </summary>
-        $ParamComment$
-        $ReturnComment$
-        [OperationContract]
-        $Return$ $Data2Obj$$MethodName$($Param$);

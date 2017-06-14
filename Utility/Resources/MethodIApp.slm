@@ -1,0 +1,8 @@
+﻿        /// <summary>
+        /// $Comment$
+        /// Author：$Author$
+        /// Organize：$Organize$
+        /// </summary>
+        $ParamComment$
+        $ReturnComment$
+        $Return$ $MethodName$($Param$);
