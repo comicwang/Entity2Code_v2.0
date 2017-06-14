@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Utility.Base
 {
-    static class CodeClassExtention
+    public static class CodeClassExtention
     {
         #region methods
 

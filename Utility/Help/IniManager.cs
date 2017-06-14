@@ -7,9 +7,9 @@ using System.Text;
 
 namespace Utility
 {
-    public class OperateIniFile
+    public class IniManager
     {
-        private static string IniFilePath = Path.Combine(Properties.Resource.RootPath, "Code.ini");
+        //private static string IniFilePath = Path.Combine(Properties.Resource.RootPath, "Code.ini");
 
 
         [DllImport("kernel32")]
@@ -21,15 +21,15 @@ namespace Utility
         {
             return null == s ? null : Encoding.GetEncoding(encodingName).GetBytes(s);
         }
-        public static string ReadString(string section, string key, string def, string encodingName = "utf-8", int size = 1024)
+        public static string ReadString(string section, string key,string path ,string def, string encodingName = "utf-8", int size = 1024)
         {
             byte[] buffer = new byte[size];
-            int count = GetPrivateProfileString(getBytes(section, encodingName), getBytes(key, encodingName), getBytes(def, encodingName), buffer, size, IniFilePath);
+            int count = GetPrivateProfileString(getBytes(section, encodingName), getBytes(key, encodingName), getBytes(def, encodingName), buffer, size, path);
             return Encoding.GetEncoding(encodingName).GetString(buffer, 0, count).Trim();
         }
-        public static bool WriteString(string section, string key, string value, string encodingName = "utf-8")
+        public static bool WriteString(string section, string key, string value,string path, string encodingName = "utf-8")
         {
-            return WritePrivateProfileString(getBytes(section, encodingName), getBytes(key, encodingName), getBytes(value, encodingName), IniFilePath);
+            return WritePrivateProfileString(getBytes(section, encodingName), getBytes(key, encodingName), getBytes(value, encodingName), path);
         }
 
     }

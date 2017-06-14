@@ -10,7 +10,7 @@ namespace Utility.Base
     /// <summary>
     /// 执行ExcuteCommand的一些常用命令
     /// </summary>
-    static class DTECommandExtention
+    public static class DTECommandExtention
     {
         /// <summary>
         /// 重新编译解决方案

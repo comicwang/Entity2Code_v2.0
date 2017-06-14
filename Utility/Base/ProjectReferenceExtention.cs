@@ -8,7 +8,7 @@ using VSLangProj;
 
 namespace Utility.Base
 {
-    static class ProjectReferenceExtention
+    public static class ProjectReferenceExtention
     {
         #region methods
 

@@ -12,7 +12,7 @@ namespace Utility.Base
     /// <summary>
     /// 提供项目操作的扩展
     /// </summary>
-    static class ProjectExtention
+    public static class ProjectExtention
     {
         #region methods
 

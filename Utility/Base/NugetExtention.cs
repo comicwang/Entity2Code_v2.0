@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Utility.Base
 {
-    static class NugetExtention
+    public static class NugetExtention
     {
         #region methods
 

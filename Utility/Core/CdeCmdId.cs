@@ -7,10 +7,51 @@ namespace Utility.Core
 {
     public class CdeCmdId
     {
+        static CdeCmdId()
+        {
+            SetBelongId(PrjCmdId.Infrastructure, InfrastructureId.DbContextExtensions);
+            SetBelongId(PrjCmdId.Infrastructure, InfrastructureId.Repository);
+            SetBelongId(PrjCmdId.Infrastructure, InfrastructureId.Map);
+            SetBelongId(PrjCmdId.Infrastructure, InfrastructureId.ContextUnit);
+            SetBelongId(PrjCmdId.Infrastructure, InfrastructureId.DBContext.Fix);
+            SetBelongId(PrjCmdId.Infrastructure, InfrastructureId.DBContext.UnFix);
+            SetBelongId(PrjCmdId.DomainEntity, DomainEntityId.Entity);
+            SetBelongId(PrjCmdId.DomainEntity, DomainEntityId.Entities);
+            SetBelongId(PrjCmdId.DomainContext, DomainContextId.IRepository);
+            SetBelongId(PrjCmdId.Application, ApplicationId.Application);
+            SetBelongId(PrjCmdId.IApplication, IApplicationId.IApplication);
+            SetBelongId(PrjCmdId.Data2Object, Data2ObjectId.Data2Obj);
+            SetBelongId(PrjCmdId.Data2Object, Data2ObjectId.Profile.Fix);
+            SetBelongId(PrjCmdId.Data2Object, Data2ObjectId.Profile.UnFix);
+            SetBelongId(PrjCmdId.Service, ServiceId.AttachDataSignBehavior);
+            SetBelongId(PrjCmdId.Service, ServiceId.Container.Fix);
+            SetBelongId(PrjCmdId.Service, ServiceId.Container.UnFix);
+            SetBelongId(PrjCmdId.Service, ServiceId.IService.Fix);
+            SetBelongId(PrjCmdId.Service, ServiceId.IService.UnFix);
+            SetBelongId(PrjCmdId.Service, ServiceId.Service.Fix);
+            SetBelongId(PrjCmdId.Service, ServiceId.Service.UnFix);
+            SetBelongId(PrjCmdId.Service, ServiceId.UnityInstanceProvider);
+            SetBelongId(PrjCmdId.Service, ServiceId.UnityInstanceProviderServiceBehavior);
+            SetBelongId(PrjCmdId.Service, ServiceId.WebConfig);
+        }
+
+        private static Dictionary<string, string> _idContainer = new Dictionary<string, string>();
+
+        public static void SetBelongId(string pid, string id)
+        {
+            if (!_idContainer.ContainsKey(pid))
+                _idContainer.Add(pid, id);
+            else
+                _idContainer[pid] = id;
+        }
+
+        public static string BelongId(string guid)
+        {
+            return _idContainer[guid];
+        }
+
         public static class InfrastructureId
         {
-            public static string BelongId = PrjCmdId.Infrastructure;
-
             public const string DbContextExtensions = "C51F47AD-4B33-4596-9B00-BF5A38A67669";
 
             public static class DBContext
@@ -28,8 +69,6 @@ namespace Utility.Core
 
         public static class DomainEntityId
         {
-            public static string BelongId = PrjCmdId.DomainEntity;
-
             public const string Entity = "E9354F4B-CB6B-488F-8E0E-B4AD24C7C246";
 
             public const string Entities = "EA8D007E-65ED-4AAE-9E02-988650EEA81F";
@@ -37,30 +76,22 @@ namespace Utility.Core
 
         public static class DomainContextId
         {
-            public static string BelongId = PrjCmdId.DomainContext;
-
             public const string IRepository = "4C22DD8D-A0C5-4616-85C9-AB82CBE2A6E6";
         }
 
         public static class ApplicationId
         {
-            public static string BelongId = PrjCmdId.Application;
-
             public const string Application = "E5543E7E-B17D-42A3-9AC2-6565F87E99D4";
         }
 
         public static class IApplicationId
         {
-            public static string BelongId = PrjCmdId.IApplication;
-
             public const string IApplication = "68A6482E-C517-46BF-B908-6D735BFE0B4C";
 
         }
 
         public static class Data2ObjectId
         {
-            public static string BelongId = PrjCmdId.Data2Object;
-
             public const string Data2Obj = "B673DE88-23A2-4C33-BA1F-FE2FFDBD1DE0";
 
             public static class Profile

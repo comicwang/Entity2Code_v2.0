@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Utility.Base
 {
-    static class ProjectSettingExtention
+    public static class ProjectSettingExtention
     {
         #region methods
 

@@ -7,6 +7,21 @@ namespace Utility.Core
 {
     public class PrjCmdId
     {
+        private static Dictionary<string, string> _pContainer = new Dictionary<string, string>();
+
+        public static string FindProjectName(string pid)
+        {
+            return _pContainer[pid];
+        }
+
+        public static void SetProjectName(string pid, string pname)
+        {
+            if (!_pContainer.ContainsKey(pid))
+                _pContainer.Add(pid, pname);
+            else
+                _pContainer[pid] = pname;
+        }
+
         public const string Infrastructure = "3B1FC4ED-4158-4556-89FC-0D52D2C05750";
 
         public const string DomainEntity = "574E6625-41B8-4FA2-A6CD-C6B2AA4BF71E";

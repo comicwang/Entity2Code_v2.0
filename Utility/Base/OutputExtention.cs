@@ -11,7 +11,7 @@ namespace Utility.Base
     /// <summary>
     /// 提供DTE输出的操作
     /// </summary>
-    static class OutputExtention
+    public static class OutputExtention
     {
         #region fields and attrs
 

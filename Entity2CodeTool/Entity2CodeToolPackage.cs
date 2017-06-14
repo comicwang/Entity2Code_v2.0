@@ -19,6 +19,8 @@ using Infoearth.Entity2CodeTool.Helps;
 using Infoearth.Entity2CodeTool.Logic;
 using Infoearth.Entity2CodeTool.UI;
 using Infoearth.Entity2CodeTool;
+using Utility;
+using System.Collections.Generic;
 
 namespace Infoearth.Entity2CodeTool
 {
@@ -66,7 +68,7 @@ namespace Infoearth.Entity2CodeTool
         /// </summary>
         protected override void Initialize()
         {
-            Utility.ConfirmResource.Copy();
+           
 
             Debug.WriteLine(string.Format(CultureInfo.CurrentCulture, "Entering Initialize() of: {0}", this.ToString()));
             base.Initialize();
@@ -140,7 +142,6 @@ namespace Infoearth.Entity2CodeTool
         private void CreateCode(object sender, EventArgs e) 
         {
             DTE dte = (DTE)(GetService(typeof(DTE)));
-            //Test(dte);
             dte.OutString("开始收集构架应用程序名称信息.", true);
             FormMain frm = new FormMain(dte.Solution.FullName);
             if (frm.ShowDialog() != DialogResult.OK)

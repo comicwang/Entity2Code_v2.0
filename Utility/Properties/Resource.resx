@@ -272,4 +272,13 @@
   <data name="BeginGenerate" xml:space="preserve">
     <value>开始创建代码</value>
   </data>
+  <data name="ConfigName" xml:space="preserve">
+    <value>Entity2Code.xml</value>
+  </data>
+  <data name="EntityNode" xml:space="preserve">
+    <value>Entity</value>
+  </data>
+  <data name="EntityPNode" xml:space="preserve">
+    <value>Entities</value>
+  </data>
 </root>

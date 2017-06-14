@@ -160,13 +160,18 @@
     <Compile Include="Base\ProjectReferenceExtention.cs" />
     <Compile Include="Base\ProjectSettingExtention.cs" />
     <Compile Include="Common\CommonContainer.cs" />
+    <Compile Include="Common\ModelContainer.cs" />
     <Compile Include="Core\ConfirmResource.cs" />
     <Compile Include="Core\CdeCmdId.cs" />
     <Compile Include="Core\CodeGenerate.cs" />
     <Compile Include="Core\PrjCmdId.cs" />
-    <Compile Include="Core\ProjectContainer.cs" />
+    <Compile Include="Common\TemplateContainer.cs" />
+    <Compile Include="Entity\ReplaceEntity.cs" />
+    <Compile Include="Entity\TemplateEntity.cs" />
+    <Compile Include="Enum\ProjectEnum.cs" />
     <Compile Include="Help\FileOprateHelp.cs" />
     <Compile Include="Help\IniManager.cs" />
+    <Compile Include="Help\xmlManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resource.Designer.cs">
       <AutoGen>True</AutoGen>
