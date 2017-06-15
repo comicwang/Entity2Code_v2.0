@@ -117,4 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BeginCollectInfo" xml:space="preserve">
+    <value>开始收集创建代码所需要的必要信息</value>
+  </data>
+  <data name="NameSpaceName" xml:space="preserve">
+    <value>NameSpace</value>
+  </data>
+  <data name="NodeName" xml:space="preserve">
+    <value>UserSetting</value>
+  </data>
+  <data name="SolutionPath" xml:space="preserve">
+    <value>项目存储路径</value>
+  </data>
 </root>

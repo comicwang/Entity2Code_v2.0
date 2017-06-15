@@ -32,7 +32,7 @@
             this.pic = new System.Windows.Forms.PictureBox();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlMain = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.txtProjectName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -74,14 +74,15 @@
             this.tbConStr = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.pnlMain3 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.rBtnCode = new System.Windows.Forms.RadioButton();
             this.rbtnDb = new System.Windows.Forms.RadioButton();
-            this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic)).BeginInit();
             this.pnlMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel2.SuspendLayout();
             this.pnlMain2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -91,6 +92,7 @@
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.pnlMain3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -126,7 +128,7 @@
             // 
             // pnlMain
             // 
-            this.pnlMain.Controls.Add(this.label4);
+            this.pnlMain.Controls.Add(this.pictureBox2);
             this.pnlMain.Controls.Add(this.txtProjectName);
             this.pnlMain.Controls.Add(this.label3);
             this.pnlMain.Controls.Add(this.label2);
@@ -136,29 +138,27 @@
             this.pnlMain.Size = new System.Drawing.Size(613, 430);
             this.pnlMain.TabIndex = 5;
             // 
-            // label4
+            // pictureBox2
             // 
-            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label4.Location = new System.Drawing.Point(29, 98);
-            this.label4.Name = "label4";
-            this.label4.Padding = new System.Windows.Forms.Padding(3);
-            this.label4.Size = new System.Drawing.Size(566, 146);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "项目的名称关键字。根据关键字，命名构架的各层名称，你还可以自定义各层项目名称，以及工具加载的各层的策略.";
+            this.pictureBox2.Location = new System.Drawing.Point(17, 99);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(577, 304);
+            this.pictureBox2.TabIndex = 6;
+            this.pictureBox2.TabStop = false;
             // 
             // txtProjectName
             // 
-            this.txtProjectName.Location = new System.Drawing.Point(29, 65);
+            this.txtProjectName.Location = new System.Drawing.Point(19, 65);
             this.txtProjectName.Name = "txtProjectName";
-            this.txtProjectName.Size = new System.Drawing.Size(566, 21);
+            this.txtProjectName.Size = new System.Drawing.Size(574, 21);
             this.txtProjectName.TabIndex = 1;
-            this.txtProjectName.Text = "ProjectName";
+            this.txtProjectName.Text = "MyProject";
             this.txtProjectName.TextChanged += new System.EventHandler(this.txtProjectName_TextChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(26, 44);
+            this.label3.Location = new System.Drawing.Point(20, 44);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(89, 12);
             this.label3.TabIndex = 5;
@@ -168,7 +168,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(24, 15);
+            this.label2.Location = new System.Drawing.Point(18, 15);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(181, 12);
             this.label2.TabIndex = 4;
@@ -251,9 +251,9 @@
             this.chkService.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkService.Location = new System.Drawing.Point(28, 306);
             this.chkService.Name = "chkService";
-            this.chkService.Size = new System.Drawing.Size(204, 16);
+            this.chkService.Size = new System.Drawing.Size(162, 16);
             this.chkService.TabIndex = 4;
-            this.chkService.Text = "是否同时创建服务端应用程序(&S):";
+            this.chkService.Text = "是否分开创建WCF服务(&S):";
             this.chkService.UseVisualStyleBackColor = true;
             this.chkService.CheckedChanged += new System.EventHandler(this.chkService_CheckedChanged);
             // 
@@ -553,8 +553,8 @@
             // 
             // pnlMain3
             // 
+            this.pnlMain3.Controls.Add(this.pictureBox1);
             this.pnlMain3.Controls.Add(this.groupBox4);
-            this.pnlMain3.Controls.Add(this.label15);
             this.pnlMain3.Controls.Add(this.label14);
             this.pnlMain3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain3.Location = new System.Drawing.Point(0, 86);
@@ -562,6 +562,14 @@
             this.pnlMain3.Size = new System.Drawing.Size(613, 430);
             this.pnlMain3.TabIndex = 8;
             this.pnlMain3.Visible = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(21, 107);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(570, 304);
+            this.pictureBox1.TabIndex = 10;
+            this.pictureBox1.TabStop = false;
             // 
             // groupBox4
             // 
@@ -589,6 +597,7 @@
             // rbtnDb
             // 
             this.rbtnDb.AutoSize = true;
+            this.rbtnDb.Enabled = false;
             this.rbtnDb.Location = new System.Drawing.Point(131, 32);
             this.rbtnDb.Name = "rbtnDb";
             this.rbtnDb.Size = new System.Drawing.Size(107, 16);
@@ -596,19 +605,6 @@
             this.rbtnDb.Text = "底层数据库优先";
             this.rbtnDb.UseVisualStyleBackColor = true;
             this.rbtnDb.CheckedChanged += new System.EventHandler(this.rbtnDb_CheckedChanged);
-            // 
-            // label15
-            // 
-            this.label15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label15.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label15.Location = new System.Drawing.Point(18, 110);
-            this.label15.Margin = new System.Windows.Forms.Padding(5);
-            this.label15.Name = "label15";
-            this.label15.Padding = new System.Windows.Forms.Padding(8);
-            this.label15.Size = new System.Drawing.Size(577, 146);
-            this.label15.TabIndex = 8;
-            this.label15.Text = "架构的底层类型决定了生成的架构是以哪种领域驱动模型存在。底层数据库优先，表示以数据库模型为基础结构层的主要内容。底层代码优先，将由映射类代码来充当基础结构层的主要" +
-    "内容，代码优先将提供Oracle的命名空间配置，具体配置在生成代码的服务层web.config配置节DBSchema";
             // 
             // label14
             // 
@@ -643,6 +639,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pic)).EndInit();
             this.pnlMain.ResumeLayout(false);
             this.pnlMain.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel2.ResumeLayout(false);
             this.pnlMain2.ResumeLayout(false);
             this.pnlMain2.PerformLayout();
@@ -660,6 +657,7 @@
             this.groupBox6.PerformLayout();
             this.pnlMain3.ResumeLayout(false);
             this.pnlMain3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
@@ -671,7 +669,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Panel pnlMain;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtProjectName;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
@@ -718,6 +715,7 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.RadioButton rBtnCode;
         private System.Windows.Forms.RadioButton rbtnDb;
-        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }

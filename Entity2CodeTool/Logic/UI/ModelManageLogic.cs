@@ -79,13 +79,13 @@ namespace Infoearth.Entity2CodeTool.Logic
         /// </summary>
         public static void WriteModel(string consType)
          {
-             consType = Path.GetFileNameWithoutExtension(consType);
-             if (consType.ToString() == "Application" || consType.ToString() == "IApplication")
-                 ApplicationLogic.Create(true);
-             else if (consType.ToString() == "Service" || consType.ToString() == "IService")
-                 ServiceLogic.CreateCode(true);
-             else if (consType.ToString() == "Map" && SolutionCommon.infrastryctType == InfrastructType.CodeFirst)
-                 InfrastructureLogic.CreateCodeFirst(true);
+             //consType = Path.GetFileNameWithoutExtension(consType);
+             //if (consType.ToString() == "Application" || consType.ToString() == "IApplication")
+             //    ApplicationLogic.Create(true);
+             //else if (consType.ToString() == "Service" || consType.ToString() == "IService")
+             //    ServiceLogic.CreateCode(true);
+             //else if (consType.ToString() == "Map" && SolutionCommon.infrastryctType == InfrastructType.CodeFirst)
+             //    InfrastructureLogic.CreateCodeFirst();
             //其他固定模板
 
          }

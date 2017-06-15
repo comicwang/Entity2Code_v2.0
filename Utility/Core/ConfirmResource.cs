@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using Utility.Properties;
 
-namespace Utility
+namespace Utility.Core
 {
     public class ConfirmResource
     {
@@ -15,8 +15,10 @@ namespace Utility
             if (!Directory.Exists(Resource.RootPath))
                 Directory.CreateDirectory(Resource.RootPath);
 
-            Confirm("Code.ini", Resource.CodeIni);
+            Confirm("Entity2Code.ini", Resource.Entity2Code);
             Confirm("img.jpg", Resource.img);
+            Confirm("coment.jpg", Resource.coment);
+            Confirm("first.jpg", Resource.first);
             Confirm("AttachDataSignBehavior.sem", Resource.AttachDataSignBehavior);
             Confirm("Container.sem", Resource.Container);
             Confirm("ContextUnit.sem", Resource.ContextUnit);
@@ -29,6 +31,7 @@ namespace Utility
             Confirm("UnityInstanceProvider.sem", Resource.UnityInstanceProvider);
             Confirm("UnityInstanceProviderServiceBehavior.sem", Resource.UnityInstanceProviderServiceBehavior);
             Confirm("WebConfig.sem", Resource.WebConfig);
+            Confirm("CodeBehind.sem", Resource.CodeBehind);
 
             Confirm("Application.slm", Resource.Application);
             Confirm("Container.slm", Resource.Container1);

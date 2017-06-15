@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language=\"C#\" Debug=\"true\" Service=\"{1}.{0}Service\" CodeBehind=\"{0}Service.svc.cs\" %>

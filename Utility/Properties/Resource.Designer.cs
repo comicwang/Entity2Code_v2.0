@@ -110,12 +110,22 @@ namespace Utility.Properties {
         }
         
         /// <summary>
-        ///   查找类似 
-        /// 的本地化字符串。
+        ///   查找 System.Byte[] 类型的本地化资源。
         /// </summary>
-        internal static string CodeIni {
+        internal static byte[] CodeBehind {
             get {
-                return ResourceManager.GetString("CodeIni", resourceCulture);
+                object obj = ResourceManager.GetObject("CodeBehind", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap coment {
+            get {
+                object obj = ResourceManager.GetObject("coment", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -219,6 +229,17 @@ namespace Utility.Properties {
         }
         
         /// <summary>
+        ///   查找类似 [UserSetting]
+        ///
+        ///NameSpace = iTelluro.Explorer 的本地化字符串。
+        /// </summary>
+        internal static string Entity2Code {
+            get {
+                return ResourceManager.GetString("Entity2Code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Byte[] 类型的本地化资源。
         /// </summary>
         internal static byte[] EntityFramework {
@@ -243,6 +264,16 @@ namespace Utility.Properties {
         internal static string EntityPNode {
             get {
                 return ResourceManager.GetString("EntityPNode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap first {
+            get {
+                object obj = ResourceManager.GetObject("first", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

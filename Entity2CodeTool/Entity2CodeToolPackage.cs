@@ -21,6 +21,8 @@ using Infoearth.Entity2CodeTool.UI;
 using Infoearth.Entity2CodeTool;
 using Utility;
 using System.Collections.Generic;
+using Utility.Common;
+using Infoearth.Entity2CodeTool.Properties;
 
 namespace Infoearth.Entity2CodeTool
 {
@@ -68,7 +70,7 @@ namespace Infoearth.Entity2CodeTool
         /// </summary>
         protected override void Initialize()
         {
-           
+            Utility.Core.ConfirmResource.Copy();
 
             Debug.WriteLine(string.Format(CultureInfo.CurrentCulture, "Entering Initialize() of: {0}", this.ToString()));
             base.Initialize();
@@ -98,8 +100,8 @@ namespace Infoearth.Entity2CodeTool
 
         private void AddMethod(object sender, EventArgs e)
         {
-            if (SolutionCommon.Dte == null)
-                SolutionCommon.Dte = (DTE)(GetService(typeof(DTE)));
+            if (CommonContainer.CommonServer == null)
+                CommonContainer.CommonServer = (DTE)(GetService(typeof(DTE)));
 
             FormAddMethod frmAdd = new FormAddMethod();
             frmAdd.Show();
@@ -112,8 +114,8 @@ namespace Infoearth.Entity2CodeTool
         /// <param name="e"></param>
         private void ReferManage(object sender, EventArgs e)
         {
-            if (SolutionCommon.Dte == null)
-                SolutionCommon.Dte = (DTE)(GetService(typeof(DTE)));
+            if (CommonContainer.CommonServer == null)
+                CommonContainer.CommonServer = (DTE)(GetService(typeof(DTE)));
 
             FormReferManager frmRefer = new FormReferManager();
             frmRefer.Show();
@@ -127,8 +129,8 @@ namespace Infoearth.Entity2CodeTool
         /// <param name="e"></param>
         private void ModelManage(object sender, EventArgs e)
         {
-            if (SolutionCommon.Dte == null)
-                SolutionCommon.Dte = (DTE)(GetService(typeof(DTE)));
+            if (CommonContainer.CommonServer == null)
+                CommonContainer.CommonServer = (DTE)(GetService(typeof(DTE)));
 
             FormModelManager frmModel = new FormModelManager();
             frmModel.Show();
@@ -139,30 +141,31 @@ namespace Infoearth.Entity2CodeTool
         /// See the Initialize method to see how the menu item is associated to this function using
         /// the OleMenuCommandService service and the MenuCommand class.
         /// </summary>
-        private void CreateCode(object sender, EventArgs e) 
+        private void CreateCode(object sender, EventArgs e)
         {
-            DTE dte = (DTE)(GetService(typeof(DTE)));
-            dte.OutString("开始收集构架应用程序名称信息.", true);
-            FormMain frm = new FormMain(dte.Solution.FullName);
+            if (CommonContainer.CommonServer == null)
+                CommonContainer.CommonServer = (DTE)(GetService(typeof(DTE)));
+
+            CommonContainer.CommonServer.OutString(Resources.BeginCollectInfo, true);
+
+            //获取项目的信息
+            FormMain frm = new FormMain();
             if (frm.ShowDialog() != DialogResult.OK)
                 return;
-            Solution sln = dte.Solution;
-            if (string.IsNullOrEmpty(sln.FullName))
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            dialog.RootFolder = Environment.SpecialFolder.MyComputer;
+            dialog.Description = Resources.SolutionPath;
+            if (dialog.ShowDialog() == DialogResult.OK)
             {
-                FolderBrowserDialog dialog = new FolderBrowserDialog();
-                dialog.RootFolder = Environment.SpecialFolder.MyComputer;
-                dialog.Description = "项目存储路径";
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    sln.Create(string.Format("iTelluro.Explorer.{0}.sln", SolutionCommon.ProjectName), string.Format("iTelluro.Explorer.{0}", SolutionCommon.ProjectName));
-                    dte.Solution.SaveAs(Path.Combine(dialog.SelectedPath, string.Format("iTelluro.Explorer.{0}.sln", SolutionCommon.ProjectName)));
-                }
-                else
-                    return;
+                string projectName = KeywordContainer.Resove("$ProjectName$");
+                string space = IniManager.ReadString(Resources.NodeName, Resources.NameSpaceName, "");
+                CommonContainer.CommonServer.Solution.Create(string.Format("{1}.{0}.sln", projectName, space), string.Format("{1}.{0}", space, projectName));
+                CommonContainer.CommonServer.Solution.SaveAs(Path.Combine(dialog.SelectedPath, string.Format("{1}.{0}.sln", projectName, space)));
             }
+            else
+                return;
 
-            SolutionCommon.Dte = dte;
-            SolutionStrategy strategy = new SolutionStrategy(dte);
+            SolutionStrategy strategy = new SolutionStrategy();
             strategy.BeginStrategy();
         }
          

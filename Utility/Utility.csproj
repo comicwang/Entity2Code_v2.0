@@ -159,18 +159,33 @@
     <Compile Include="Base\ProjectItemExtention.cs" />
     <Compile Include="Base\ProjectReferenceExtention.cs" />
     <Compile Include="Base\ProjectSettingExtention.cs" />
+    <Compile Include="CodeFirst\CodeFirstTools.cs" />
+    <Compile Include="CodeFirst\Column.cs" />
+    <Compile Include="CodeFirst\ForeignKey.cs" />
+    <Compile Include="CodeFirst\OracleSchemaReader.cs" />
+    <Compile Include="CodeFirst\SchemaReader.cs" />
+    <Compile Include="CodeFirst\SqlServerSchemaReader.cs" />
+    <Compile Include="CodeFirst\Table.cs" />
+    <Compile Include="CodeFirst\Tables.cs" />
+    <Compile Include="CodeFirst\UniqueIndex.cs" />
     <Compile Include="Common\CommonContainer.cs" />
-    <Compile Include="Common\ModelContainer.cs" />
+    <Compile Include="Common\KeywordContainer.cs" />
+    <Compile Include="Common\MsgBoxHelp.cs" />
+    <Compile Include="Converter\StringConverter.cs" />
+    <Compile Include="Core\CodeFirstLogic.cs" />
     <Compile Include="Core\ConfirmResource.cs" />
     <Compile Include="Core\CdeCmdId.cs" />
-    <Compile Include="Core\CodeGenerate.cs" />
+    <Compile Include="Core\CodeGenerateBase.cs" />
     <Compile Include="Core\PrjCmdId.cs" />
     <Compile Include="Common\TemplateContainer.cs" />
     <Compile Include="Entity\ReplaceEntity.cs" />
     <Compile Include="Entity\TemplateEntity.cs" />
     <Compile Include="Enum\ProjectEnum.cs" />
+    <Compile Include="Generate\CodeGenerate.cs" />
+    <Compile Include="Generate\TempGenerate.cs" />
     <Compile Include="Help\FileOprateHelp.cs" />
     <Compile Include="Help\IniManager.cs" />
+    <Compile Include="Help\SolutionExplorHelp.cs" />
     <Compile Include="Help\xmlManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resource.Designer.cs">
@@ -189,7 +204,7 @@
     <None Include="Key.snk" />
     <None Include="Resources\Application.slm" />
     <None Include="Resources\AttachDataSignBehavior.sem" />
-    <None Include="Resources\CodeIni.txt" />
+    <None Include="Resources\CodeBehind.sem" />
     <None Include="Resources\Container.sem" />
     <None Include="Resources\Container.slm" />
     <None Include="Resources\ContextUnit.sem" />
@@ -199,6 +214,7 @@
     <None Include="Resources\DbContextExtensions.sem" />
     <None Include="Resources\Entities.sem" />
     <None Include="Resources\Entity.slm" />
+    <None Include="Resources\Entity2Code.ini" />
     <None Include="Resources\IApplication.slm" />
     <None Include="Resources\IRepository.slm" />
     <None Include="Resources\IService.sem" />
@@ -268,7 +284,12 @@
   <ItemGroup>
     <None Include="Resources\log4net.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\coment.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\first.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

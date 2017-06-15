@@ -212,31 +212,31 @@ namespace Infoearth.Entity2CodeTool.UI
             template.Entity = _selectEntity.Entity;
             template.Data2Obj = _selectEntity.Data2Obj.Substring(0, _selectEntity.Data2Obj.Length - 3);
 
-            CodeAppendManager manager = new CodeAppendManager(ConstructType.MethodApp, template);
-            build1.Clear();
-            manager.BuildTaget = build1;
-            manager.CreateCode();
+            //CodeAppendManager manager = new CodeAppendManager(ConstructType.MethodApp, template);
+            //build1.Clear();
+            //manager.BuildTaget = build1;
+            //manager.CreateCode();
 
-            FileOprateHelp.WriteMethod(ProjectContainer.Application, build1.ToString(), template, template.Data2Obj + "App");
+            //FileOprateHelp.WriteMethod(ProjectContainer.Application, build1.ToString(), template, template.Data2Obj + "App");
 
-            CodeAppendManager manager1 = new CodeAppendManager(ConstructType.MethodIApp, template);
-            build1.Clear();
-            manager1.BuildTaget = build1;
-            manager1.CreateCode();
+            //CodeAppendManager manager1 = new CodeAppendManager(ConstructType.MethodIApp, template);
+            //build1.Clear();
+            //manager1.BuildTaget = build1;
+            //manager1.CreateCode();
 
-            FileOprateHelp.WriteMethod(ProjectContainer.IApplication, build1.ToString(), template, "I" + template.Data2Obj + "App");
+            //FileOprateHelp.WriteMethod(ProjectContainer.IApplication, build1.ToString(), template, "I" + template.Data2Obj + "App");
 
-            CodeAppendManager manager2 = new CodeAppendManager(ConstructType.MethodServer, template);
-            build1.Clear();
-            manager2.BuildTaget = build1;
-            manager2.CreateCode();
+            //CodeAppendManager manager2 = new CodeAppendManager(ConstructType.MethodServer, template);
+            //build1.Clear();
+            //manager2.BuildTaget = build1;
+            //manager2.CreateCode();
 
-            FileOprateHelp.WriteMethod(ProjectContainer.Service, build1.ToString(), template, SolutionCommon.ProjectName + "Service.svc");
+            //FileOprateHelp.WriteMethod(ProjectContainer.Service, build1.ToString(), template, SolutionCommon.ProjectName + "Service.svc");
 
-            CodeAppendManager manager3 = new CodeAppendManager(ConstructType.MethodIServer, template);
-            build1.Clear();
-            manager3.BuildTaget = build1;
-            manager3.CreateCode();
+            //CodeAppendManager manager3 = new CodeAppendManager(ConstructType.MethodIServer, template);
+            //build1.Clear();
+            //manager3.BuildTaget = build1;
+            //manager3.CreateCode();
 
             FileOprateHelp.WriteMethod(ProjectContainer.Service, build1.ToString(), template, "I" + SolutionCommon.ProjectName + "Service");
 

@@ -18,8 +18,8 @@ namespace $Infrastructure$.Map
         public $Data2Obj$Map(string schema = "$Schema$")
         {
             ToTable("$Entity$", schema);
-            HasKey($PrimaryKey$);
-$Property$$ForeignKey$          
+            HasKey($MapPrimaryKey$);
+            $MapProperty$$MapForeignKey$          
         }
     }
 }

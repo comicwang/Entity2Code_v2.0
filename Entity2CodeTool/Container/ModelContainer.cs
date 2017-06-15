@@ -52,21 +52,21 @@ namespace Infoearth.Entity2CodeTool
         private static void ConfigContainer()
         {
             _models = new ContainerModels();
-            RegistSource("$Data2Obj$", "", "应用层实体名称");
-            RegistSource("$Entity$", "", "领域层实体名称");
-            RegistSource("$ProjectName$", SolutionCommon.ProjectName, "创建的项目名称");
-            RegistSource("$Infrastructure$", SolutionCommon.Infrastructure, "基础结构层项目名称");
-            RegistSource("$DomainEntity$", SolutionCommon.DomainEntity, "领域实体层项目名称");
-            RegistSource("$DomainContext$", SolutionCommon.DomainContext, "领域层项目名称");
-            RegistSource("$Application$", SolutionCommon.Application, "应用层项目名称");
-            RegistSource("$IApplication$", SolutionCommon.IApplication, "应用接口层项目名称");
-            RegistSource("$Data2Object$", SolutionCommon.Data2Object, "应用实体层项目名称");
-            RegistSource("$Service$", SolutionCommon.Service, "服务层项目名称");
-            RegistSource("$ProfileContent$", CodeBuilderContainer.ProfileBuilder, "领域层实体转换注册内容");
-            RegistSource("$ContainerContent$", CodeBuilderContainer.ContainBuilder, "服务层容器注册内容");
-            RegistSource("$ServiceContent$", CodeBuilderContainer.ServiceBuilder, "服务层函数内容");
-            RegistSource("$IServiceContent$", CodeBuilderContainer.IServiceBuilder, "服务层接口内容");
-            RegistSource("$DBContextContent$", CodeBuilderContainer.DBContextBuilder, "数据库连接字符串内容（数据库优先）");
+            //RegistSource("$Data2Obj$", "", "应用层实体名称");
+            //RegistSource("$Entity$", "", "领域层实体名称");
+            //RegistSource("$ProjectName$", SolutionCommon.ProjectName, "创建的项目名称");
+            //RegistSource("$Infrastructure$", SolutionCommon.Infrastructure, "基础结构层项目名称");
+            //RegistSource("$DomainEntity$", SolutionCommon.DomainEntity, "领域实体层项目名称");
+            //RegistSource("$DomainContext$", SolutionCommon.DomainContext, "领域层项目名称");
+            //RegistSource("$Application$", SolutionCommon.Application, "应用层项目名称");
+            //RegistSource("$IApplication$", SolutionCommon.IApplication, "应用接口层项目名称");
+            //RegistSource("$Data2Object$", SolutionCommon.Data2Object, "应用实体层项目名称");
+            //RegistSource("$Service$", SolutionCommon.Service, "服务层项目名称");
+            //RegistSource("$ProfileContent$", CodeBuilderContainer.ProfileBuilder, "领域层实体转换注册内容");
+            //RegistSource("$ContainerContent$", CodeBuilderContainer.ContainBuilder, "服务层容器注册内容");
+            //RegistSource("$ServiceContent$", CodeBuilderContainer.ServiceBuilder, "服务层函数内容");
+            //RegistSource("$IServiceContent$", CodeBuilderContainer.IServiceBuilder, "服务层接口内容");
+            //RegistSource("$DBContextContent$", CodeBuilderContainer.DBContextBuilder, "数据库连接字符串内容（数据库优先）");
         }
 
         /// <summary>

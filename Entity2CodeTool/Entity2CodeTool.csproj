@@ -191,39 +191,15 @@
     <Compile Include="HelpsAndExtentions\DTEExtentions\ProjectSettingExtention.cs" />
     <Compile Include="HelpsAndExtentions\ResourceFileHelp.cs" />
     <Compile Include="HelpsAndExtentions\SolutionExplorHelp.cs" />
-    <Compile Include="Logic\CodeCerate\CodeAppendManager.cs" />
-    <Compile Include="Logic\CodeCerate\CodeCreateManager.cs" />
-    <Compile Include="Logic\CodeCerate\CodeManageBase.cs" />
-    <Compile Include="Logic\CodeCerate\CodeStaticManager.cs" />
-    <Compile Include="Logic\CodeCerate\Data2ObjCerateManager.cs" />
-    <Compile Include="Logic\CodeFirst\CodeFirstTools.cs" />
-    <Compile Include="Logic\CodeFirst\Column.cs" />
-    <Compile Include="Logic\CodeFirst\ForeignKey.cs" />
-    <Compile Include="Logic\CodeFirst\OracleSchemaReader.cs" />
-    <Compile Include="Logic\CodeFirst\SchemaReader.cs" />
-    <Compile Include="Logic\CodeFirst\SqlServerSchemaReader.cs" />
-    <Compile Include="Logic\CodeFirst\Table.cs" />
-    <Compile Include="Logic\CodeFirst\Tables.cs" />
-    <Compile Include="Logic\CodeFirst\UniqueIndex.cs" />
     <Compile Include="Converter\ModelNameConverter.cs" />
     <Compile Include="Converter\ModelPathConverter.cs" />
     <Compile Include="HelpsAndExtentions\FileOprateHelp.cs" />
     <Compile Include="HelpsAndExtentions\MsgBoxHelp.cs" />
     <Compile Include="Container\ModelContainer.cs" />
-    <Compile Include="Logic\InfrastructLogic\ApplicationLogic.cs" />
-    <Compile Include="Logic\InfrastructLogic\CodeFirstLogic.cs" />
-    <Compile Include="Logic\InfrastructLogic\Data2ObjLogic.cs" />
-    <Compile Include="Logic\InfrastructLogic\DomainEntityLogic.cs" />
-    <Compile Include="Logic\InfrastructLogic\InfrastructureLogic.cs" />
     <Compile Include="Logic\UI\LoadProjectLogic.cs" />
     <Compile Include="Logic\UI\ModelManageLogic.cs" />
-    <Compile Include="Logic\InfrastructLogic\ReferenceLogic.cs" />
-    <Compile Include="Logic\InfrastructLogic\RepositoryLogic.cs" />
-    <Compile Include="Logic\InfrastructLogic\ServiceLogic.cs" />
-    <Compile Include="Logic\SolutionStrategy.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Logic\UI\ReferManageLogic.cs" />
+    <Compile Include="Logic\SolutionStrategy.cs" />
     <Compile Include="Model\ContainerModel.cs" />
     <Compile Include="Model\ContainerModels.cs" />
     <Compile Include="Model\LineShow.cs" />
@@ -297,7 +273,6 @@
     <EmbeddedResource Include="UI\FormSelectArg.resx">
       <DependentUpon>FormSelectArg.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\KeyComment.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

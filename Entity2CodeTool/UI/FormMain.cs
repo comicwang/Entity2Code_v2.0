@@ -10,6 +10,12 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Infoearth.Entity2CodeTool.Helps;
+using Utility.Common;
+using Utility.Converter;
+using Utility;
+using Infoearth.Entity2CodeTool.Properties;
+using Utility.Core;
+using Utility.CodeFirst;
 
 namespace Infoearth.Entity2CodeTool
 {
@@ -33,15 +39,15 @@ namespace Infoearth.Entity2CodeTool
             get { return this.txtProjectName.Text; }
             set
             {
-                txtDomainEntity.Text = string.Format("iTelluro.Explorer.{0}.Domain.Entities", value);
-                txtData2Obj.Text = string.Format("iTelluro.Explorer.{0}.Application.DTO", value);
-                txtApplica.Text = string.Format("iTelluro.Explorer.{0}.Application", value);
-                txtIApplica.Text = string.Format("iTelluro.Explorer.{0}.IApplication", value);
-                txtInfrastructure.Text = string.Format("iTelluro.Explorer.{0}.Infrastructure.Context", value);
-                txtDomainContxt.Text = string.Format("iTelluro.Explorer.{0}.Domain.Context", value);
-                txtService.Text = string.Format("iTelluro.Explorer.{0}.Service", value);
+                string space = IniManager.ReadString(Resources.NodeName, Resources.NameSpaceName, "");
+                txtDomainEntity.Text = string.Format("{1}.{0}.Domain.Entities", value, space);
+                txtData2Obj.Text = string.Format("{1}.{0}.Application.DTO", value,space);
+                txtApplica.Text = string.Format("{1}.{0}.Application", value,space);
+                txtIApplica.Text = string.Format("{1}.{0}.IApplication", value, space);
+                txtInfrastructure.Text = string.Format("{1}.{0}.Infrastructure.Context", value,space);
+                txtDomainContxt.Text = string.Format("{1}.{0}.Domain.Context", value, space);
+                txtService.Text = string.Format("{1}.{0}.Service", value, space);
                 txtContextName.Text = value + "Context";
-                SolutionCommon.ProjectName = value;
             }
         }
 
@@ -134,21 +140,15 @@ namespace Infoearth.Entity2CodeTool
         public FormMain()
         {
             InitializeComponent();
-            //pic.Image = Infoearth.Entity2CodeTool.Properties.Resources.img;
-            pic.Image = "img.jpg".GetImageResource("Img");
-        }
-
-        /// <summary>
-        /// 构造函数
-        /// </summary>
-        /// <param name="solutionName">项目名称</param>
-        public FormMain(string solutionName)
-            : this()
-        {
-            solutionName = System.IO.Path.GetFileNameWithoutExtension(solutionName);
-            if (!string.IsNullOrEmpty(solutionName) && solutionName.Split('.').Length >= 3)
+            try
             {
-                this.txtProjectName.Text = solutionName.Split('.')[2];
+                pic.Image = Image.FromFile(StringConverter.ConvertPath("img.jpg"));
+                pictureBox1.Image = Image.FromFile(StringConverter.ConvertPath("coment.jpg"));
+                pictureBox2.Image = Image.FromFile(StringConverter.ConvertPath("first.jpg"));
+            }
+            catch (Exception ex)
+            {
+                Utility.Common.MsgBoxHelp.ShowError("初始化窗口失败", ex);
             }
         }
 
@@ -182,35 +182,42 @@ namespace Infoearth.Entity2CodeTool
         /// </summary>
         private void UpdateRegex()
         {
-            if (clbDBNames.CheckedItems.Count == 0)
+            try
             {
-                tbIncludeTables.Text = NoTables;
-                return;
-            }
-
-            var sb = new StringBuilder();
-            sb.Append("TableFilterInclude = new Regex(\"");
-            var sb1 = new StringBuilder();
-
-            bool first = true;
-            foreach (var item in clbDBNames.CheckedItems)
-            {
-                if (!first)
+                if (clbDBNames.CheckedItems.Count == 0)
                 {
-                    sb.Append("|");
-                    sb1.Append("|");
+                    tbIncludeTables.Text = NoTables;
+                    return;
                 }
-                else
-                    first = false;
 
-                sb.AppendFormat("^{0}$", item);
-                sb1.AppendFormat("^{0}$", item);
+                var sb = new StringBuilder();
+                sb.Append("TableFilterInclude = new Regex(\"");
+                var sb1 = new StringBuilder();
+
+                bool first = true;
+                foreach (var item in clbDBNames.CheckedItems)
+                {
+                    if (!first)
+                    {
+                        sb.Append("|");
+                        sb1.Append("|");
+                    }
+                    else
+                        first = false;
+
+                    sb.AppendFormat("^{0}$", item);
+                    sb1.AppendFormat("^{0}$", item);
+                }
+
+                sb.Append("\");");
+                Clipboard.SetText(sb.ToString());
+                tbIncludeTables.Text = sb.ToString();
+                regex = new Regex(sb1.ToString());
             }
-
-            sb.Append("\");");
-            Clipboard.SetText(sb.ToString());
-            tbIncludeTables.Text = sb.ToString();
-            regex = new Regex(sb1.ToString());
+            catch (Exception ex)
+            {
+                Utility.Common.MsgBoxHelp.ShowError("获取表信息失败", ex);
+            }
         }
 
         /// <summary>
@@ -292,7 +299,6 @@ namespace Infoearth.Entity2CodeTool
         private void txtProjectName_TextChanged(object sender, EventArgs e)
         {
             btnNext.Enabled = !string.IsNullOrEmpty(this.txtProjectName.Text);
-            // btnOk.Enabled = !string.IsNullOrEmpty(this.txtProjectName.Text);
         }
 
         /// <summary>
@@ -323,21 +329,29 @@ namespace Infoearth.Entity2CodeTool
         /// <param name="e"></param>
         private void btnOk_Click(object sender, EventArgs e)
         {
-            SolutionCommon.ProjectName = ProjectName;
-            SolutionCommon.IsAddService = IsAddService;
-            SolutionCommon.Infrastructure = Infrastructure;
-            SolutionCommon.IApplication = IApplica;
-            SolutionCommon.Application = Applica;
-            SolutionCommon.Data2Object = Data2Object;
-            SolutionCommon.DomainContext = DomainContxt;
-            SolutionCommon.DomainEntity = DomainEntity;
-            SolutionCommon.Service = Service;
+            KeywordContainer.RegistSource("$ProjectName$", ProjectName);
+            KeywordContainer.RegistSource("$Infrastructure$", Infrastructure);
+            KeywordContainer.RegistSource("$IApplication$", IApplica);
+            KeywordContainer.RegistSource("$Application$", Applica);
+            KeywordContainer.RegistSource("$Data2Object$", Data2Object);
+            KeywordContainer.RegistSource("$DomainContext$", DomainContxt);
+            KeywordContainer.RegistSource("$DomainEntity$", DomainEntity);
+            KeywordContainer.RegistSource("$Service$", Service);
+            PrjCmdId.SetProjectName(PrjCmdId.Infrastructure, Infrastructure);
+            PrjCmdId.SetProjectName(PrjCmdId.IApplication, IApplica);
+            PrjCmdId.SetProjectName(PrjCmdId.Application, Applica);
+            PrjCmdId.SetProjectName(PrjCmdId.Data2Object, Data2Object);
+            PrjCmdId.SetProjectName(PrjCmdId.Infrastructure, Infrastructure);
+            PrjCmdId.SetProjectName(PrjCmdId.DomainContext, DomainContxt);
+            PrjCmdId.SetProjectName(PrjCmdId.DomainEntity, DomainEntity);
+
             if (rbtnDb.Checked)
-                SolutionCommon.infrastryctType = InfrastructType.DbFirst;
-            else
-                SolutionCommon.infrastryctType = InfrastructType.CodeFirst;
+            {
+                KeywordContainer.RegistSource("$IsPartService$", "true");
+            }
             CodeFirstTools.TableFilterInclude = regex;
             CodeFirstTools.DbContextName = txtContextName.Text;
+            KeywordContainer.RegistSource("$ContextName$", txtContextName.Text);
             this.DialogResult = DialogResult.OK;
         }
 
@@ -348,8 +362,7 @@ namespace Infoearth.Entity2CodeTool
         /// <param name="e"></param>
         private void chkService_CheckedChanged(object sender, EventArgs e)
         {
-            txtService.Enabled = chkService.Checked;
-            btnNext.Enabled = IsContentEmpty();
+            
         }
 
         /// <summary>
@@ -359,8 +372,6 @@ namespace Infoearth.Entity2CodeTool
         /// <param name="e"></param>
         private void txtInfrastructure_TextChanged(object sender, EventArgs e)
         {
-            //if (string.IsNullOrEmpty(((Control)sender).Text))
-            //    btnNext.Enabled = false;
             btnNext.Enabled = IsContentEmpty();
         }
 
@@ -457,27 +468,34 @@ namespace Infoearth.Entity2CodeTool
         /// <param name="e"></param>
         private void rbAll_CheckedChanged(object sender, EventArgs e)
         {
-            if (rbAll.Checked)
+            try
             {
-                for (var n = 0; n < clbDBNames.Items.Count; n++)
+                if (rbAll.Checked)
                 {
-                    clbDBNames.SetItemCheckState(n, CheckState.Checked);
+                    for (var n = 0; n < clbDBNames.Items.Count; n++)
+                    {
+                        clbDBNames.SetItemCheckState(n, CheckState.Checked);
+                    }
+                    tbIncludeTables.Text = AllTables;
+                    Clipboard.SetText(AllTables);
+                    regex = null;
                 }
-                tbIncludeTables.Text = AllTables;
-                Clipboard.SetText(AllTables);
-                regex = null;
+                else
+                {
+                    for (var n = 0; n < clbDBNames.Items.Count; n++)
+                    {
+                        clbDBNames.SetItemCheckState(n, CheckState.Unchecked);
+                    }
+                    tbIncludeTables.Text = NoTables;
+                    Clipboard.SetText(NoTables);
+                    regex = new Regex("^$");
+                }
+                btnOk.Enabled = rbAll.Checked;
             }
-            else
+            catch (Exception ex)
             {
-                for (var n = 0; n < clbDBNames.Items.Count; n++)
-                {
-                    clbDBNames.SetItemCheckState(n, CheckState.Unchecked);
-                }
-                tbIncludeTables.Text = NoTables;
-                Clipboard.SetText(NoTables);
-                regex = new Regex("^$");
+                Utility.Common.MsgBoxHelp.ShowError("获取表信息失败", ex);
             }
-            btnOk.Enabled = rbAll.Checked;
         }
 
         /// <summary>

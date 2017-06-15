@@ -11,8 +11,16 @@ using System.IO;
 
 namespace Infoearth.Entity2CodeTool.Generate
 {
-    public class ReplaceGenerate : CodeGenerateBase
+    public class TempGenerate : CodeGenerateBase
     {
+        private StringBuilder _tempBuild = null;
+
+        public StringBuilder TempBuild
+        {
+            get { return _tempBuild; }
+            set { _tempBuild = value; }
+        }
+
         public override object[] GetGenerateInfo(string guid, bool allowNew)
         {
             //找到项目源
@@ -29,20 +37,40 @@ namespace Infoearth.Entity2CodeTool.Generate
                 TemplateContainer.Regist(pid, prjt);
             }
 
-            string targetPath=Path.Combine(CommonContainer.RootPath,TemplateContainer.Resove<string>(guid));
+            string templatePath = Path.Combine(CommonContainer.RootPath, TemplateContainer.Resove<string>(guid));
 
-            return new object[] { guid, pid, prjt, targetPath };
+            return new object[] { guid, pid, prjt, templatePath };
 
         }
 
         public override void HandleGenerateContainer(Dictionary<string, string> containerArgment)
         {
-            
+            foreach (var item in containerArgment)
+            {
+                KeywordContainer.RegistSource(item.Key, item.Value);
+            }
         }
 
         public override bool GenerateCode(object[] info)
         {
-            return false;
+            try
+            {
+                using (StreamReader reader = new StreamReader(info[3].ToString()))
+                {
+                    while (reader.Peek() != -1)
+                    {
+                        string temp = reader.ReadLine();
+                        temp = KeywordContainer.Replace(temp);
+                        _tempBuild.AppendLine(temp);
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MsgBoxHelp.ShowError(string.Format("创建代码失败-{0}", info[0]), ex);
+                return false;
+            }
         }
 
 

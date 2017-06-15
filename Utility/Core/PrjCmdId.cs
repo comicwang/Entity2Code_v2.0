@@ -11,6 +11,8 @@ namespace Utility.Core
 
         public static string FindProjectName(string pid)
         {
+            if (!_pContainer.ContainsKey(pid))
+                return null;
             return _pContainer[pid];
         }
 

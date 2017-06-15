@@ -9,35 +9,63 @@ namespace Utility.Core
     {
         static CdeCmdId()
         {
-            SetBelongId(PrjCmdId.Infrastructure, InfrastructureId.DbContextExtensions);
-            SetBelongId(PrjCmdId.Infrastructure, InfrastructureId.Repository);
-            SetBelongId(PrjCmdId.Infrastructure, InfrastructureId.Map);
-            SetBelongId(PrjCmdId.Infrastructure, InfrastructureId.ContextUnit);
-            SetBelongId(PrjCmdId.Infrastructure, InfrastructureId.DBContext.Fix);
-            SetBelongId(PrjCmdId.Infrastructure, InfrastructureId.DBContext.UnFix);
-            SetBelongId(PrjCmdId.DomainEntity, DomainEntityId.Entity);
-            SetBelongId(PrjCmdId.DomainEntity, DomainEntityId.Entities);
-            SetBelongId(PrjCmdId.DomainContext, DomainContextId.IRepository);
-            SetBelongId(PrjCmdId.Application, ApplicationId.Application);
-            SetBelongId(PrjCmdId.IApplication, IApplicationId.IApplication);
-            SetBelongId(PrjCmdId.Data2Object, Data2ObjectId.Data2Obj);
-            SetBelongId(PrjCmdId.Data2Object, Data2ObjectId.Profile.Fix);
-            SetBelongId(PrjCmdId.Data2Object, Data2ObjectId.Profile.UnFix);
-            SetBelongId(PrjCmdId.Service, ServiceId.AttachDataSignBehavior);
-            SetBelongId(PrjCmdId.Service, ServiceId.Container.Fix);
-            SetBelongId(PrjCmdId.Service, ServiceId.Container.UnFix);
-            SetBelongId(PrjCmdId.Service, ServiceId.IService.Fix);
-            SetBelongId(PrjCmdId.Service, ServiceId.IService.UnFix);
-            SetBelongId(PrjCmdId.Service, ServiceId.Service.Fix);
-            SetBelongId(PrjCmdId.Service, ServiceId.Service.UnFix);
-            SetBelongId(PrjCmdId.Service, ServiceId.UnityInstanceProvider);
-            SetBelongId(PrjCmdId.Service, ServiceId.UnityInstanceProviderServiceBehavior);
-            SetBelongId(PrjCmdId.Service, ServiceId.WebConfig);
+            SetBelongId(InfrastructureId.DbContextExtensions,PrjCmdId.Infrastructure);
+            SetBelongId(InfrastructureId.Repository, PrjCmdId.Infrastructure);
+            SetBelongId(InfrastructureId.Map, PrjCmdId.Infrastructure);
+            SetBelongId(InfrastructureId.ContextUnit, PrjCmdId.Infrastructure);
+            SetBelongId(InfrastructureId.DBContext.Fix, PrjCmdId.Infrastructure);
+            SetBelongId(InfrastructureId.DBContext.UnFix, PrjCmdId.Infrastructure);
+            SetBelongId(DomainEntityId.Entity, PrjCmdId.DomainEntity);
+            SetBelongId(DomainEntityId.Entities, PrjCmdId.DomainEntity);
+            SetBelongId(DomainContextId.IRepository, PrjCmdId.DomainContext);
+            SetBelongId(ApplicationId.Application, PrjCmdId.Application);
+            SetBelongId(IApplicationId.IApplication, PrjCmdId.IApplication);
+            SetBelongId(Data2ObjectId.Data2Obj, PrjCmdId.Data2Object);
+            SetBelongId(Data2ObjectId.Profile.Fix, PrjCmdId.Data2Object);
+            SetBelongId(Data2ObjectId.Profile.UnFix,PrjCmdId.Data2Object);
+            SetBelongId(ServiceId.AttachDataSignBehavior, PrjCmdId.Service);
+            SetBelongId(ServiceId.Container.Fix, PrjCmdId.Service);
+            SetBelongId(ServiceId.Container.UnFix, PrjCmdId.Service);
+            SetBelongId(ServiceId.IService.Fix, PrjCmdId.Service);
+            SetBelongId(ServiceId.IService.UnFix, PrjCmdId.Service);
+            SetBelongId(ServiceId.Service.Fix, PrjCmdId.Service);
+            SetBelongId(ServiceId.Service.UnFix, PrjCmdId.Service);
+            SetBelongId(ServiceId.UnityInstanceProvider, PrjCmdId.Service);
+            SetBelongId(ServiceId.UnityInstanceProviderServiceBehavior, PrjCmdId.Service);
+            SetBelongId(ServiceId.WebConfig, PrjCmdId.Service);
+            SetBelongId(ServiceId.CodeBehind, PrjCmdId.Service);
+
+            SetFileName(InfrastructureId.Repository, "$Data2Obj$Repository.cs");
+            SetFileName(InfrastructureId.Map, "$Entity$Map.cs");
+            SetFileName(InfrastructureId.ContextUnit, "$ProjectName$ContextUnit.cs");
+            SetFileName(InfrastructureId.DBContext.UnFix, "$ProjectName$Context.cs");
+            SetFileName(Data2ObjectId.Profile.UnFix, "$ProjectName$Profile.cs");
+            SetFileName(DomainEntityId.Entity, "$Entity$.cs");
+            SetFileName(DomainContextId.IRepository, "I$Data2Obj$Repository.cs");
+            SetFileName(ApplicationId.Application, "$Data2Obj$App.cs");
+            SetFileName(IApplicationId.IApplication, "I$Data2Obj$App.cs");
+            SetFileName(Data2ObjectId.Data2Obj, "$Data2Obj$.cs");
+            SetFileName(ServiceId.IService.UnFix, "I$ProjectName$Service.cs");
+            SetFileName(ServiceId.Service.UnFix, "$ProjectName$Service.svc.cs");
+            SetFileName(ServiceId.Service.UnFix, "$ProjectName$Service.svc");
+            SetFileName(ServiceId.WebConfig, "web.config");
+
+            SetForlder(Data2ObjectId.Profile.UnFix, "Profile");
+            SetForlder(InfrastructureId.DbContextExtensions, "Extention");
+            SetForlder(InfrastructureId.Map, "Map");
+            SetForlder(InfrastructureId.Repository, "Repository");
+            SetForlder(ServiceId.UnityInstanceProviderServiceBehavior, "InstanceProviders");
+            SetForlder(ServiceId.UnityInstanceProvider, "InstanceProviders");
+            SetForlder(ServiceId.AttachDataSignBehavior, "InstanceProviders");
+            SetForlder(ServiceId.Container.UnFix, "InstanceProviders");
+
         }
 
         private static Dictionary<string, string> _idContainer = new Dictionary<string, string>();
+        private static Dictionary<string, string> _nameContainer = new Dictionary<string, string>();
+        private static Dictionary<string, string> _forldContainer = new Dictionary<string, string>();
 
-        public static void SetBelongId(string pid, string id)
+        private static void SetBelongId(string pid, string id)
         {
             if (!_idContainer.ContainsKey(pid))
                 _idContainer.Add(pid, id);
@@ -45,8 +73,44 @@ namespace Utility.Core
                 _idContainer[pid] = id;
         }
 
+        private static void SetFileName(string guid, string fileNameFormate)
+        {
+            if (!_nameContainer.ContainsKey(guid))
+                _nameContainer.Add(guid, fileNameFormate);
+            else
+                _nameContainer[guid] = fileNameFormate;
+        }
+
+        private static void SetForlder(string guid, string forlderName)
+        {
+            if (!_forldContainer.ContainsKey(guid))
+                _forldContainer.Add(guid, forlderName);
+            else
+                _forldContainer[guid] = forlderName;
+        }
+
+        public static string TempFileName(string guid)
+        {
+            if(!_nameContainer.ContainsKey(guid))
+                return null;
+            return _nameContainer[guid];
+        }
+
+        public static bool HasForlder(string guid, out string Forlder)
+        {
+            if (_forldContainer.ContainsKey(guid))
+            {
+                Forlder = _forldContainer[guid];
+                return true;
+            }
+            Forlder = null;
+            return false;
+        }
+
         public static string BelongId(string guid)
         {
+            if (!_idContainer.ContainsKey(guid))
+                return null;
             return _idContainer[guid];
         }
 
@@ -105,8 +169,6 @@ namespace Utility.Core
 
         public static class ServiceId
         {
-            public static string BelongId = PrjCmdId.Service;
-
             public const string AttachDataSignBehavior = "2337856B-A581-4D3A-9E00-E1026E43040F";
 
             public static class Container
@@ -135,6 +197,8 @@ namespace Utility.Core
 
                 public const string UnFix = "E8071412-0147-4AD3-BBF7-489854B665CE";
             }
+
+            public const string CodeBehind = "A0517CF0-4B45-4D23-B11A-40434D247DC1";
         }
     }
 }

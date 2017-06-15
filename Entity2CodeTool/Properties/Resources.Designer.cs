@@ -59,5 +59,41 @@ namespace Infoearth.Entity2CodeTool.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   查找类似 开始收集创建代码所需要的必要信息 的本地化字符串。
+        /// </summary>
+        internal static string BeginCollectInfo {
+            get {
+                return ResourceManager.GetString("BeginCollectInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 NameSpace 的本地化字符串。
+        /// </summary>
+        internal static string NameSpaceName {
+            get {
+                return ResourceManager.GetString("NameSpaceName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 UserSetting 的本地化字符串。
+        /// </summary>
+        internal static string NodeName {
+            get {
+                return ResourceManager.GetString("NodeName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 项目存储路径 的本地化字符串。
+        /// </summary>
+        internal static string SolutionPath {
+            get {
+                return ResourceManager.GetString("SolutionPath", resourceCulture);
+            }
+        }
     }
 }
