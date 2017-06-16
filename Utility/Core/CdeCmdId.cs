@@ -47,17 +47,17 @@ namespace Utility.Core
             SetFileName(Data2ObjectId.Data2Obj, "$Data2Obj$.cs");
             SetFileName(ServiceId.IService.UnFix, "I$ProjectName$Service.cs");
             SetFileName(ServiceId.Service.UnFix, "$ProjectName$Service.svc.cs");
-            SetFileName(ServiceId.Service.UnFix, "$ProjectName$Service.svc");
+            SetFileName(ServiceId.CodeBehind, "$ProjectName$Service.svc");
             SetFileName(ServiceId.WebConfig, "web.config");
-
-            SetForlder(Data2ObjectId.Profile.UnFix, "Profile");
+           
+            SetForlder(Data2ObjectId.Profile.Fix, "Profile");
             SetForlder(InfrastructureId.DbContextExtensions, "Extention");
             SetForlder(InfrastructureId.Map, "Map");
             SetForlder(InfrastructureId.Repository, "Repository");
             SetForlder(ServiceId.UnityInstanceProviderServiceBehavior, "InstanceProviders");
             SetForlder(ServiceId.UnityInstanceProvider, "InstanceProviders");
             SetForlder(ServiceId.AttachDataSignBehavior, "InstanceProviders");
-            SetForlder(ServiceId.Container.UnFix, "InstanceProviders");
+            SetForlder(ServiceId.Container.Fix, "InstanceProviders");
 
         }
 

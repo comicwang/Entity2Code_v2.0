@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using Utility.Core;
+using Utility.Filter;
+using Utility.Properties;
 
 namespace Utility.Common
 {
@@ -23,26 +26,38 @@ namespace Utility.Common
             RegistSource("$DBConstr$", "new InjectionConstructor(db)");
         }
 
+        public static Dictionary<string, string> GetAll()
+        {
+            return _mContainer;
+        }
+
         public static void LoadContainer()
         {
-            string iniPath = Path.Combine(CommonContainer.SolutionPath, Properties.Resource.ConfigName);
-
-            Dictionary<string, string> models = xmlManager.Read(iniPath);
+            string xmlPath = Path.Combine(CommonContainer.SolutionPath, Resource.ConfigName);
+            Dictionary<string, string> models = xmlManager.ReadModel(xmlPath);
 
             foreach (var item in models)
             {
                 RegistSource(item.Key, item.Value);
             }
+            PrjCmdId.SetProjectName(PrjCmdId.Infrastructure,KeywordContainer.Resove("$Infrastructure$"));
+            PrjCmdId.SetProjectName(PrjCmdId.IApplication, KeywordContainer.Resove("$IApplication$"));
+            PrjCmdId.SetProjectName(PrjCmdId.Application, KeywordContainer.Resove("$Application$"));
+            PrjCmdId.SetProjectName(PrjCmdId.Data2Object, KeywordContainer.Resove("$Data2Object$"));
+            PrjCmdId.SetProjectName(PrjCmdId.Service, KeywordContainer.Resove("$DomainEntity$"));
+            PrjCmdId.SetProjectName(PrjCmdId.DomainContext, KeywordContainer.Resove("$DomainContext$"));
+            PrjCmdId.SetProjectName(PrjCmdId.DomainEntity, KeywordContainer.Resove("$Service$"));
         }
 
 
-        public static void SetContainer(Dictionary<string, string> kv)
+        public static void SetContainer()
         {
-            string iniPath = Path.Combine(CommonContainer.SolutionPath, Properties.Resource.ConfigName);
-
             foreach (var item in _mContainer)
             {
-                xmlManager.Write(item.Key, item.Value, iniPath);
+                if (!KeywordFilter.FilterCollection.Contains(item.Key))
+                {
+                    xmlManager.WriteModel(item.Key, item.Value,Path.Combine(CommonContainer.SolutionPath, CommonContainer.xmlName));
+                }
             }
         }
 

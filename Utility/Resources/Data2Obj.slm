@@ -9,3 +9,7 @@ namespace $Data2Object$
    [DataContract]
    public class $Data2Obj$DTO
    {
+         $Data2ObjContent$
+   }
+
+}

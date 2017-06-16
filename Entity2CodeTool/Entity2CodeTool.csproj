@@ -178,6 +178,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Container\ModelContainer.cs" />
     <Compile Include="Container\VarCsharp.cs" />
     <Compile Include="Generate\ReplaceGenerate.cs" />
     <Compile Include="HelpsAndExtentions\AssemblyOprateHelp.cs" />
@@ -195,7 +196,6 @@
     <Compile Include="Converter\ModelPathConverter.cs" />
     <Compile Include="HelpsAndExtentions\FileOprateHelp.cs" />
     <Compile Include="HelpsAndExtentions\MsgBoxHelp.cs" />
-    <Compile Include="Container\ModelContainer.cs" />
     <Compile Include="Logic\UI\LoadProjectLogic.cs" />
     <Compile Include="Logic\UI\ModelManageLogic.cs" />
     <Compile Include="Logic\UI\ReferManageLogic.cs" />

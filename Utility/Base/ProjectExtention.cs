@@ -130,6 +130,18 @@ namespace Utility.Base
         }
 
         /// <summary>
+        /// 设置Log4net日志管理工具开始工作
+        /// </summary>
+        /// <param name="project"></param>
+        public static void SetLog4netWatch(this Project project)
+        {
+            string assemblyInfoPath = Path.Combine(project.ToDirectory(), "Properties", "AssemblyInfo.cs");
+            StringBuilder build1 = FileOprateHelp.ReadTextFile(assemblyInfoPath);
+            build1.AppendLine("[assembly: log4net.Config.XmlConfigurator(Watch = true)]");//日志监视
+            FileOprateHelp.SaveTextFile(build1.ToString(), assemblyInfoPath);
+        }
+
+        /// <summary>
         /// 根据项目名称获取项目类
         /// </summary>
         /// <param name="projects">项目集合宿体</param>

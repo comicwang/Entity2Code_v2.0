@@ -290,4 +290,22 @@
   <data name="first" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\first.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Node" xml:space="preserve">
+    <value>KeyModel</value>
+  </data>
+  <data name="PNode" xml:space="preserve">
+    <value>Container</value>
+  </data>
+  <data name="IniPNodeName" xml:space="preserve">
+    <value>UserSetting</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>UserName</value>
+  </data>
+  <data name="DTOName" xml:space="preserve">
+    <value>DTOName</value>
+  </data>
+  <data name="TabelName" xml:space="preserve">
+    <value>EntityName</value>
+  </data>
 </root>

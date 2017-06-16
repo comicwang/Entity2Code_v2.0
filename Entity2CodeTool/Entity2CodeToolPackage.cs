@@ -161,6 +161,7 @@ namespace Infoearth.Entity2CodeTool
                 string space = IniManager.ReadString(Resources.NodeName, Resources.NameSpaceName, "");
                 CommonContainer.CommonServer.Solution.Create(string.Format("{1}.{0}.sln", projectName, space), string.Format("{1}.{0}", space, projectName));
                 CommonContainer.CommonServer.Solution.SaveAs(Path.Combine(dialog.SelectedPath, string.Format("{1}.{0}.sln", projectName, space)));
+                CommonContainer.SolutionPath = dialog.SelectedPath;
             }
             else
                 return;

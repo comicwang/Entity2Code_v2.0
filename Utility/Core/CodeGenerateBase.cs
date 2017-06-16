@@ -12,8 +12,6 @@ namespace Utility.Core
 {
     public abstract class CodeGenerateBase
     {
-        public List<TemplateEntity> LstEntity = null;
-
         public virtual void BeginGenerate()
         {
             if (CommonContainer.CommonServer != null)

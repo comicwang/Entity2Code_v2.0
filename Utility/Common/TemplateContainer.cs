@@ -41,6 +41,7 @@ namespace Utility.Core
             Regist("3A685CEE-1E8F-4373-B605-624BE2FB072D", "IService.slm");
             Regist("9F8CD6F5-7F51-48B7-9D04-0CAFE029A3EC", "Service.sem");
             Regist("E8071412-0147-4AD3-BBF7-489854B665CE", "Service.slm");
+            Regist("A0517CF0-4B45-4D23-B11A-40434D247DC1", "Codebehind.sem");
            
         }
 

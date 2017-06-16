@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utility.Properties;
 
 namespace Utility.Common
 {
@@ -16,5 +18,8 @@ namespace Utility.Common
         }
 
         public static string SolutionPath { get; set; }
+
+        public static string xmlName = Resource.ConfigName;
+
     }
 }

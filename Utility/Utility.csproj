@@ -170,7 +170,9 @@
     <Compile Include="CodeFirst\UniqueIndex.cs" />
     <Compile Include="Common\CommonContainer.cs" />
     <Compile Include="Common\KeywordContainer.cs" />
-    <Compile Include="Common\MsgBoxHelp.cs" />
+    <Compile Include="Entity\GenerateEntityContext.cs" />
+    <Compile Include="Filter\KeywordFilter.cs" />
+    <Compile Include="Help\MsgBoxHelp.cs" />
     <Compile Include="Converter\StringConverter.cs" />
     <Compile Include="Core\CodeFirstLogic.cs" />
     <Compile Include="Core\ConfirmResource.cs" />
@@ -178,6 +180,7 @@
     <Compile Include="Core\CodeGenerateBase.cs" />
     <Compile Include="Core\PrjCmdId.cs" />
     <Compile Include="Common\TemplateContainer.cs" />
+    <Compile Include="Entity\GenerateEntity.cs" />
     <Compile Include="Entity\ReplaceEntity.cs" />
     <Compile Include="Entity\TemplateEntity.cs" />
     <Compile Include="Enum\ProjectEnum.cs" />

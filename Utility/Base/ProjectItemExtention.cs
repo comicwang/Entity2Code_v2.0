@@ -169,6 +169,7 @@ namespace Utility.Base
                 projectItem = project.ProjectItems.AddFromFile(filePath);
                 if (null == projectItem)
                     projectItem = project.ProjectItems.Find(itemName);
+                projectItem.FormatDocument();
                 return projectItem;
             }
             catch (Exception ex)
@@ -207,6 +208,7 @@ namespace Utility.Base
                 projectItem = project.ProjectItems.AddFromFile(filePath);
                 if (null == projectItem)
                     projectItem = project.ProjectItems.Find(itemName);
+                projectItem.FormatDocument();
                 return projectItem;
             }
             catch (Exception ex)
@@ -323,6 +325,7 @@ namespace Utility.Base
             }
             return null;
         }
+
 
         /// <summary>
         /// 规范化项目.cs文件

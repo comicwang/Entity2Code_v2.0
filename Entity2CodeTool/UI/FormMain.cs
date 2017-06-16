@@ -148,7 +148,7 @@ namespace Infoearth.Entity2CodeTool
             }
             catch (Exception ex)
             {
-                Utility.Common.MsgBoxHelp.ShowError("初始化窗口失败", ex);
+                MsgBoxHelp.ShowError("初始化窗口失败", ex);
             }
         }
 
@@ -216,7 +216,7 @@ namespace Infoearth.Entity2CodeTool
             }
             catch (Exception ex)
             {
-                Utility.Common.MsgBoxHelp.ShowError("获取表信息失败", ex);
+                Utility.Help.MsgBoxHelp.ShowError("获取表信息失败", ex);
             }
         }
 
@@ -341,7 +341,7 @@ namespace Infoearth.Entity2CodeTool
             PrjCmdId.SetProjectName(PrjCmdId.IApplication, IApplica);
             PrjCmdId.SetProjectName(PrjCmdId.Application, Applica);
             PrjCmdId.SetProjectName(PrjCmdId.Data2Object, Data2Object);
-            PrjCmdId.SetProjectName(PrjCmdId.Infrastructure, Infrastructure);
+            PrjCmdId.SetProjectName(PrjCmdId.Service, Service);
             PrjCmdId.SetProjectName(PrjCmdId.DomainContext, DomainContxt);
             PrjCmdId.SetProjectName(PrjCmdId.DomainEntity, DomainEntity);
 
@@ -494,7 +494,7 @@ namespace Infoearth.Entity2CodeTool
             }
             catch (Exception ex)
             {
-                Utility.Common.MsgBoxHelp.ShowError("获取表信息失败", ex);
+                MsgBoxHelp.ShowError("获取表信息失败", ex);
             }
         }
 

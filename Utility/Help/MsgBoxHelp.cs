@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Utility.Common
+namespace Utility.Help
 {
     /// <summary>
     /// 提供消息显示的静态方法
