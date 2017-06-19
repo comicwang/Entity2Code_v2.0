@@ -7,9 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Infoearth.Entity2CodeTool.Helps;
-using Infoearth.Entity2CodeTool.Model;
-using Infoearth.Entity2CodeTool.Logic.UI;
 using System.IO;
 using System.Reflection;
 

@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using Utility.Enum;
 
 namespace Utility.Core
 {
+    /// <summary>
+    /// 模板容器，用于存储模板文件名称，项目COM
+    /// </summary>
     public class TemplateContainer : IDisposable
     {
         static TemplateContainer()
@@ -47,6 +49,12 @@ namespace Utility.Core
 
         private static Dictionary<string, object> _templateContainer = new Dictionary<string, object>();
 
+        /// <summary>
+        /// 加入模板中
+        /// </summary>
+        /// <typeparam name="T">模板的名称或者项目COM</typeparam>
+        /// <param name="guid">模板ID</param>
+        /// <param name="source"></param>
         public static void Regist<T>(string guid, T source)
         {
             if (_templateContainer.ContainsKey(guid))
@@ -56,14 +64,30 @@ namespace Utility.Core
 
         }
 
+        /// <summary>
+        /// 解析模板
+        /// </summary>
+        /// <typeparam name="T">解析的类型</typeparam>
+        /// <param name="guid">ID</param>
+        /// <returns></returns>
         public static T Resove<T>(string guid)
         {
-            if (_templateContainer == null || !_templateContainer.ContainsKey(guid))
-                return default(T);
-            return (T)_templateContainer[guid];
+            try
+            {
+                if (_templateContainer == null || !_templateContainer.ContainsKey(guid))
+                    return default(T);
+                return (T)_templateContainer[guid];
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException(string.Format(Properties.Resource.NotFoundProjectError, guid), ex);
+            }
         }
 
 
+        /// <summary>
+        /// 销毁容器
+        /// </summary>
         public void Dispose()
         {
             _templateContainer = null;

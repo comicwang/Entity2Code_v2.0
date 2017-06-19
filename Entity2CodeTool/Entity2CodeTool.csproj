@@ -178,35 +178,11 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Container\ModelContainer.cs" />
-    <Compile Include="Container\VarCsharp.cs" />
-    <Compile Include="Generate\ReplaceGenerate.cs" />
-    <Compile Include="HelpsAndExtentions\AssemblyOprateHelp.cs" />
-    <Compile Include="HelpsAndExtentions\DTEExtentions\CodeClassExtention.cs" />
-    <Compile Include="HelpsAndExtentions\DTEExtentions\DTECommandExtention.cs" />
-    <Compile Include="HelpsAndExtentions\DTEExtentions\NugetExtention.cs" />
-    <Compile Include="HelpsAndExtentions\DTEExtentions\OutputExtention.cs" />
-    <Compile Include="HelpsAndExtentions\DTEExtentions\ProjectExtention.cs" />
-    <Compile Include="HelpsAndExtentions\DTEExtentions\ProjectItemExtention.cs" />
-    <Compile Include="HelpsAndExtentions\DTEExtentions\ProjectReferenceExtention.cs" />
-    <Compile Include="HelpsAndExtentions\DTEExtentions\ProjectSettingExtention.cs" />
-    <Compile Include="HelpsAndExtentions\ResourceFileHelp.cs" />
-    <Compile Include="HelpsAndExtentions\SolutionExplorHelp.cs" />
-    <Compile Include="Converter\ModelNameConverter.cs" />
-    <Compile Include="Converter\ModelPathConverter.cs" />
-    <Compile Include="HelpsAndExtentions\FileOprateHelp.cs" />
-    <Compile Include="HelpsAndExtentions\MsgBoxHelp.cs" />
-    <Compile Include="Logic\UI\LoadProjectLogic.cs" />
-    <Compile Include="Logic\UI\ModelManageLogic.cs" />
-    <Compile Include="Logic\UI\ReferManageLogic.cs" />
     <Compile Include="Logic\SolutionStrategy.cs" />
-    <Compile Include="Model\ContainerModel.cs" />
-    <Compile Include="Model\ContainerModels.cs" />
     <Compile Include="Model\LineShow.cs" />
     <Compile Include="Model\MethodArgment.cs" />
     <Compile Include="Model\MethodCommon.cs" />
     <Compile Include="Model\ReferManageArgment.cs" />
-    <Compile Include="Model\XEntity.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -239,10 +215,7 @@
     <Compile Include="UI\FormReferManager.Designer.cs">
       <DependentUpon>FormReferManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\InfrastructType.cs" />
-    <Compile Include="Model\StringCodeArgment.cs" />
     <Compile Include="Model\ModelManageArgment.cs" />
-    <Compile Include="Model\SolutionCommon.cs" />
     <Compile Include="UI\FormAddMethod.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -256,10 +229,6 @@
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Guids.cs" />
-    <Compile Include="Model\ConstructType.cs" />
-    <Compile Include="Model\CodeBuilderContainer.cs" />
-    <Compile Include="Model\ProjectContainer.cs" />
-    <Compile Include="Model\TemplateEntity.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Entity2CodeToolPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

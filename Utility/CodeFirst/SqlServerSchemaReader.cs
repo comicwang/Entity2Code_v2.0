@@ -280,6 +280,12 @@ WHERE   t.is_ms_shipped = 0
 
         private bool IncludeQueryTraceOn9481Flag;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="factory"></param>
+        /// <param name="includeQueryTraceOn9481Flag"></param>
         public SqlServerSchemaReader(DbConnection connection, DbProviderFactory factory, bool includeQueryTraceOn9481Flag)
             : base(connection, factory)
         {
@@ -294,6 +300,19 @@ OPTION (QUERYTRACEON 9481)";
             return string.Empty;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tableFilterExclude"></param>
+        /// <param name="columnFilterExclude"></param>
+        /// <param name="useCamelCase"></param>
+        /// <param name="prependSchemaName"></param>
+        /// <param name="includeComments"></param>
+        /// <param name="includeExtendedPropertyComments"></param>
+        /// <param name="tableRename"></param>
+        /// <param name="schemaNameFilter"></param>
+        /// <param name="updateColumn"></param>
+        /// <returns></returns>
         public override Tables ReadSchema(Regex tableFilterExclude, Regex columnFilterExclude, bool useCamelCase, bool prependSchemaName, bool includeComments, ExtendedPropertyCommentsStyle includeExtendedPropertyComments, Func<string, string, string> tableRename, string schemaNameFilter, Func<Column, Table, Column> updateColumn)
         {
             var result = new Tables();
@@ -382,7 +401,12 @@ OPTION (QUERYTRACEON 9481)";
 
             return result;
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tableRename"></param>
+        /// <returns></returns>
         public override List<ForeignKey> ReadForeignKeys(Func<string, string, string> tableRename)
         {
             var fkList = new List<ForeignKey>();
@@ -421,77 +445,10 @@ OPTION (QUERYTRACEON 9481)";
 
         // When a table has no primary keys, all the NOT NULL columns are set as being the primary key.
         // This function reads the unique indexes for a table, and correctly sets the columns being used as primary keys.
-        public override void ReadUniqueIndexes(Tables tables)
-        {
-            if (Cmd == null)
-                return;
-
-            if (Cmd.GetType().Name == "SqlCeCommand")
-                return;
-
-            Cmd.CommandText = UniqueIndexSQL + IncludeQueryTraceOn9481();
-
-            var list = new List<UniqueIndex>();
-            using (DbDataReader rdr = Cmd.ExecuteReader())
-            {
-                while (rdr.Read())
-                {
-                    var uniqueIndex = new UniqueIndex();
-
-                    uniqueIndex.Schema = rdr["TableSchema"].ToString().Trim();
-                    uniqueIndex.TableName = rdr["TableName"].ToString().Trim();
-                    uniqueIndex.IndexName = rdr["IndexName"].ToString().Trim();
-                    uniqueIndex.KeyOrdinal = (byte)rdr["KeyOrdinal"];
-                    uniqueIndex.Column = rdr["ColumnName"].ToString().Trim();
-                    uniqueIndex.ColumnCount = (int)rdr["ColumnCount"];
-
-                    list.Add(uniqueIndex);
-                }
-            }
-
-            Table t = null;
-            var indexes = list
-                .Select(x => new { x.Schema, x.TableName, x.IndexName })
-                .Distinct()
-                .OrderBy(o => o.Schema)
-                .ThenBy(o => o.TableName)
-                .ThenBy(o => o.IndexName);
-
-            foreach (var index in indexes)
-            {
-                if (t == null || t.Name != index.TableName || t.Schema != index.Schema)
-                    t = tables.Find(x => x.Name == index.TableName && x.Schema == index.Schema);
-
-                if (t != null && !t.PrimaryKeys.Any())
-                {
-                    // Table has no primary keys
-                    var uniqueIndexKeys =
-                        list.Where(x => x.Schema == index.Schema && x.TableName == index.TableName && x.IndexName == index.IndexName)
-                            .Select(x => new { x.IndexName, x.KeyOrdinal, x.Column, x.ColumnCount })
-                            .OrderBy(o => o.ColumnCount)
-                            .ThenBy(o => o.IndexName);
-
-                    // Process only the first index with the lowest unique column count
-                    string indexName = null;
-                    foreach (var key in uniqueIndexKeys)
-                    {
-                        if (indexName == null)
-                            indexName = key.IndexName;
-
-                        if (indexName != key.IndexName)
-                            break;  // First unique index with lowest column count has been processed, exit.
-
-                        var col = t.Columns.Find(x => x.Name == key.Column);
-                        if (col != null && !col.IsNullable && !col.Hidden)
-                        {
-                            col.IsPrimaryKey = true;
-                            col.IsPrimaryKeyViaUniqueIndex = true;
-                            col.UniqueIndexName = indexName;
-                        }
-                    }
-                }
-            }
-        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tables"></param>
 
         public override void ReadExtendedProperties(Tables tables)
         {
@@ -539,6 +496,15 @@ OPTION (QUERYTRACEON 9481)";
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="spFilterExclude"></param>
+        /// <param name="useCamelCase"></param>
+        /// <param name="prependSchemaName"></param>
+        /// <param name="StoredProcedureRename"></param>
+        /// <param name="schemaNameFilter"></param>
+        /// <returns></returns>
         public override List<StoredProcedure> ReadStoredProcs(Regex spFilterExclude, bool useCamelCase, bool prependSchemaName, Func<string, string, string> StoredProcedureRename, string schemaNameFilter)
         {
             var result = new List<StoredProcedure>();
@@ -613,6 +579,12 @@ OPTION (QUERYTRACEON 9481)";
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="connectionString"></param>
+        /// <param name="proc"></param>
+
         public void ReadStoredProcReturnObject(string connectionString, StoredProcedure proc)
         {
             try
@@ -668,6 +640,17 @@ OPTION (QUERYTRACEON 9481)";
                 // Stored procedure does not have a return type
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fkList"></param>
+        /// <param name="tables"></param>
+        /// <param name="useCamelCase"></param>
+        /// <param name="prependSchemaName"></param>
+        /// <param name="collectionType"></param>
+        /// <param name="checkForFkNameClashes"></param>
+        /// <param name="includeComments"></param>
 
         public override void ProcessForeignKeys(List<ForeignKey> fkList, Tables tables, bool useCamelCase, bool prependSchemaName, string collectionType, bool checkForFkNameClashes, bool includeComments)
         {
@@ -726,6 +709,11 @@ OPTION (QUERYTRACEON 9481)";
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fkList"></param>
+        /// <param name="tables"></param>
         public override void IdentifyForeignKeys(List<ForeignKey> fkList, Tables tables)
         {
             foreach (var foreignKey in fkList)
@@ -750,6 +738,7 @@ OPTION (QUERYTRACEON 9481)";
             }
         }
 
+
         private static string GetRelationship(Relationship relationship, Column fkCol, Column pkCol, string pkPropName, string fkPropName, string manyToManyMapping, int casete)
         {
             string temp = string.Empty;
@@ -767,6 +756,7 @@ OPTION (QUERYTRACEON 9481)";
         // HasOptional
         // HasRequired
         // HasMany
+
         private static string GetHasMethod(Relationship relationship, Column fkCol, Column pkCol)
         {
             bool withMany = false;
@@ -1081,6 +1071,11 @@ OPTION (QUERYTRACEON 9481)";
                     break;
             }
             return sysType;
+        }
+
+        public override void ReadUniqueIndexes(Tables tables)
+        {
+            throw new NotImplementedException();
         }
     }
 

@@ -1,4 +1,4 @@
-﻿using Infoearth.Entity2CodeTool.Helps;
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

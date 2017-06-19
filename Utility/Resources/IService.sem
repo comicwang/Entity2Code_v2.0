@@ -9,9 +9,9 @@ using System.Text;
 
 namespace $Service$
 {
-    // 注意: 使用“重构”菜单上的“重命名”命令，可以同时更改代码和配置文件中的接口名“I$ProjectName$Service”。
+    // 注意: 使用“重构”菜单上的“重命名”命令，可以同时更改代码和配置文件中的接口名“I$ServiceName$Service”。
     [ServiceContract]
-    public interface I$ProjectName$Service
+    public interface I$ServiceName$Service
     {
 $IServiceContent$
     }

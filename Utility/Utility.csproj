@@ -23,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
     <PlatformTarget>x86</PlatformTarget>
+    <DocumentationFile>bin\Debug\Utility.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -159,6 +160,7 @@
     <Compile Include="Base\ProjectItemExtention.cs" />
     <Compile Include="Base\ProjectReferenceExtention.cs" />
     <Compile Include="Base\ProjectSettingExtention.cs" />
+    <Compile Include="Base\SolutionExtention.cs" />
     <Compile Include="CodeFirst\CodeFirstTools.cs" />
     <Compile Include="CodeFirst\Column.cs" />
     <Compile Include="CodeFirst\ForeignKey.cs" />
@@ -170,7 +172,12 @@
     <Compile Include="CodeFirst\UniqueIndex.cs" />
     <Compile Include="Common\CommonContainer.cs" />
     <Compile Include="Common\KeywordContainer.cs" />
-    <Compile Include="Entity\GenerateEntityContext.cs" />
+    <Compile Include="Filter\CsharpVarFilter.cs" />
+    <Compile Include="Entity\EventGeneratedArg.cs" />
+    <Compile Include="Entity\EventHandledArg.cs" />
+    <Compile Include="Entity\GenerateContext.cs" />
+    <Compile Include="Entity\ReferenceContext.cs" />
+    <Compile Include="Entity\ReferenceEntity.cs" />
     <Compile Include="Filter\KeywordFilter.cs" />
     <Compile Include="Help\MsgBoxHelp.cs" />
     <Compile Include="Converter\StringConverter.cs" />
@@ -181,14 +188,11 @@
     <Compile Include="Core\PrjCmdId.cs" />
     <Compile Include="Common\TemplateContainer.cs" />
     <Compile Include="Entity\GenerateEntity.cs" />
-    <Compile Include="Entity\ReplaceEntity.cs" />
     <Compile Include="Entity\TemplateEntity.cs" />
-    <Compile Include="Enum\ProjectEnum.cs" />
     <Compile Include="Generate\CodeGenerate.cs" />
     <Compile Include="Generate\TempGenerate.cs" />
     <Compile Include="Help\FileOprateHelp.cs" />
     <Compile Include="Help\IniManager.cs" />
-    <Compile Include="Help\SolutionExplorHelp.cs" />
     <Compile Include="Help\xmlManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resource.Designer.cs">
@@ -234,7 +238,9 @@
     <None Include="Resources\Service.slm" />
     <None Include="Resources\UnityInstanceProvider.sem" />
     <None Include="Resources\UnityInstanceProviderServiceBehavior.sem" />
-    <None Include="Resources\WebConfig.sem" />
+    <None Include="Resources\WebConfig.sem">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\img.jpg" />
@@ -292,6 +298,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\first.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Enum\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

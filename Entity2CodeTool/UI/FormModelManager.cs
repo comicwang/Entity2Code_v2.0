@@ -1,5 +1,5 @@
-﻿using Infoearth.Entity2CodeTool.Logic;
-using Infoearth.Entity2CodeTool.Model;
+﻿
+
 using Infoearth.Entity2CodeTool;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Infoearth.Entity2CodeTool.Helps;
+
 using Infoearth.Entity2CodeTool.UI;
 
 namespace Infoearth.Entity2CodeTool

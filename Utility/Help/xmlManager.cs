@@ -10,8 +10,16 @@ using Utility.Properties;
 
 namespace Utility
 {
+    /// <summary>
+    /// 读取xml文件
+    /// </summary>
     public class xmlManager
     {
+        /// <summary>
+        /// 读取所有关键字的信息
+        /// </summary>
+        /// <param name="xmlPath">关键字文件路径</param>
+        /// <returns></returns>
         public static Dictionary<string, string> ReadModel(string xmlPath)
         {
             Dictionary<string, string> result = new Dictionary<string, string>();
@@ -27,6 +35,11 @@ namespace Utility
             return result;
         }
 
+        /// <summary>
+        /// 读取所有实体信息
+        /// </summary>
+        /// <param name="xmlPath">xml文件路径</param>
+        /// <returns></returns>
         public static Dictionary<string, string> ReadEntities(string xmlPath)
         {
             Dictionary<string, string> result = new Dictionary<string, string>();
@@ -42,6 +55,12 @@ namespace Utility
             return result;
         }
 
+        /// <summary>
+        /// 写入实体信息
+        /// </summary>
+        /// <param name="entityName"></param>
+        /// <param name="dtoName"></param>
+        /// <param name="path"></param>
         public static void WriteEntity(string entityName, string dtoName, string path)
         {
             XmlDocument xmlDoc = new XmlDocument();
@@ -87,6 +106,13 @@ namespace Utility
             
         }
 
+
+        /// <summary>
+        /// 写入关键字容器信息
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <param name="path"></param>
         public static void WriteModel(string key, string value, string path)
         {
             XmlDocument xmlDoc = new XmlDocument();

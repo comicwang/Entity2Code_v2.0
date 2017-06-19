@@ -14,9 +14,9 @@ using EnvDTE80;
 using System.IO;
 using System.Windows.Forms;
 using System.ComponentModel;
-using Infoearth.Entity2CodeTool.Model;
-using Infoearth.Entity2CodeTool.Helps;
-using Infoearth.Entity2CodeTool.Logic;
+using Utility.Base;
+
+
 using Infoearth.Entity2CodeTool.UI;
 using Infoearth.Entity2CodeTool;
 using Utility;
@@ -159,7 +159,7 @@ namespace Infoearth.Entity2CodeTool
             {
                 string projectName = KeywordContainer.Resove("$ProjectName$");
                 string space = IniManager.ReadString(Resources.NodeName, Resources.NameSpaceName, "");
-                CommonContainer.CommonServer.Solution.Create(string.Format("{1}.{0}.sln", projectName, space), string.Format("{1}.{0}", space, projectName));
+                CommonContainer.CommonServer.Solution.Create(string.Format("{1}.{0}.sln", projectName, space), string.Format("{1}.{0}", projectName, space));
                 CommonContainer.CommonServer.Solution.SaveAs(Path.Combine(dialog.SelectedPath, string.Format("{1}.{0}.sln", projectName, space)));
                 CommonContainer.SolutionPath = dialog.SelectedPath;
             }

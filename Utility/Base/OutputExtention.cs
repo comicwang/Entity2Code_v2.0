@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Utility.Base
 {
     /// <summary>
-    /// 提供DTE输出的操作
+    /// 提供窗口输出的操作
     /// </summary>
     public static class OutputExtention
     {
@@ -35,7 +35,7 @@ namespace Utility.Base
             dte.StatusBar.Clear();
             dte.StatusBar.Text = strs;
             if (Inlog)
-                dte.OutWindow(strs);
+                dte.OutWindow(strs, "Entity2CodeLog");
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Utility.Base
             else
                 dte.StatusBar.Progress(false);
             if (Inlog)
-                dte.OutWindow(strs);
+                dte.OutWindow(strs,"Entity2CodeLog");
         }
 
         /// <summary>
@@ -60,12 +60,12 @@ namespace Utility.Base
         /// </summary>
         /// <param name="dte"></param>
         /// <param name="strs">输出字符串</param>
-        public static void OutWindow(this DTE dte, string strs)
+        public static void OutWindow(this DTE dte, string strs,string windowName)
         {
             if (null == _outPanel)
             {
                 DTE2 dte2 = (DTE2)dte;
-                _outPanel = dte2.ToolWindows.OutputWindow.OutputWindowPanes.Add("Entity2CodeTool Log");
+                _outPanel = dte2.ToolWindows.OutputWindow.OutputWindowPanes.Add(windowName);
                 _outPanel.Activate();
             }
             _outPanel.OutputString(strs + "\r\n");

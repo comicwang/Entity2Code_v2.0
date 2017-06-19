@@ -1,9 +1,4 @@
 ﻿using DevComponents.DotNetBar.Controls;
-using Infoearth.Entity2CodeTool.Container;
-using Infoearth.Entity2CodeTool.Helps;
-using Infoearth.Entity2CodeTool.Logic;
-using Infoearth.Entity2CodeTool.Logic.UI;
-using Infoearth.Entity2CodeTool.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Utility.Entity;
 
 namespace Infoearth.Entity2CodeTool.UI
 {

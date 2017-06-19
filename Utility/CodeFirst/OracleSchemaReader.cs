@@ -49,12 +49,30 @@ where i.INDEX_NAME=ui.index_name and i.TABLE_NAME=ui.table_name and ui.uniquenes
 order by i.TABLE_NAME asc,i.COLUMN_POSITION asc
 ";
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="factory"></param>
         public OracleSchemaReader(DbConnection connection, DbProviderFactory factory)
             : base(connection, factory)
         {
 
         }
 
+        /// <summary>
+        /// 读取表空间信息
+        /// </summary>
+        /// <param name="tableFilterExclude"></param>
+        /// <param name="columnFilterExclude"></param>
+        /// <param name="useCamelCase"></param>
+        /// <param name="prependSchemaName"></param>
+        /// <param name="includeComments"></param>
+        /// <param name="includeExtendedPropertyComments"></param>
+        /// <param name="tableRename"></param>
+        /// <param name="schemaNameFilter"></param>
+        /// <param name="updateColumn"></param>
+        /// <returns></returns>
         public override Tables ReadSchema(Regex tableFilterExclude, Regex columnFilterExclude, bool useCamelCase, bool prependSchemaName, bool includeComments, ExtendedPropertyCommentsStyle includeExtendedPropertyComments, Func<string, string, string> tableRename, string schemaNameFilter, Func<Column, Table, Column> updateColumn)
         {
             var result = new Tables();
@@ -144,6 +162,11 @@ order by i.TABLE_NAME asc,i.COLUMN_POSITION asc
             return result;
         }
 
+        /// <summary>
+        /// 读取外键信息
+        /// </summary>
+        /// <param name="tableRename"></param>
+        /// <returns></returns>
         public override List<ForeignKey> ReadForeignKeys(Func<string, string, string> tableRename)
         {
             var fkList = new List<ForeignKey>();
@@ -179,9 +202,12 @@ order by i.TABLE_NAME asc,i.COLUMN_POSITION asc
 
             return fkList;
         }
-
-        // When a table has no primary keys, all the NOT NULL columns are set as being the primary key.
-        // This function reads the unique indexes for a table, and correctly sets the columns being used as primary keys.
+       
+        /// <summary>
+        /// 读取索引信息
+        /// When a table has no primary keys, all the NOT NULL columns are set as being the primary key. This function reads the unique indexes for a table, and correctly sets the columns being used as primary keys.
+        /// </summary>
+        /// <param name="tables"></param>
         public override void ReadUniqueIndexes(Tables tables)
         {
             if (Cmd == null)
@@ -254,6 +280,10 @@ order by i.TABLE_NAME asc,i.COLUMN_POSITION asc
             }
         }
 
+        /// <summary>
+        /// 读取扩展属性信息
+        /// </summary>
+        /// <param name="tables"></param>
         public override void ReadExtendedProperties(Tables tables)
         {
             if (Cmd == null)
@@ -290,10 +320,25 @@ order by i.TABLE_NAME asc,i.COLUMN_POSITION asc
             }
         }
 
+        /// <summary>
+        /// 读取存储过程信息
+        /// </summary>
+        /// <param name="spFilterExclude"></param>
+        /// <param name="useCamelCase"></param>
+        /// <param name="prependSchemaName"></param>
+        /// <param name="StoredProcedureRename"></param>
+        /// <param name="schemaNameFilter"></param>
+        /// <returns></returns>
         public override List<StoredProcedure> ReadStoredProcs(Regex spFilterExclude, bool useCamelCase, bool prependSchemaName, Func<string, string, string> StoredProcedureRename, string schemaNameFilter)
         {
             throw new Exception();
         }
+
+        /// <summary>
+        /// 读取存储过程返回信息
+        /// </summary>
+        /// <param name="connectionString"></param>
+        /// <param name="proc"></param>
 
         public void ReadStoredProcReturnObject(string connectionString, StoredProcedure proc)
         {
@@ -350,6 +395,16 @@ order by i.TABLE_NAME asc,i.COLUMN_POSITION asc
                 // Stored procedure does not have a return type
             }
         }
+        /// <summary>
+        /// 处理外键信息
+        /// </summary>
+        /// <param name="fkList"></param>
+        /// <param name="tables"></param>
+        /// <param name="useCamelCase"></param>
+        /// <param name="prependSchemaName"></param>
+        /// <param name="collectionType"></param>
+        /// <param name="checkForFkNameClashes"></param>
+        /// <param name="includeComments"></param>
 
         public override void ProcessForeignKeys(List<ForeignKey> fkList, Tables tables, bool useCamelCase, bool prependSchemaName, string collectionType, bool checkForFkNameClashes, bool includeComments)
         {
@@ -408,6 +463,11 @@ order by i.TABLE_NAME asc,i.COLUMN_POSITION asc
             }
         }
 
+        /// <summary>
+        /// 识别外键信息
+        /// </summary>
+        /// <param name="fkList"></param>
+        /// <param name="tables"></param>
         public override void IdentifyForeignKeys(List<ForeignKey> fkList, Tables tables)
         {
             foreach (var foreignKey in fkList)

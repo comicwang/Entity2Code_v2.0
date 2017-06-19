@@ -6,6 +6,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utility.Common;
+using Utility.Core;
+using Utility.Help;
 
 namespace Utility.Base
 {
@@ -21,13 +24,14 @@ namespace Utility.Base
         /// </summary>
         /// <param name="dte">DTE宿体</param>
         /// <param name="projectName">项目名称</param>
+        /// <param name="overWrite">是否覆盖现有项目</param>
         /// <returns>创建的项目类</returns>
-        public static Project AddClassLibrary(this DTE dte, string projectName, bool overWrite = false)
+        public static Project AddClassLibrary(this DTE dte, string projectName,bool overWrite=false)
         {
             try
             {
                 Solution2 sln = dte.Solution as Solution2;
-                Project prj = sln.Projects.Find(projectName);
+                Project prj = (sln as Solution).FindProject(projectName);
                 if (null != prj)
                 {
                     if (overWrite == false)
@@ -41,10 +45,10 @@ namespace Utility.Base
                     Directory.CreateDirectory(path);
                 prj = sln.AddFromTemplate(projectTemplate, path, projectName);
                 if (null == prj)
-                    prj = sln.Projects.Find(projectName);
+                    prj = (sln as Solution).FindProject(projectName);
 
                 //移除Class1
-                ProjectItem prjItem = prj.ProjectItems.Find("Class1.cs");
+                ProjectItem prjItem = prj.ProjectItems.FindItem("Class1.cs");
                 if (null != prjItem)
                     prjItem.Delete();
 
@@ -63,13 +67,14 @@ namespace Utility.Base
         /// </summary>
         /// <param name="dte">DTE宿体</param>
         /// <param name="projectName">项目名称</param>
+        /// <param name="overWrite">是否覆盖现有项目</param>
         /// <returns>创建的项目类</returns>
         public static Project AddWebService(this DTE dte, string projectName, bool overWrite = false)
         {
             try
             {
                 Solution2 sln = dte.Solution as Solution2;
-                Project prj = sln.Projects.Find(projectName);
+                Project prj = (sln as Solution).FindProject(projectName);
                 if (null != prj)
                 {
                     if (overWrite == false)
@@ -83,7 +88,7 @@ namespace Utility.Base
                     Directory.CreateDirectory(path);
                 prj = sln.AddFromTemplate(projectTemplate, path, projectName);
                 if (null == prj)
-                    prj = sln.Projects.Find(projectName);
+                    prj = (sln as Solution).FindProject(projectName);
                 prj.SetProjectConfig("PlatformTarget", "X86");
                 return prj;
             }
@@ -97,7 +102,7 @@ namespace Utility.Base
         /// 新增项目文件夹
         /// </summary>
         /// <param name="dte"></param>
-        /// <param name="folderName"></param>
+        /// <param name="folderName">文件夹名称</param>
         /// <returns></returns>
         public static Project AddSolutionFolder(this DTE dte, string folderName)
         {
@@ -105,14 +110,13 @@ namespace Utility.Base
             try
             {
                 Solution2 sln = dte.Solution as Solution2;
-                project = dte.Solution.Projects.Find(folderName);
+                project =(dte.Solution as Solution).FindProject(folderName);
                 if (project == null)
                     project = sln.AddSolutionFolder(folderName);
               
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
             return project;
@@ -122,8 +126,8 @@ namespace Utility.Base
         /// 获取项目的目录
         /// </summary>
         /// <param name="project">项目宿体</param>
-        /// <returns></returns>
-        public static string ToDirectory(this Project project)
+        /// <returns>项目根目录</returns>
+        public static string GetDirectory(this Project project)
         {
             if (null == project) return string.Empty;
             return Path.GetDirectoryName(project.FullName);
@@ -135,35 +139,10 @@ namespace Utility.Base
         /// <param name="project"></param>
         public static void SetLog4netWatch(this Project project)
         {
-            string assemblyInfoPath = Path.Combine(project.ToDirectory(), "Properties", "AssemblyInfo.cs");
+            string assemblyInfoPath = Path.Combine(project.GetDirectory(), "Properties", "AssemblyInfo.cs");
             StringBuilder build1 = FileOprateHelp.ReadTextFile(assemblyInfoPath);
             build1.AppendLine("[assembly: log4net.Config.XmlConfigurator(Watch = true)]");//日志监视
             FileOprateHelp.SaveTextFile(build1.ToString(), assemblyInfoPath);
-        }
-
-        /// <summary>
-        /// 根据项目名称获取项目类
-        /// </summary>
-        /// <param name="projects">项目集合宿体</param>
-        /// <param name="projectName">项目名称</param>
-        /// <returns></returns>
-        public static Project Find(this Projects projects, string projectName)
-        {
-            try
-            {
-                if (null == projects || 0 == projects.Count)
-                    return null;
-                foreach (Project prj in projects)
-                {
-                    if (prj.Name == projectName)
-                        return prj;
-                }
-                return null;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
         }
 
         #endregion

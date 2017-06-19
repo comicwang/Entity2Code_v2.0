@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Utility
+namespace Utility.Help
 {
     /// <summary>
     /// 有关文件操作的帮助类
@@ -27,6 +27,11 @@ namespace Utility
             }
         }
 
+        /// <summary>
+        /// 保存文件
+        /// </summary>
+        /// <param name="stream">文件流</param>
+        /// <param name="filePath">文件路径</param>
         public static void SaveStreamFile(Stream stream, string filePath)
         {
             using (FileStream create = new FileStream(filePath, FileMode.Create))

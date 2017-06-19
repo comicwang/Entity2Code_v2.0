@@ -12,17 +12,37 @@ using Utility.Help;
 
 namespace Utility.Generate
 {
+    /// <summary>
+    /// 用于生成临时文件的类（不会创建项目项）
+    /// </summary>
     public class TempGenerate : CodeGenerateBase
     {
+        /// <summary>
+        /// 临时的字符串容器
+        /// </summary>
         public StringBuilder TempBuild;
 
+        /// <summary>
+        /// 临时字符串要用到的关键字容器的关键字名称
+        /// </summary>
         public string TemplateName;
 
+        /// <summary>
+        /// 收集信息
+        /// </summary>
+        /// <param name="guid">ID</param>
+        /// <param name="key">是否需要注入到关键字容器中</param>
+        /// <returns></returns>
         public override object[] GetGenerateInfo(string guid, bool key)
         {
             string templatePath = Path.Combine(CommonContainer.RootPath, TemplateContainer.Resove<string>(guid));
             return new object[] { guid,templatePath,key };
         }
+
+        /// <summary>
+        /// 处理容器
+        /// </summary>
+        /// <param name="containerArgment"></param>
 
         public override void HandleGenerateContainer(Dictionary<string, string> containerArgment)
         {
@@ -33,6 +53,11 @@ namespace Utility.Generate
                 }
         }
 
+        /// <summary>
+        /// 生成临时代码
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
         public override bool GenerateCode(object[] info)
         {
             try
@@ -56,8 +81,7 @@ namespace Utility.Generate
             }
             catch (Exception ex)
             {
-                MsgBoxHelp.ShowError(string.Format("创建临时代码失败-{0}", info[0]), ex);
-                return false;
+                throw ex;
             }
         }
 

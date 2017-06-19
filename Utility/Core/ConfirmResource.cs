@@ -4,12 +4,19 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Utility.Help;
 using Utility.Properties;
 
 namespace Utility.Core
 {
+    /// <summary>
+    /// 用于确认资源存在的类
+    /// </summary>
     public class ConfirmResource
     {
+        /// <summary>
+        /// 确认
+        /// </summary>
         public static void Copy()
         {
             if (!Directory.Exists(Resource.RootPath))

@@ -13,12 +13,12 @@ namespace Utility.Base
     public static class DTECommandExtention
     {
         /// <summary>
-        /// 重新编译解决方案
+        /// 提供DTE类执行命令
         /// </summary>
-        /// <param name="dte"></param>
-        public static void RebuildSolution(this DTE dte)
+        /// <param name="dte">DTE宿主</param>
+        public static void RebuildSolution(this DTE dte,string command)
         {
-            dte.ExecuteCommand("Build.RebuildSolution");
+            dte.ExecuteCommand(command);
         }
     }
 }

@@ -26,14 +26,22 @@ namespace Utility.Common
             RegistSource("$DBConstr$", "new InjectionConstructor(db)");
         }
 
+        /// <summary>
+        /// 获取所有的关键字信息
+        /// </summary>
+        /// <returns></returns>
         public static Dictionary<string, string> GetAll()
         {
             return _mContainer;
         }
 
-        public static void LoadContainer()
+        /// <summary>
+        /// 根据配置文件来加载关键字信息
+        /// </summary>
+        /// <param name="xmlPath">xml文件路径</param>
+        public static void LoadContainer(string xmlPath)
         {
-            string xmlPath = Path.Combine(CommonContainer.SolutionPath, Resource.ConfigName);
+            //string xmlPath = Path.Combine(CommonContainer.SolutionPath, Resource.ConfigName);
             Dictionary<string, string> models = xmlManager.ReadModel(xmlPath);
 
             foreach (var item in models)
@@ -49,7 +57,9 @@ namespace Utility.Common
             PrjCmdId.SetProjectName(PrjCmdId.DomainEntity, KeywordContainer.Resove("$Service$"));
         }
 
-
+        /// <summary>
+        /// 存储关键字信息
+        /// </summary>
         public static void SetContainer()
         {
             foreach (var item in _mContainer)
@@ -62,7 +72,7 @@ namespace Utility.Common
         }
 
         /// <summary>
-        /// 更替模型内容
+        /// 用实际内容更替模型关键字
         /// </summary>
         /// <param name="metaString"></param>
         public static string Replace(string metaString)
@@ -93,6 +103,12 @@ namespace Utility.Common
             else
                 _mContainer.Add(key, value);
         }
+        
+        /// <summary>
+        /// 解析容器中关键字的值
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
 
         public static string Resove(string key)
         {

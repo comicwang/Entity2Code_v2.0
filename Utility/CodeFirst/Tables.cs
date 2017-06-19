@@ -11,6 +11,12 @@ namespace Utility.CodeFirst
     /// </summary>
     public class Tables : List<Table>
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="schema"></param>
+        /// <returns></returns>
         public Table GetTable(string tableName, string schema)
         {
             return this.SingleOrDefault(x =>
@@ -18,6 +24,9 @@ namespace Utility.CodeFirst
                 String.Compare(x.Schema, schema, StringComparison.OrdinalIgnoreCase) == 0);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void SetPrimaryKeys()
         {
             foreach (var tbl in this)
@@ -26,6 +35,15 @@ namespace Utility.CodeFirst
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fkList"></param>
+        /// <param name="useCamelCase"></param>
+        /// <param name="collectionType"></param>
+        /// <param name="checkForFkNameClashes"></param>
+        /// <param name="includeComments"></param>
+        /// <param name="isSqlCE"></param>
         public void IdentifyMappingTables(List<ForeignKey> fkList, bool useCamelCase, string collectionType, bool checkForFkNameClashes, bool includeComments, bool isSqlCE)
         {
             foreach (var tbl in this.Where(x => x.HasForeignKey))
@@ -34,6 +52,9 @@ namespace Utility.CodeFirst
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void ResetNavigationProperties()
         {
             foreach (var tbl in this)

@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Utility.Common;
 
 namespace Utility.Core
 {
+    /// <summary>
+    /// 项目项基础文件
+    /// </summary>
     public class CdeCmdId
     {
         static CdeCmdId()
         {
-            SetBelongId(InfrastructureId.DbContextExtensions,PrjCmdId.Infrastructure);
+            SetBelongId(InfrastructureId.DbContextExtensions, PrjCmdId.Infrastructure);
             SetBelongId(InfrastructureId.Repository, PrjCmdId.Infrastructure);
             SetBelongId(InfrastructureId.Map, PrjCmdId.Infrastructure);
             SetBelongId(InfrastructureId.ContextUnit, PrjCmdId.Infrastructure);
@@ -22,7 +26,7 @@ namespace Utility.Core
             SetBelongId(IApplicationId.IApplication, PrjCmdId.IApplication);
             SetBelongId(Data2ObjectId.Data2Obj, PrjCmdId.Data2Object);
             SetBelongId(Data2ObjectId.Profile.Fix, PrjCmdId.Data2Object);
-            SetBelongId(Data2ObjectId.Profile.UnFix,PrjCmdId.Data2Object);
+            SetBelongId(Data2ObjectId.Profile.UnFix, PrjCmdId.Data2Object);
             SetBelongId(ServiceId.AttachDataSignBehavior, PrjCmdId.Service);
             SetBelongId(ServiceId.Container.Fix, PrjCmdId.Service);
             SetBelongId(ServiceId.Container.UnFix, PrjCmdId.Service);
@@ -38,18 +42,20 @@ namespace Utility.Core
             SetFileName(InfrastructureId.Repository, "$Data2Obj$Repository.cs");
             SetFileName(InfrastructureId.Map, "$Entity$Map.cs");
             SetFileName(InfrastructureId.ContextUnit, "$ProjectName$ContextUnit.cs");
-            SetFileName(InfrastructureId.DBContext.UnFix, "$ProjectName$Context.cs");
-            SetFileName(Data2ObjectId.Profile.UnFix, "$ProjectName$Profile.cs");
+            SetFileName(InfrastructureId.DBContext.Fix, "$ProjectName$Context.cs");
+            SetFileName(Data2ObjectId.Profile.Fix, "$ProjectName$Profile.cs");
             SetFileName(DomainEntityId.Entity, "$Entity$.cs");
             SetFileName(DomainContextId.IRepository, "I$Data2Obj$Repository.cs");
             SetFileName(ApplicationId.Application, "$Data2Obj$App.cs");
             SetFileName(IApplicationId.IApplication, "I$Data2Obj$App.cs");
             SetFileName(Data2ObjectId.Data2Obj, "$Data2Obj$.cs");
-            SetFileName(ServiceId.IService.UnFix, "I$ProjectName$Service.cs");
-            SetFileName(ServiceId.Service.UnFix, "$ProjectName$Service.svc.cs");
-            SetFileName(ServiceId.CodeBehind, "$ProjectName$Service.svc");
+
+            SetFileName(ServiceId.IService.Fix, "I$ServiceName$Service.cs");
+            SetFileName(ServiceId.Service.Fix, "$ServiceName$Service.svc.cs");
+
+            SetFileName(ServiceId.CodeBehind, "$ServiceName$Service.svc");
             SetFileName(ServiceId.WebConfig, "web.config");
-           
+
             SetForlder(Data2ObjectId.Profile.Fix, "Profile");
             SetForlder(InfrastructureId.DbContextExtensions, "Extention");
             SetForlder(InfrastructureId.Map, "Map");
@@ -89,6 +95,11 @@ namespace Utility.Core
                 _forldContainer[guid] = forlderName;
         }
 
+        /// <summary>
+        /// 获取项目项未被关键字容器解析的名称
+        /// </summary>
+        /// <param name="guid">项目项ID</param>
+        /// <returns></returns>
         public static string TempFileName(string guid)
         {
             if(!_nameContainer.ContainsKey(guid))
@@ -96,6 +107,12 @@ namespace Utility.Core
             return _nameContainer[guid];
         }
 
+        /// <summary>
+        /// 项目项是否需要添加文件夹
+        /// </summary>
+        /// <param name="guid">项目项ID</param>
+        /// <param name="Forlder">文件夹名称</param>
+        /// <returns>是否需要</returns>
         public static bool HasForlder(string guid, out string Forlder)
         {
             if (_forldContainer.ContainsKey(guid))
@@ -107,12 +124,19 @@ namespace Utility.Core
             return false;
         }
 
+        /// <summary>
+        /// 获取项目项所属的项目ID
+        /// </summary>
+        /// <param name="guid">项目项ID</param>
+        /// <returns>项目ID</returns>
         public static string BelongId(string guid)
         {
             if (!_idContainer.ContainsKey(guid))
                 return null;
             return _idContainer[guid];
         }
+
+        
 
         public static class InfrastructureId
         {

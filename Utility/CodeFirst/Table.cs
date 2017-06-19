@@ -11,24 +11,75 @@ namespace Utility.CodeFirst
     /// </summary>
     public class Table
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public string Name;
+        /// <summary>
+        /// 
+        /// </summary>
         public string NameHumanCase;
+        /// <summary>
+        /// 
+        /// </summary>
         public string Schema;
+        /// <summary>
+        /// 
+        /// </summary>
         public string Type;
+        /// <summary>
+        /// 
+        /// </summary>
         public string ClassName;
+        /// <summary>
+        /// 
+        /// </summary>
         public string CleanName;
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsMapping;
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsView;
+        /// <summary>
+        /// 
+        /// </summary>
         public bool HasForeignKey;
+        /// <summary>
+        /// 
+        /// </summary>
         public bool HasNullableColumns;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public List<Column> Columns;
+        /// <summary>
+        /// 
+        /// </summary>
         public List<string> ReverseNavigationProperty;
+        /// <summary>
+        /// 
+        /// </summary>
         public List<string> MappingConfiguration;
+        /// <summary>
+        /// 
+        /// </summary>
         public List<string> ReverseNavigationCtor;
+        /// <summary>
+        /// 
+        /// </summary>
         public List<string> ReverseNavigationUniquePropName;
+        /// <summary>
+        /// 
+        /// </summary>
         public List<string> ReverseNavigationUniquePropNameClashes;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Table()
         {
             Columns = new List<Column>();
@@ -36,6 +87,9 @@ namespace Utility.CodeFirst
             ReverseNavigationUniquePropNameClashes = new List<string>();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void ResetNavigationProperties()
         {
             MappingConfiguration = new List<string>();
@@ -44,11 +98,18 @@ namespace Utility.CodeFirst
             ReverseNavigationUniquePropName = new List<string>();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IEnumerable<Column> PrimaryKeys
         {
             get { return Columns.Where(x => x.IsPrimaryKey).OrderBy(x => x.Ordinal).ToList(); }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public string PrimaryKeyNameHumanCase()
         {
             var data = PrimaryKeys.Select(x => "x." + x.PropertyName).ToList();
@@ -61,16 +122,36 @@ namespace Utility.CodeFirst
             return string.Format("x => new {{ {0} }}", string.Join(", ", data));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="columnName"></param>
+        /// <returns></returns>
         public Column this[string columnName]
         {
             get { return GetColumn(columnName); }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="columnName"></param>
+        /// <returns></returns>
 
         public Column GetColumn(string columnName)
         {
             return Columns.SingleOrDefault(x => String.Compare(x.Name, columnName, StringComparison.OrdinalIgnoreCase) == 0);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tableNameHumanCase"></param>
+        /// <param name="foreignKey"></param>
+        /// <param name="useCamelCase"></param>
+        /// <param name="checkForFkNameClashes"></param>
+        /// <param name="makeSingular"></param>
+        /// <returns></returns>
         public string GetUniqueColumnPropertyName(string tableNameHumanCase, ForeignKey foreignKey, bool useCamelCase, bool checkForFkNameClashes, bool makeSingular)
         {
             if (ReverseNavigationUniquePropName.Count == 0)
@@ -120,6 +201,16 @@ namespace Utility.CodeFirst
             return tableNameHumanCase;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="relationship"></param>
+        /// <param name="fkName"></param>
+        /// <param name="fkTable"></param>
+        /// <param name="propName"></param>
+        /// <param name="constraint"></param>
+        /// <param name="collectionType"></param>
+        /// <param name="includeComments"></param>
         public void AddReverseNavigation(Relationship relationship, string fkName, Table fkTable, string propName, string constraint, string collectionType, bool includeComments)
         {
             switch (relationship)
@@ -147,6 +238,15 @@ namespace Utility.CodeFirst
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <param name="useCamelCase"></param>
+        /// <param name="leftPropName"></param>
+        /// <param name="rightPropName"></param>
+        /// <param name="isSqlCE"></param>
         public void AddMappingConfiguration(ForeignKey left, ForeignKey right, bool useCamelCase, string leftPropName, string rightPropName, bool isSqlCE)
         {
             MappingConfiguration.Add(string.Format(@"HasMany(t => t.{0}).WithMany(t => t.{1}).Map(m => 
@@ -157,6 +257,9 @@ namespace Utility.CodeFirst
             }});", leftPropName, rightPropName, left.FkTableName, left.FkColumn, right.FkColumn, isSqlCE ? string.Empty : ", schema"));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void SetPrimaryKeys()
         {
             if (PrimaryKeys.Any())
@@ -170,6 +273,16 @@ namespace Utility.CodeFirst
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fkList"></param>
+        /// <param name="tables"></param>
+        /// <param name="useCamelCase"></param>
+        /// <param name="collectionType"></param>
+        /// <param name="checkForFkNameClashes"></param>
+        /// <param name="includeComments"></param>
+        /// <param name="isSqlCE"></param>
         public void IdentifyMappingTable(List<ForeignKey> fkList, Tables tables, bool useCamelCase, string collectionType, bool checkForFkNameClashes, bool includeComments, bool isSqlCE)
         {
             IsMapping = false;

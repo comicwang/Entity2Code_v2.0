@@ -1,13 +1,20 @@
 ﻿using EnvDTE;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utility.Common;
+using Utility.Core;
+using Utility.Help;
 using VSLangProj;
 
 namespace Utility.Base
 {
+    /// <summary>
+    /// 提供项目引用扩展
+    /// </summary>
     public static class ProjectReferenceExtention
     {
         #region methods
@@ -55,6 +62,43 @@ namespace Utility.Base
         }
 
         /// <summary>
+        /// 通过关键字来添加项目引用
+        /// </summary>
+        /// <param name="project"></param>
+        /// <param name="referId">项目ID,系统类库或者资源类库</param>
+        public static void AddReferByKey(this Project project, string referId)
+        {
+            try
+            {
+                if (referId.Count() == 36)
+                {
+                    Project referProject = TemplateContainer.Resove<Project>(referId);
+                    if (referProject != null)
+                    {
+                        project.AddReferenceFromProject(referProject);
+                        return;
+                    }
+                }
+                string[] files = Directory.GetFiles(CommonContainer.RootPath, "*.dll");
+                if (files != null)
+                    Array.ForEach(files, t =>
+                    {
+                        if (t.Contains(referId))
+                        {
+                            project.AddReference(t);
+                            return;
+                        }
+                    });
+                project.AddReference(referId);
+            }
+            catch (Exception ex)
+            {
+                MsgBoxHelp.ShowError(string.Format(Properties.Resource.ReferError, referId), ex);
+            }
+        }
+
+
+        /// <summary>
         /// 更新项目引用
         /// </summary>
         /// <param name="project">项目宿体</param>
@@ -98,12 +142,5 @@ namespace Utility.Base
     //    }
 
         #endregion
-    }
-
-    public class ReferMini
-    {
-        public string Id;
-
-        public string Path;
     }
 }

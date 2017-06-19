@@ -1,5 +1,5 @@
-﻿using Infoearth.Entity2CodeTool.Container;
-using Infoearth.Entity2CodeTool.Model;
+﻿
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,8 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Infoearth.Entity2CodeTool.Helps;
+
 using System.IO;
+using Utility.Entity;
 
 namespace Infoearth.Entity2CodeTool.UI
 {
@@ -18,7 +19,7 @@ namespace Infoearth.Entity2CodeTool.UI
     {
         private List<TemplateEntity> _entitys = null;
         private string _repositoy = null;
-        private bool _reList = false;
+        private bool _isReturn = false;
 
         private string _code = null;
 
@@ -32,18 +33,18 @@ namespace Infoearth.Entity2CodeTool.UI
             InitializeComponent();
         }
 
-        public FormSelectArg(string repositoy,List<TemplateEntity> entitys,bool reList)
+        public FormSelectArg(string repositoy,List<TemplateEntity> entitys,bool isReurn)
             : this()
         {
             _repositoy = repositoy;
             _entitys = entitys;
-            _reList = reList;
+            _isReturn = isReurn;
             SetCustomArg();
         }
 
         private void SetCustomArg()
         {
-            List<string> customs = VarCsharp.AllTypes(_reList);
+            List<string> customs = Utility.Filter.CsharpVarFilter.FilterAll(_isReturn);
             comboBox1.Items.Clear();
             comboBox1.Items.AddRange(customs.ToArray());
         }
@@ -52,13 +53,8 @@ namespace Infoearth.Entity2CodeTool.UI
         {
             if (radioButton2.Checked)
             {
-                //获取仓储内复杂参数
-                string fileForld = ProjectContainer.DomainEntity.ToDirectory();
-                string filePath = Directory.GetFiles(fileForld, _repositoy + ".cs", SearchOption.AllDirectories).FirstOrDefault();
-                List<string> specials = FileOprateHelp.ReadFileFilter(filePath, _entitys);
-
                 comboBox1.Items.Clear();
-                comboBox1.Items.AddRange(specials.ToArray());
+                comboBox1.Items.AddRange(_entitys.ToArray());
             }
         }
 
@@ -70,7 +66,7 @@ namespace Infoearth.Entity2CodeTool.UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string result = comboBox1.SelectedItem.ToString();
+            string result = (comboBox1.SelectedItem as TemplateEntity).Data2Obj + Properties.Resources.Data2ObjEndName;
 
             foreach (Control item in groupBox2.Controls)
             {

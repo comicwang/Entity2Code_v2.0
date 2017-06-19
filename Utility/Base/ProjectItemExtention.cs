@@ -14,8 +14,6 @@ namespace Utility.Base
     /// </summary>
     public static class ProjectItemExtention
     {
-        #region methods
-
         /// <summary>
         /// 创建ADO.NET实体数据模型
         /// </summary>
@@ -26,11 +24,11 @@ namespace Utility.Base
         {
             try
             {
-                ProjectItem projectItem = project.ProjectItems.Find(itemNameWithoutExtion + ".edmx");
+                ProjectItem projectItem = project.ProjectItems.FindItem(itemNameWithoutExtion + ".edmx");
                 //项存在删除
                 if (null != projectItem)
                     projectItem.Delete();
-                ProjectItem appItem = project.ProjectItems.Find("app.config");
+                ProjectItem appItem = project.ProjectItems.FindItem("app.config");
                 if (null != appItem)
                     appItem.Delete();
                 Solution2 sln = project.DTE.Solution as Solution2;
@@ -58,7 +56,7 @@ namespace Utility.Base
             try
             {
                 ProjectItem prjItem = null;
-                string dirPath = Path.Combine(project.ToDirectory(), dirName);
+                string dirPath = Path.Combine(project.GetDirectory(), dirName);
                 //文件夹不存在创建项目文件夹
                 if (!Directory.Exists(dirPath))
                     prjItem = project.ProjectItems.AddFolder(dirName);
@@ -66,7 +64,7 @@ namespace Utility.Base
                 else
                 {
                     //项目文件夹存在
-                    prjItem = project.ProjectItems.Find(dirName);
+                    prjItem = project.ProjectItems.FindItem(dirName);
                     //项目文件夹不存在创建
                     if (null == prjItem)
                         prjItem = project.ProjectItems.AddFromDirectory(dirPath);
@@ -74,7 +72,7 @@ namespace Utility.Base
                 if (null == prjItem)
                     throw new ArgumentException(dirName);
 
-                ProjectItem projectItem = prjItem.ProjectItems.Find(itemNameWithoutExtion + ".edmx");
+                ProjectItem projectItem = prjItem.ProjectItems.FindItem(itemNameWithoutExtion + ".edmx");
                 //项存在删除
                 if (null != projectItem)
                     projectItem.Delete();
@@ -83,7 +81,7 @@ namespace Utility.Base
                 string templatePath = sln.GetProjectItemTemplate("AdoNetEntityDataModelCSharp.zip", "CSharp");
                 projectItem = prjItem.ProjectItems.AddFromTemplate(templatePath, itemNameWithoutExtion + ".edmx");
                 if (null == projectItem)
-                    projectItem = prjItem.ProjectItems.Find(itemNameWithoutExtion + ".edmx");
+                    projectItem = prjItem.ProjectItems.FindItem(itemNameWithoutExtion + ".edmx");
                 return projectItem;
             }
             catch (Exception ex)
@@ -105,37 +103,13 @@ namespace Utility.Base
             try
             {
                 string itemName = Path.GetFileName(filePath);
-                ProjectItem projectItem = project.ProjectItems.Find(itemName);
+                ProjectItem projectItem = project.ProjectItems.FindItem(itemName);
                 //项存在删除
                 if (null != projectItem)
                     projectItem.Delete();
                 projectItem = project.ProjectItems.AddFromFileCopy(filePath);
                 if (null == projectItem)
-                    projectItem = project.ProjectItems.Find(itemName);
-                return projectItem;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        /// <summary>
-        /// 根据文件和项目创建项（无项目项文件夹）
-        /// </summary>
-        /// <param name="project"></param>
-        /// <param name="filePath">文件路径</param>
-        /// <returns>创建完成的项目项</returns>
-        public static ProjectItem AddFromFile(this Project project, string filePath)
-        {
-            if (!File.Exists(filePath))
-                return null;
-            try
-            {
-                string itemName = Path.GetFileName(filePath);
-                ProjectItem projectItem = project.ProjectItems.AddFromFile(filePath);
-                if (null == projectItem)
-                    projectItem = project.ProjectItems.Find(itemName);
+                    projectItem = project.ProjectItems.FindItem(itemName);
                 return projectItem;
             }
             catch (Exception ex)
@@ -150,25 +124,26 @@ namespace Utility.Base
         /// <param name="project"></param>
         /// <param name="fileString">文件字符串内容</param>
         /// <param name="itemName">文件名称（包括后缀）</param>
+        /// <param name="encoding">编码方式</param>
         /// <returns>创建完成的项目项</returns>
         public static ProjectItem AddFromFileString(this Project project, string fileString, string itemName, Encoding encoding)
         {
             try
             {
                 //创建项文件
-                string filePath = Path.Combine(project.ToDirectory(), itemName);
+                string filePath = Path.Combine(project.GetDirectory(), itemName);
                 using (FileStream create = new FileStream(filePath, FileMode.OpenOrCreate))
                 {
                     byte[] buffer = encoding.GetBytes(fileString);
                     create.Write(buffer, 0, buffer.Length);
                 }
                 //添加项文件到项目中
-                ProjectItem projectItem = project.ProjectItems.Find(itemName);
+                ProjectItem projectItem = project.ProjectItems.FindItem(itemName);
                 if (null != projectItem)
                     projectItem.Remove();
                 projectItem = project.ProjectItems.AddFromFile(filePath);
                 if (null == projectItem)
-                    projectItem = project.ProjectItems.Find(itemName);
+                    projectItem = project.ProjectItems.FindItem(itemName);
                 projectItem.FormatDocument();
                 return projectItem;
             }
@@ -185,29 +160,30 @@ namespace Utility.Base
         /// <param name="fileString">字符串</param>
         /// <param name="dirName">文件夹名称</param>
         /// <param name="itemName">文件名称</param>
+        /// <param name="encoding">编码方式</param>
         /// <returns></returns>
-        public static ProjectItem AddFromFileString(this Project project, string fileString, string dirName, string itemName)
+        public static ProjectItem AddFromFileString(this Project project, string fileString, string dirName, string itemName, Encoding encoding)
         {
             try
             {
                 //创建项文件
-                string dirPath = Path.Combine(project.ToDirectory(), dirName);
+                string dirPath = Path.Combine(project.GetDirectory(), dirName);
                 //文件夹不存在创建项目文件夹
                 if (!Directory.Exists(dirPath))
                     Directory.CreateDirectory(dirPath);
                 string filePath = Path.Combine(dirPath, itemName);
                 using (FileStream create = new FileStream(filePath, FileMode.OpenOrCreate))
                 {
-                    byte[] buffer = Encoding.Default.GetBytes(fileString);
+                    byte[] buffer = encoding.GetBytes(fileString);
                     create.Write(buffer, 0, buffer.Length);
                 }
                 //添加项文件到项目中
-                ProjectItem projectItem = project.ProjectItems.Find(itemName);
+                ProjectItem projectItem = project.ProjectItems.FindItem(itemName);
                 if (null != projectItem)
                     projectItem.Delete();
                 projectItem = project.ProjectItems.AddFromFile(filePath);
                 if (null == projectItem)
-                    projectItem = project.ProjectItems.Find(itemName);
+                    projectItem = project.ProjectItems.FindItem(itemName);
                 projectItem.FormatDocument();
                 return projectItem;
             }
@@ -277,7 +253,7 @@ namespace Utility.Base
         /// <param name="itemName">项目项名称</param>
         /// <param name="allSub">是否递归到所有子项目（默认为false）</param>
         /// <returns></returns>
-        public static ProjectItem Find(this ProjectItems projects, string itemName, bool allSub = false)
+        public static ProjectItem FindItem(this ProjectItems projects, string itemName, bool allSub = false)
         {
             try
             {
@@ -294,7 +270,7 @@ namespace Utility.Base
                 }
                 else
                 {
-                    return Find(projects, itemName);
+                    return FindItem(projects, itemName);
                 }
             }
             catch (Exception ex)
@@ -309,7 +285,7 @@ namespace Utility.Base
         /// <param name="projects">项目项集合</param>
         /// <param name="itemName">项目项名称</param>
         /// <returns></returns>
-        private static ProjectItem Find(ProjectItems projects, string itemName)
+        private static ProjectItem FindItem(ProjectItems projects, string itemName)
         {
             foreach (ProjectItem item in projects)
             {
@@ -317,7 +293,7 @@ namespace Utility.Base
                     return item;
                 if (item.ProjectItems != null && item.ProjectItems.Count > 0)
                 {
-                    ProjectItem prj = Find(item.ProjectItems, itemName);
+                    ProjectItem prj = FindItem(item.ProjectItems, itemName);
                     if (prj != null)
                         return prj;
                 }
@@ -325,7 +301,6 @@ namespace Utility.Base
             }
             return null;
         }
-
 
         /// <summary>
         /// 规范化项目.cs文件
@@ -348,7 +323,5 @@ namespace Utility.Base
                 }
             }
         }
-
-        #endregion
     }
 }

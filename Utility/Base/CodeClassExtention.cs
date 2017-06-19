@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Utility.Base
 {
+    /// <summary>
+    /// 提供文档访问的扩展
+    /// </summary>
     public static class CodeClassExtention
     {
         #region methods

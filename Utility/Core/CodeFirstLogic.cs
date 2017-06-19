@@ -13,10 +13,15 @@ using Utility.Generate;
 
 namespace Utility.Core
 {
+    /// <summary>
+    /// 提供创建代码的主要业务
+    /// </summary>
     public  class CodeFirstLogic
     {
         private static Tables _tables;
-
+        /// <summary>
+        /// 所有表信息
+        /// </summary>
         public static Tables Tables
         {
             get
@@ -29,7 +34,7 @@ namespace Utility.Core
 
         #region methods
 
-        public static Tables GetTables()
+        private static Tables GetTables()
         {
 
             CodeFirstTools.TableRename = (name, schema) => name;   // Do nothing by default
@@ -71,6 +76,9 @@ namespace Utility.Core
             // WriteLine("        // " + t.ClassName);
         };
 
+        /// <summary>
+        /// 获取实体信息
+        /// </summary>
         public static Func<Column, string> WritePocoColumn = c => c.Entity;
 
         Func<StoredProcedure, string> WriteStoredProcFunctionName = sp =>

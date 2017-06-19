@@ -289,6 +289,15 @@ namespace Utility.Properties {
         }
         
         /// <summary>
+        ///   查找类似 创建模板{0}的{1}代码失败！ 的本地化字符串。
+        /// </summary>
+        internal static string GenerateError {
+            get {
+                return ResourceManager.GetString("GenerateError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 代码生成 的本地化字符串。
         /// </summary>
         internal static string GenerateOutput {
@@ -546,6 +555,15 @@ namespace Utility.Properties {
         }
         
         /// <summary>
+        ///   查找类似 {0}找不到项目源文件！ 的本地化字符串。
+        /// </summary>
+        internal static string NotFoundProjectError {
+            get {
+                return ResourceManager.GetString("NotFoundProjectError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Container 的本地化字符串。
         /// </summary>
         internal static string PNode {
@@ -571,6 +589,15 @@ namespace Utility.Properties {
             get {
                 object obj = ResourceManager.GetObject("Profile1", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 引用程序集{0}失败！ 的本地化字符串。
+        /// </summary>
+        internal static string ReferError {
+            get {
+                return ResourceManager.GetString("ReferError", resourceCulture);
             }
         }
         

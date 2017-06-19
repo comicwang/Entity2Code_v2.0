@@ -120,6 +120,21 @@
   <data name="BeginCollectInfo" xml:space="preserve">
     <value>开始收集创建代码所需要的必要信息</value>
   </data>
+  <data name="BeginReference" xml:space="preserve">
+    <value>正在引用程序集{0}所需要的引用</value>
+  </data>
+  <data name="BuildComplete" xml:space="preserve">
+    <value>项目{0}的代码创建完成</value>
+  </data>
+  <data name="CollseAll" xml:space="preserve">
+    <value>开始折叠所有文件</value>
+  </data>
+  <data name="Data2ObjEndName" xml:space="preserve">
+    <value>DTO</value>
+  </data>
+  <data name="EndGenerate" xml:space="preserve">
+    <value>创建模板{0}的{1}代码成功</value>
+  </data>
   <data name="NameSpaceName" xml:space="preserve">
     <value>NameSpace</value>
   </data>

@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Utility.Base
 {
+    /// <summary>
+    /// 提供项目设置扩展
+    /// </summary>
     public static class ProjectSettingExtention
     {
         #region methods
@@ -83,10 +86,19 @@ namespace Utility.Base
             return null;
         }
 
+        /// <summary>
+        /// 生成类型
+        /// </summary>
         public enum ConfigurationName
         {
+            /// <summary>
+            /// Debug
+            /// </summary>
             Debug,
 
+            /// <summary>
+            /// Release
+            /// </summary>
             Release
         }
 

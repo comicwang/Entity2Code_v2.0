@@ -51,7 +51,6 @@
         </behavior>
       </serviceBehaviors>
     </behaviors>
-    <serviceHostingEnvironment multipleSiteBindingsEnabled="true" />
   </system.serviceModel>
   <log4net>
     <!--定义输出到文件中-->

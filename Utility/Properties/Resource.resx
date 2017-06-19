@@ -308,4 +308,13 @@
   <data name="TabelName" xml:space="preserve">
     <value>EntityName</value>
   </data>
+  <data name="ReferError" xml:space="preserve">
+    <value>引用程序集{0}失败！</value>
+  </data>
+  <data name="NotFoundProjectError" xml:space="preserve">
+    <value>{0}找不到项目源文件！</value>
+  </data>
+  <data name="GenerateError" xml:space="preserve">
+    <value>创建模板{0}的{1}代码失败！</value>
+  </data>
 </root>

@@ -50,92 +50,225 @@ namespace Utility.CodeFirst
         ManyToMany,//多对多
     }
 
+    /// <summary>
+    /// 构造函数
+    /// </summary>
     public class CodeFirstTools
     {
-        // 参数配置
+        /// <summary>
+        ///  参数配置
+        /// </summary>
         public static string DataType = "Oracle";
 
-        public static string ConnectionStringName = "MyDbContext";        	//连接字符串的名称	
+        /// <summary>
+        /// 连接字符串的名称
+        /// </summary>
+        public static string ConnectionStringName = "MyDbContext";        		
 
-        public static bool IncludeViews = true; //是否包含视图
+        /// <summary>
+        /// 是否包含视图
+        /// </summary>
+        public static bool IncludeViews = true; 
 
-        public static bool AddUnitTestingDbContext = true; //输出的时候是否添加测试的上下文
+        /// <summary>
+        /// 输出的时候是否添加测试的上下文
+        /// </summary>
+        public static bool AddUnitTestingDbContext = true; 
 
-        public static string DbContextName = "MyDbContext"; //上下文的类名称
+        /// <summary>
+        /// 上下文的类名称
+        /// </summary>
+        public static string DbContextName = "MyDbContext"; 
 
-        public static string DbContextBaseClass = "DbContext"; //上下文的基础类名,这个基本上不变
+        /// <summary>
+        /// 上下文的基础类名,这个基本上不变
+        /// </summary>
+        public static string DbContextBaseClass = "DbContext"; 
 
-        public static string ConfigurationClassName = "Map";//配置类名，这个基本上不变
+        /// <summary>
+        /// 配置类名，这个基本上不变
+        /// </summary>
+        public static string ConfigurationClassName = "Map";
 
-        public static string CollectionType = "List"; //集合类型，由于导航属性
+        /// <summary>
+        /// 集合类型，由于导航属性
+        /// </summary>
+        public static string CollectionType = "List"; 
 
-        public static string CollectionTypeNamespace = ""; //集合类型的命名空间，"ObservableCollection" 此类型需要命名空间"System.Collections.ObjectModel"
+        /// <summary>
+        /// 集合类型的命名空间，"ObservableCollection" 此类型需要命名空间"System.Collections.ObjectModel"
+        /// </summary>
+        public static string CollectionTypeNamespace = ""; 
 
-        public static bool MakeClassesPartial = true; //是否将类标记为部分类
+        /// <summary>
+        /// 是否将类标记为部分类
+        /// </summary>
+        public static bool MakeClassesPartial = true; 
 
-        public static bool GenerateSeparateFiles = false; //是否生成多个文件,一个类一个文件
+        /// <summary>
+        /// 是否生成多个文件,一个类一个文件
+        /// </summary>
+        public static bool GenerateSeparateFiles = false; 
 
-        public static string FileExtension = ".cs"; //文件的扩展名
+        /// <summary>
+        /// 文件的扩展名
+        /// </summary>
+        public static string FileExtension = ".cs"; 
 
-        //This will rename the tables & fields to use CamelCase(骆驼拼写法,比如，backColor这个复合词，color的第一个字母采用大写).
-        // If false table & field names will be left alone.
+        /// <summary>
+        /// This will rename the tables & fields to use CamelCase(骆驼拼写法,比如，backColor这个复合词，color的第一个字母采用大写).
+        /// If false table & field names will be left alone.
+        /// </summary>
         public static bool UseCamelCase = true;
 
-        public static bool IncludeComments = true; //是否包含注释
+        /// <summary>
+        /// 是否包含注释
+        /// </summary>
+        public static bool IncludeComments = true; 
 
-        public static bool IncludeQueryTraceOn9481Flag = false; //是否包含查询跟踪
+        /// <summary>
+        /// 是否包含查询跟踪
+        /// </summary>
+        public static bool IncludeQueryTraceOn9481Flag = false; 
 
-        public static ExtendedPropertyCommentsStyle IncludeExtendedPropertyComments = ExtendedPropertyCommentsStyle.InSummaryBlock;//注释位置
+        /// <summary>
+        /// 注释位置
+        /// </summary>
+        public static ExtendedPropertyCommentsStyle IncludeExtendedPropertyComments = ExtendedPropertyCommentsStyle.InSummaryBlock;
 
-        public static bool AddWcfDataAttributes = false; //是否添加WCF的数据契约
+        /// <summary>
+        /// 是否添加WCF的数据契约
+        /// </summary>
+        public static bool AddWcfDataAttributes = false; 
 
-        public static string ExtraWcfDataContractAttributes = ""; //额外的数据契约信息
+        /// <summary>
+        /// 额外的数据契约信息
+        /// </summary>
+        public static string ExtraWcfDataContractAttributes = ""; 
 
-        public static string SchemaName = null; //表空间名称
+        /// <summary>
+        /// 表空间名称
+        /// </summary>
+        public static string SchemaName = null; 
 
-        public  static bool DisableGeographyTypes = false; //是否使用 System.Data.Entity.Spatial.DbGeometry 类型，Odata不支持此类型
+        /// <summary>
+        /// 是否使用 System.Data.Entity.Spatial.DbGeometry 类型，Odata不支持此类型
+        /// </summary>
+        public  static bool DisableGeographyTypes = false; 
 
-        public static bool PrependSchemaName = true;// 预先考虑表空间名称，当表空间与表名一至的时候
+        /// <summary>
+        /// 预先考虑表空间名称，当表空间与表名一至的时候
+        /// </summary>
+        public static bool PrependSchemaName = true;// 
 
-        public static Regex TableFilterExclude = null;// 不包含的表
-        public static Regex TableFilterInclude = null;// 包含的表
+        /// <summary>
+        /// 不包含的表
+        /// </summary>
+        public static Regex TableFilterExclude = null;
 
-        public static Regex StoredProcedureFilterExclude = null;//不包含的存储过程
-        public static Regex StoredProcedureFilterInclude = null;//包含的存储过程
+        /// <summary>
+        /// 包含的表
+        /// </summary>
+        public static Regex TableFilterInclude = null;
 
-        public static Regex ColumnFilterExclude = null;// 不包含的表列
+        /// <summary>
+        /// 不包含的存储过程
+        /// </summary>
+        public static Regex StoredProcedureFilterExclude = null;
 
-        public static string[] ConfigFilenameSearchOrder = null;// 配置文件名，用于搜索
-        public static string[] AdditionalNamespaces = null;// 额外的命名空间
+        /// <summary>
+        /// 包含的存储过程
+        /// </summary>
+        public static Regex StoredProcedureFilterInclude = null;
 
-        public static string _connectionString = "";//连接字符串
+        /// <summary>
+        /// 不包含的表列
+        /// </summary>
+        public static Regex ColumnFilterExclude = null;
 
-        public static string _providerName = "";//提供程序
+        /// <summary>
+        /// 配置文件名，用于搜索
+        /// </summary>
+        public static string[] ConfigFilenameSearchOrder = null;
 
-        public static string _configFilePath = "";// 配置文件路径
+        /// <summary>
+        /// 额外的命名空间
+        /// </summary>
+        public static string[] AdditionalNamespaces = null;
 
-        public static Func<string, string, string> TableRename;// 改表名的委托
-        public static Func<string, string, string> StoredProcedureRename;//改存储过程的委托
-        public static Func<Column, Table, Column> UpdateColumn;// 更新表列的委托
+        /// <summary>
+        /// 连接字符串
+        /// </summary>
+        public static string _connectionString = "";
 
-        //数据迁移的相关配置
-        public static string MigrationConfigurationFileName = null;// 
-        public static string MigrationStrategy = "MigrateDatabaseToLatestVersion";//
-        public static bool AutomaticMigrationsEnabled = true;//
-        public static bool AutomaticMigrationDataLossAllowed = true;//
+        /// <summary>
+        /// 提供程序
+        /// </summary>
+        public static string _providerName = "";
 
-        //特性表识
+        /// <summary>
+        ///  配置文件路径
+        /// </summary>
+        public static string _configFilePath = "";
+
+        /// <summary>
+        /// 改表名的委托
+        /// </summary>
+        public static Func<string, string, string> TableRename;
+        
+        /// <summary>
+        /// 改存储过程的委托
+        /// </summary>
+        public static Func<string, string, string> StoredProcedureRename;
+
+        /// <summary>
+        /// 更新表列的委托
+        /// </summary>
+        public static Func<Column, Table, Column> UpdateColumn;
+
+        /// <summary>
+        /// 数据迁移的相关配置
+        /// </summary>
+        public static string MigrationConfigurationFileName = null;
+
+        /// <summary>
+        /// 数据迁移策略
+        /// </summary>
+        public static string MigrationStrategy = "MigrateDatabaseToLatestVersion";
+
+        /// <summary>
+        /// 自动迁移
+        /// </summary>
+        public static bool AutomaticMigrationsEnabled = true;
+
+        /// <summary>
+        /// 允许迁移数据丢失
+        /// </summary>
+        public static bool AutomaticMigrationDataLossAllowed = true;
+
+        /// <summary>
+        /// 特性表识
+        /// </summary>
         public static string CodeGeneratedAttribute = "[GeneratedCodeAttribute(\"CodeFirstTools\", \"1.0.0.0\")]";//
 
-        //生成的元素包括
-        public static Elements ElementsToGenerate = Elements.Poco | Elements.Context | Elements.UnitOfWork | Elements.PocoConfiguration | Elements.StoredProcedures;//
-        //各种命名空间
+        /// <summary>
+        /// 生成的元素包括
+        /// </summary>
+        public static Elements ElementsToGenerate = Elements.Poco | Elements.Context | Elements.UnitOfWork | Elements.PocoConfiguration | Elements.StoredProcedures;
+
+        /// <summary>
+        /// 各种命名空间
+        /// </summary>
         public static string PocoNamespace, ContextNamespace, UnitOfWorkNamespace, PocoConfigurationNamespace = "";
 
-        // Settings to allow TargetFramework checks
-        public static string TargetFrameworkVersion;//NET版本
+        /// <summary>
+        /// NET版本
+        /// </summary>
+        public static string TargetFrameworkVersion;
 
-        //检查是否支持当前的版本
+        /// <summary>
+        /// 检查是否支持当前的版本
+        /// </summary>
         public static Func<string, bool> IsSupportedFrameworkVersion = (string frameworkVersion) =>
         {
             if (!string.IsNullOrEmpty(TargetFrameworkVersion))
@@ -145,8 +278,14 @@ namespace Utility.CodeFirst
             return true;
         };
 
+        /// <summary>
+        /// 数据目录
+        /// </summary>
         public static string DataDirectory = "|DataDirectory|";//
 
+        /// <summary>
+        /// 不能空的数据类型
+        /// </summary>
        public static string[] NotNullable = new string[]
         {
             "string", 
@@ -157,7 +296,9 @@ namespace Utility.CodeFirst
             "System.Data.Entity.Spatial.DbGeometry"
         };
 
-        //系统预留的关键字
+        /// <summary>
+       /// 系统预留的关键字
+        /// </summary>
        public static string[] ReservedKeywords = new string[]
         {
             "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char",
@@ -171,9 +312,14 @@ namespace Utility.CodeFirst
             "unchecked", "unsafe", "ushort", "using", "virtual", "volatile", "void", "while"
         };
 
-        //清空
+        /// <summary>
+       /// 清空表达式
+        /// </summary>
         public static readonly Regex RxCleanUp = new Regex(@"[^\w\d_]", RegexOptions.Compiled);
 
+        /// <summary>
+        /// 清空委托
+        /// </summary>
         public static readonly Func<string, string> CleanUp = (str) =>
         {
             // Replace punctuation and symbols in variable names as these are not allowed.
@@ -205,7 +351,9 @@ namespace Utility.CodeFirst
             return str;
         };
 
-        //连接字符串
+        /// <summary>
+        /// 连接字符串
+        /// </summary>
         public static string ConnectionString
         {
             get
@@ -213,7 +361,10 @@ namespace Utility.CodeFirst
                 return _connectionString;
             }
         }
-        //提供程序
+        
+        /// <summary>
+        /// 提供程序
+        /// </summary>
         public static string ProviderName
         {
             get
@@ -222,7 +373,12 @@ namespace Utility.CodeFirst
             }
         }
 
-        //检查参数是否为空
+        /// <summary>
+        /// 检查参数是否为空
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="arg"></param>
+        /// <param name="name"></param>
         public static void ArgumentNotNull<T>(T arg, string name) where T : class
         {
             if (arg == null)
@@ -231,7 +387,11 @@ namespace Utility.CodeFirst
             }
         }
 
-        //检查表列是否为空
+        /// <summary>
+        /// 检查表列是否为空
+        /// </summary>
+        /// <param name="col"></param>
+        /// <returns></returns>
         public static string CheckNullable(Column col)
         {
             string result = "";
@@ -240,7 +400,13 @@ namespace Utility.CodeFirst
             return result;
         }
 
-        //获取连接字符串，提供程序，配置路径
+        /// <summary>
+        /// 获取连接字符串，提供程序，配置路径
+        /// </summary>
+        /// <param name="connectionStringName"></param>
+        /// <param name="providerName"></param>
+        /// <param name="configFilePath"></param>
+        /// <returns></returns>
         public static string GetConnectionString(ref string connectionStringName, out string providerName, out string configFilePath)
         {
             providerName = null;
@@ -274,7 +440,9 @@ namespace Utility.CodeFirst
             return result;
         }
 
-        //初始化连接字符串，提供程序，配置路径
+        /// <summary>
+        /// 初始化连接字符串，提供程序，配置路径
+        /// </summary>
         public static void InitConnectionString()
         {
             if (!String.IsNullOrEmpty(_connectionString))
@@ -287,14 +455,21 @@ namespace Utility.CodeFirst
         }
 
 
-        //控制密码
+        /// <summary>
+        /// 控制密码
+        /// </summary>
+        /// <param name="connectionString"></param>
+        /// <returns></returns>
         public static string ZapPassword(string connectionString)
         {
             var rx = new Regex("password=.*;", RegexOptions.Singleline | RegexOptions.Multiline | RegexOptions.IgnoreCase);
             return rx.Replace(connectionString, "password=**zapped**;");
         }
 
-        //获取数据库提供程序工厂
+        /// <summary>
+        /// 获取数据库提供程序工厂
+        /// </summary>
+        /// <returns></returns>
         public static DbProviderFactory GetDbProviderFactory()
         {
             //InitConnectionString();
@@ -327,6 +502,10 @@ namespace Utility.CodeFirst
             }
         }
 
+        /// <summary>
+        /// 尝试获取数据库提供程序工厂
+        /// </summary>
+        /// <returns></returns>
         public static DbProviderFactory TryGetDbProviderFactory()
         {
             try
@@ -339,7 +518,11 @@ namespace Utility.CodeFirst
             }
         }
 
-        //获取表
+        /// <summary>
+        /// 获取表
+        /// </summary>
+        /// <param name="factory"></param>
+        /// <returns></returns>
         public static Tables LoadTables(DbProviderFactory factory)
         {
             if (factory == null || !(ElementsToGenerate.HasFlag(Elements.Poco) ||
@@ -437,7 +620,11 @@ namespace Utility.CodeFirst
             }
         }
 
-        //获取存储过程
+        /// <summary>
+        /// 获取存储过程
+        /// </summary>
+        /// <param name="factory"></param>
+        /// <returns></returns>
         private static List<StoredProcedure> LoadStoredProcs(DbProviderFactory factory)
         {
             if (factory == null || !ElementsToGenerate.HasFlag(Elements.StoredProcedures))
@@ -491,7 +678,14 @@ namespace Utility.CodeFirst
             }
         }
 
-        //获取表与表之间的关系
+        /// <summary>
+        /// 获取表与表之间的关系
+        /// </summary>
+        /// <param name="pkTable"></param>
+        /// <param name="fkTable"></param>
+        /// <param name="fkCol"></param>
+        /// <param name="pkCol"></param>
+        /// <returns></returns>
         public static Relationship CalcRelationship(Table pkTable, Table fkTable, Column fkCol, Column pkCol)
         {
             bool fkTableSinglePrimaryKey = (fkTable.PrimaryKeys.Count() == 1);
@@ -522,7 +716,10 @@ namespace Utility.CodeFirst
     /// </summary>
     public static class Inflector
     {
-        static public IPluralizationService PluralizationService = null;
+        /// <summary>
+        /// 服务
+        /// </summary>
+        public static IPluralizationService PluralizationService = null;
 
         /// <summary>
         /// Makes the plural.
@@ -634,20 +831,50 @@ namespace Utility.CodeFirst
 
     #region 存储过程类
 
+    /// <summary>
+    /// 存储过程
+    /// </summary>
     public class StoredProcedure
     {
+        /// <summary>
+        /// 表空间
+        /// </summary>
         public string Schema;
+
+        /// <summary>
+        /// 名称
+        /// </summary>
         public string Name;
+
+        /// <summary>
+        /// 驼峰名称
+        /// </summary>
         public string NameHumanCase;
+
+        /// <summary>
+        /// 参数
+        /// </summary>
         public List<StoredProcedureParameter> Parameters;
+
+        /// <summary>
+        /// 返回项
+        /// </summary>
         public List<DataColumn> ReturnColumns;
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         public StoredProcedure()
         {
             Parameters = new List<StoredProcedureParameter>();
             ReturnColumns = new List<DataColumn>();
         }
 
+        /// <summary>
+        /// 检查空
+        /// </summary>
+        /// <param name="col"></param>
+        /// <returns></returns>
         public static string CheckNullable(DataColumn col)
         {
             string result = " ";
@@ -657,24 +884,69 @@ namespace Utility.CodeFirst
         }
     }
 
+    /// <summary>
+    /// 存储过程参数类型
+    /// </summary>
     public enum StoredProcedureParameterMode
     {
+        /// <summary>
+        /// 输入参数
+        /// </summary>
         In,
+        /// <summary>
+        /// 输入或者输出
+        /// </summary>
         InOut,
+        /// <summary>
+        /// 输出
+        /// </summary>
         Out
     };
 
+    /// <summary>
+    /// 存储过程参数
+    /// </summary>
     public class StoredProcedureParameter
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public int Ordinal;
+        /// <summary>
+        /// 参数类型
+        /// </summary>
         public StoredProcedureParameterMode Mode;
+        /// <summary>
+        /// 名称
+        /// </summary>
         public string Name;
+        /// <summary>
+        /// 驼峰名称
+        /// </summary>
         public string NameHumanCase;
+        /// <summary>
+        /// 数据库类型
+        /// </summary>
         public string SqlDbType;
+        /// <summary>
+        /// 属性类型
+        /// </summary>
         public string PropertyType;
+        /// <summary>
+        /// 时间精度
+        /// </summary>
         public int DateTimePrecision;
+        /// <summary>
+        /// 最大长度
+        /// </summary>
         public int MaxLength;
+        /// <summary>
+        /// 精度
+        /// </summary>
         public int Precision;
+        /// <summary>
+        /// 大小
+        /// </summary>
         public int Scale;
     }
 

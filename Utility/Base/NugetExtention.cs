@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Utility.Base
 {
+    /// <summary>
+    /// 提供Nuget操作的扩展
+    /// </summary>
     public static class NugetExtention
     {
         #region methods
@@ -14,8 +17,8 @@ namespace Utility.Base
         /// <summary>
         /// 安装Nuget程序包
         /// </summary>
-        /// <param name="prj"></param>
-        /// <param name="PackageName"></param>
+        /// <param name="prj">项目COM</param>
+        /// <param name="PackageName">安装包名称</param>
         public static void InstallNugetPackage(this Project prj, string PackageName)
         {
             DTE dte = prj.DTE;

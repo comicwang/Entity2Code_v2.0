@@ -1,4 +1,4 @@
-﻿using Infoearth.Entity2CodeTool.Model;
+﻿
 using Microsoft.Data.ConnectionUI;
 using System;
 using System.Data.Common;
@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using Infoearth.Entity2CodeTool.Helps;
+
 using Utility.Common;
 using Utility.Converter;
 using Utility;
@@ -345,7 +345,7 @@ namespace Infoearth.Entity2CodeTool
             PrjCmdId.SetProjectName(PrjCmdId.DomainContext, DomainContxt);
             PrjCmdId.SetProjectName(PrjCmdId.DomainEntity, DomainEntity);
 
-            if (rbtnDb.Checked)
+            if (this.chkService.Checked)
             {
                 KeywordContainer.RegistSource("$IsPartService$", "true");
             }

@@ -12,11 +12,11 @@ using EnvDTE100;
 using Utility.Common;
 using Utility.Generate;
 using Utility.Core;
-using Utility.Helps;
 using Utility.Base;
 using Utility.CodeFirst;
 using Utility;
 using Utility.Entity;
+using Utility.Converter;
 
 namespace Infoearth.Entity2CodeTool
 {
@@ -27,6 +27,12 @@ namespace Infoearth.Entity2CodeTool
     {
         private BackgroundWorker _work;
         private DTE _dte;
+        private float _totalPercent = 0;
+        private int _currentTotalCount = 0;
+        private int _currentCount = 0;
+        private int _processTotalCount = 0;
+        private int _processCurrentCount = 0;
+
       
         /// <summary>
         /// 构造函数
@@ -49,9 +55,10 @@ namespace Infoearth.Entity2CodeTool
 
         private void _work_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            SolutionExplorHelp.CollapseAll();
-            _dte.RebuildSolution();
-            _dte.OutString("代码创建完成..");
+            _dte.OutString(Properties.Resources.CollseAll);
+            _dte.Solution.CollapseAllProject();
+            _dte.Solution.RebuildSln();
+            _dte.OutString(string.Format(Properties.Resources.BuildComplete, KeywordContainer.Resove("$ProjectName$")));
         }
 
         private void _work_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -67,11 +74,11 @@ namespace Infoearth.Entity2CodeTool
             try
             {
                 NewProject();
-                //ReferenceLogic.Add();
+                AddRef();
             }
             catch (Exception ex)
             {
-                _dte.OutWindow(ex.Message);
+                _dte.OutWindow(ex.Message,"Entity2CodeLog");
             }
         }
 
@@ -84,7 +91,9 @@ namespace Infoearth.Entity2CodeTool
             try
             {
                 bool allowNew = true;
-                GenerateEntityContext context = new GenerateEntityContext();
+                bool isPartService = KeywordContainer.Resove("$IsPartService$") == "true";
+                GenerateContext context = new GenerateContext();
+                context.GeneratedOne += context_GeneratedOne;
                 CodeGenerate generateCode = new CodeGenerate();
                 TempGenerate generateTemp = new TempGenerate();
                 generateTemp.TempBuild = new StringBuilder();
@@ -112,16 +121,18 @@ namespace Infoearth.Entity2CodeTool
                     str = "<add name=\"" + CodeFirstTools.DbContextName + "\" providerName=\"" + CodeFirstTools.ProviderName + "\" connectionString=\"" + CodeFirstTools.ConnectionString + ";MultipleActiveResultSets=True;Pooling=True;\"/>";
                 else
                     str = "<add name=\"" + CodeFirstTools.DbContextName + "\" providerName=\"Oracle.DataAccess.Client\" connectionString=\"" + CodeFirstTools.ConnectionString + "\"/>";
-                container.Add("$ConnectionString$", str);
-                container.Add("$DBSchemaApp$", string.Format("<add key=\"DBSchema\" value=\"{0}\"/>", CodeFirstTools.SchemaName));
 
+                int totalPercent = CodeFirstLogic.Tables.Count;
+               
                 #region 循环实体
 
-                int count = 0;
+                _processCurrentCount = 0;
+                _processTotalCount = CodeFirstLogic.Tables.Count;
+                _totalPercent = 0.6f;
                 //循环实体
                 foreach (Table tbl in CodeFirstLogic.Tables.Where(t => !t.IsMapping).OrderBy(x => x.NameHumanCase))
                 {
-                    count++;
+                    _processCurrentCount++;
                     Dictionary<string, string> keycontainer = new Dictionary<string, string>();
                     keycontainer.Add("$Entity$", tbl.Name);
                     keycontainer.Add("$Data2Obj$", tbl.NameHumanCase);
@@ -193,19 +204,30 @@ namespace Infoearth.Entity2CodeTool
                     entityBuild.Clear();
 
                     context.injection(generateCode, CdeCmdId.DomainContextId.IRepository, allowNew, keycontainer);//IRepository
-                    context.injection(generateCode, CdeCmdId.InfrastructureId.Repository, allowNew, keycontainer);//Repository
+                    context.injection(generateCode, CdeCmdId.InfrastructureId.Repository, allowNew, keycontainer);//Repositor                 
                     context.injection(generateCode, CdeCmdId.ApplicationId.Application, allowNew, keycontainer);//Application
                     context.injection(generateCode, CdeCmdId.IApplicationId.IApplication, allowNew, keycontainer);//IApplication
                     context.injection(generateCode, CdeCmdId.Data2ObjectId.Data2Obj, allowNew, keycontainer);//Data2Obj
                     context.injection(generateCode, CdeCmdId.InfrastructureId.Map, allowNew, keycontainer);//Map
                     context.injection(generateCode, CdeCmdId.DomainEntityId.Entity, allowNew, keycontainer);//Entity
-                    context.injection(generateProTemp, CdeCmdId.Data2ObjectId.Profile.UnFix, count == CodeFirstLogic.Tables.Count, keycontainer);//ProfiTemp
-                    context.injection(generateTemp, CdeCmdId.InfrastructureId.DBContext.UnFix, count == CodeFirstLogic.Tables.Count, keycontainer);//DbContextTemp
-                    context.injection(serverProTemp, CdeCmdId.ServiceId.Service.UnFix, count == CodeFirstLogic.Tables.Count, keycontainer);//ServerTemp
-                    context.injection(iServerProTemp, CdeCmdId.ServiceId.IService.UnFix, count == CodeFirstLogic.Tables.Count, keycontainer);//IServerTemp
-                    context.injection(containerTemp, CdeCmdId.ServiceId.Container.UnFix, count == CodeFirstLogic.Tables.Count, keycontainer);//ContainerTemp
+                    context.injection(generateProTemp, CdeCmdId.Data2ObjectId.Profile.UnFix, _processCurrentCount == CodeFirstLogic.Tables.Count, keycontainer);//ProfiTemp
+                    context.injection(generateTemp, CdeCmdId.InfrastructureId.DBContext.UnFix, _processCurrentCount == CodeFirstLogic.Tables.Count, keycontainer);//DbContextTemp
+                    context.injection(serverProTemp, CdeCmdId.ServiceId.Service.UnFix, isPartService || _processCurrentCount == CodeFirstLogic.Tables.Count, keycontainer);//ServerTemp
+                    context.injection(iServerProTemp, CdeCmdId.ServiceId.IService.UnFix, isPartService || _processCurrentCount == CodeFirstLogic.Tables.Count, keycontainer);//IServerTemp
+                    if (isPartService)
+                    {
+                        keycontainer.Add("$ServiceName$", tbl.NameHumanCase);
+                        context.injection(generateCode, CdeCmdId.ServiceId.IService.Fix, allowNew, keycontainer);//IServer
+                        context.injection(generateCode, CdeCmdId.ServiceId.CodeBehind, allowNew, keycontainer);//CodeBehind
+                        context.injection(generateCode, CdeCmdId.ServiceId.Service.Fix, allowNew, keycontainer);//Server
+                    }
+                    context.injection(containerTemp, CdeCmdId.ServiceId.Container.UnFix, _processCurrentCount == CodeFirstLogic.Tables.Count, keycontainer);//ContainerTemp
+                    _currentTotalCount = context.Count;
                     context.Commit();
                 }
+                container.Add("$ConnectionString$", str);
+                container.Add("$DBSchemaApp$", string.Format("<add key=\"DBSchema\" value=\"{0}\"/>", CodeFirstTools.SchemaName));
+
 
                 #endregion
 
@@ -213,16 +235,24 @@ namespace Infoearth.Entity2CodeTool
                 context.injection(generateCode,CdeCmdId.InfrastructureId.DBContext.Fix, allowNew, null);//DbContext
                 context.injection(generateCode,CdeCmdId.Data2ObjectId.Profile.Fix, allowNew, null);//DbContext
                 context.injection(generateCode,CdeCmdId.InfrastructureId.ContextUnit, allowNew, null);//DbContextUnit
-                context.injection(generateCode,CdeCmdId.ServiceId.IService.Fix, allowNew, null);//IServer
-                context.injection(generateCode,CdeCmdId.ServiceId.Service.Fix, allowNew, null);//Server
+                if (!isPartService)
+                {
+                    container.Add("$ServiceName$", KeywordContainer.Resove("$ProjectName$"));
+                    context.injection(generateCode, CdeCmdId.ServiceId.IService.Fix, allowNew, container);//IServer
+                    context.injection(generateCode, CdeCmdId.ServiceId.CodeBehind, allowNew, container);//CodeBehind
+                    context.injection(generateCode, CdeCmdId.ServiceId.Service.Fix, allowNew, container);//Server
+                }
                 context.injection(generateCode,CdeCmdId.ServiceId.Container.Fix, allowNew, null);//Container
                 context.injection(generateCode,CdeCmdId.ServiceId.WebConfig, allowNew, null);//WebConfig
                 context.injection(generateCode,CdeCmdId.ServiceId.UnityInstanceProviderServiceBehavior, allowNew, null);//UnityInstanceProviderServiceBehavior
                 context.injection(generateCode,CdeCmdId.ServiceId.UnityInstanceProvider, allowNew, null);//UnityInstanceProvider       
                 context.injection(generateCode,CdeCmdId.ServiceId.AttachDataSignBehavior, allowNew, null);//AttachDataSignBehavior      ,
-                context.injection(generateCode,CdeCmdId.ServiceId.CodeBehind, allowNew, null);//CodeBehind
+               
+                _totalPercent = 0.8f;
+                _processTotalCount = 1;
+                _processCurrentCount = 1;
+                _currentTotalCount = context.Count;
                 context.Commit();
-
                 Project serverProject = TemplateContainer.Resove<Project>(PrjCmdId.Service);
                 serverProject.SetLog4netWatch();
 
@@ -240,82 +270,39 @@ namespace Infoearth.Entity2CodeTool
             }
         }
 
+        void context_GeneratedOne(object sender, EventGeneratedArg arg)
+        {
+            int currentCount = _currentTotalCount- arg.CurrentCount;
+            int percent = (int)(_totalPercent * (_processCurrentCount / _processTotalCount) * (currentCount / _currentTotalCount) * 100);
+            _work.ReportProgress(percent, string.Format(Properties.Resources.EndGenerate, PrjCmdId.FindProjectName(arg.GeneratedId), arg.CurrentEntity));
+        }
+
         private void AddRef()
         {
-            CommonContainer.CommonServer.OutString("开始添加构架程序集引用.", true);
+            ReferenceContext context = new ReferenceContext();
+            context.injection(PrjCmdId.Infrastructure, PrjCmdId.DomainContext, PrjCmdId.DomainEntity, "iTelluro.Explorer.Domain.CodeFirst.Seedwork.dll", "iTelluro.Explorer.Infrastruct.CodeFirst.Seedwork.dll", "EntityFramework.dll", "System.Data.Entity", "System.ComponentModel.DataAnnotations");
 
-            CommonContainer.CommonServer.OutString("添加基础结构层程序集引用.", true);
-            //Infrastructure
-            Project proj = CommonContainer.r PrjCmdId.Infrastructure
-            .AddReferenceFromProject(ProjectContainer.DomainContext);
-            ProjectContainer.Infrastructure.AddReferenceFromProject(ProjectContainer.DomainEntity);
-            ProjectContainer.Infrastructure.AddReference("iTelluro.Explorer.Domain.CodeFirst.Seedwork.dll".GetFileResource("Dll"));
-            ProjectContainer.Infrastructure.AddReference("iTelluro.Explorer.Infrastruct.CodeFirst.Seedwork.dll".GetFileResource("Dll"));
+            context.injection(PrjCmdId.DomainContext, PrjCmdId.DomainEntity, "iTelluro.Explorer.Domain.CodeFirst.Seedwork.dll", "System.Data.Entity");
 
-            ProjectContainer.Infrastructure.AddReference("EntityFramework.dll".GetFileResource("Dll"));
-            ProjectContainer.Infrastructure.AddReference("System.Data.Entity");
-            ProjectContainer.Infrastructure.AddReference("System.ComponentModel.DataAnnotations");
+            context.injection(PrjCmdId.DomainEntity, "iTelluro.Explorer.Domain.CodeFirst.Seedwork.dll");
 
-            CommonContainer.CommonServer.OutString("添加领域层程序集引用.", true);
-            //DomainContext
-            ProjectContainer.DomainContext.AddReferenceFromProject(ProjectContainer.DomainEntity);
-            ProjectContainer.DomainContext.AddReference("iTelluro.Explorer.Domain.CodeFirst.Seedwork.dll".GetFileResource("Dll"));
-            ProjectContainer.DomainEntity.AddReference("System.Data.Entity");
+            context.injection(PrjCmdId.Application, PrjCmdId.Data2Object, PrjCmdId.DomainContext, PrjCmdId.DomainEntity, PrjCmdId.IApplication, "iTelluro.Explorer.Domain.CodeFirst.Seedwork.dll", "iTelluro.Explorer.Infrastruct.CodeFirst.Seedwork.dll", "iTelluro.Explorer.Application.CodeFirst.Seedwork.dll", "iTelluro.Explorer.Infrastructure.CrossCutting.dll");
+            context.injection(PrjCmdId.IApplication, PrjCmdId.DomainEntity, PrjCmdId.Data2Object);
+            context.injection(PrjCmdId.Data2Object, PrjCmdId.DomainEntity, "System.Runtime.Serialization", "iTelluro.Explorer.Domain.CodeFirst.Seedwork.dll", "AutoMapper.dll", "AutoMapper.Net4.dll");
+            context.injection(PrjCmdId.Service, PrjCmdId.Infrastructure, PrjCmdId.Application, PrjCmdId.IApplication, PrjCmdId.DomainContext, PrjCmdId.Data2Object, "System.Runtime.Serialization", "System.ServiceModel", "EntityFramework.dll", "iTelluro.Explorer.Domain.CodeFirst.Seedwork.dll", "iTelluro.Explorer.Infrastruct.CodeFirst.Seedwork.dll", "iTelluro.Explorer.Application.CodeFirst.Seedwork.dll", "iTelluro.Explorer.Infrastructure.CrossCutting.dll", "AutoMapper.dll", "AutoMapper.Net4.dll", "iTelluro.Explorer.Infrastructure.CrossCutting.NetFramework.dll", "iTelluro.SSO.dll", "iTelluro.SSO.Common.dll", "iTelluro.SSO.WebServices.dll", "iTelluro.SYS.Entity.dll", "iTelluro.Utility.dll", "log4net.dll", "Microsoft.Practices.Unity.dll");
+            context.HandledOne += context_HandledOne;
+            _totalPercent = 1;
+            _processCurrentCount = 1;
+            _processTotalCount = 1;
+            _currentTotalCount = context.Count;
+            context.Commit();
+        }
 
-            CommonContainer.CommonServer.OutString("添加领域实体层程序集引用.", true);
-            //DomainEntity
-            ProjectContainer.DomainEntity.AddReference("iTelluro.Explorer.Domain.CodeFirst.Seedwork.dll".GetFileResource("Dll"));
-
-            CommonContainer.CommonServer.OutString("添加应用层程序集引用.", true);
-            //Application
-            ProjectContainer.Application.AddReferenceFromProject(ProjectContainer.Data2Object);
-            ProjectContainer.Application.AddReferenceFromProject(ProjectContainer.DomainContext);
-            ProjectContainer.Application.AddReferenceFromProject(ProjectContainer.DomainEntity);
-            ProjectContainer.Application.AddReferenceFromProject(ProjectContainer.IApplication);
-            ProjectContainer.Application.AddReference("iTelluro.Explorer.Domain.CodeFirst.Seedwork.dll".GetFileResource("Dll"));
-            ProjectContainer.Application.AddReference("iTelluro.Explorer.Infrastruct.CodeFirst.Seedwork.dll".GetFileResource("Dll"));
-            ProjectContainer.Application.AddReference("iTelluro.Explorer.Application.CodeFirst.Seedwork.dll".GetFileResource("Dll"));
-            ProjectContainer.Application.AddReference("iTelluro.Explorer.Infrastructure.CrossCutting.dll".GetFileResource("Dll"));
-
-            CommonContainer.CommonServer.OutString("添加应用接口层程序集引用.", true);
-            //IApplication
-            ProjectContainer.IApplication.AddReferenceFromProject(ProjectContainer.DomainEntity);
-            ProjectContainer.IApplication.AddReferenceFromProject(ProjectContainer.Data2Object);
-
-            CommonContainer.CommonServer.OutString("添加应用实体层程序集引用.", true);
-            //Data2Object
-            ProjectContainer.Data2Object.AddReferenceFromProject(ProjectContainer.DomainEntity);
-            ProjectContainer.Data2Object.AddReference("System.Runtime.Serialization");
-            ProjectContainer.Data2Object.AddReference("iTelluro.Explorer.Domain.CodeFirst.Seedwork.dll".GetFileResource("Dll"));
-            ProjectContainer.Data2Object.AddReference("AutoMapper.dll".GetFileResource("Dll"));
-            ProjectContainer.Data2Object.AddReference("AutoMapper.Net4.dll".GetFileResource("Dll"));
-
-
-            CommonContainer.CommonServer.OutString("添加服务层程序集引用.", true);
-
-            ProjectContainer.Service.AddReferenceFromProject(ProjectContainer.Infrastructure);
-            ProjectContainer.Service.AddReferenceFromProject(ProjectContainer.Application);
-            ProjectContainer.Service.AddReferenceFromProject(ProjectContainer.IApplication);
-            ProjectContainer.Service.AddReferenceFromProject(ProjectContainer.DomainContext);
-            ProjectContainer.Service.AddReferenceFromProject(ProjectContainer.Data2Object);
-            ProjectContainer.Service.AddReference("System.Runtime.Serialization");
-            ProjectContainer.Service.AddReference("System.ServiceModel");
-            ProjectContainer.Service.AddReference("EntityFramework.dll".GetFileResource("Dll"));
-            ProjectContainer.Service.AddReference("iTelluro.Explorer.Domain.CodeFirst.Seedwork.dll".GetFileResource("Dll"));
-            ProjectContainer.Service.AddReference("iTelluro.Explorer.Infrastruct.CodeFirst.Seedwork.dll".GetFileResource("Dll"));
-            ProjectContainer.Service.AddReference("iTelluro.Explorer.Application.CodeFirst.Seedwork.dll".GetFileResource("Dll"));
-            ProjectContainer.Service.AddReference("iTelluro.Explorer.Infrastructure.CrossCutting.dll".GetFileResource("Dll"));
-            ProjectContainer.Service.AddReference("AutoMapper.dll".GetFileResource("Dll"));
-            ProjectContainer.Service.AddReference("AutoMapper.Net4.dll".GetFileResource("Dll"));
-            ProjectContainer.Service.AddReference("iTelluro.Explorer.Infrastructure.CrossCutting.NetFramework.dll".GetFileResource("Dll"));
-            ProjectContainer.Service.AddReference("iTelluro.SSO.dll".GetFileResource("Dll"));
-            ProjectContainer.Service.AddReference("iTelluro.SSO.Common.dll".GetFileResource("Dll"));
-            ProjectContainer.Service.AddReference("iTelluro.SSO.WebServices.dll".GetFileResource("Dll"));
-            ProjectContainer.Service.AddReference("iTelluro.SYS.Entity.dll".GetFileResource("Dll"));
-            ProjectContainer.Service.AddReference("iTelluro.Utility.dll".GetFileResource("Dll"));
-            ProjectContainer.Service.AddReference("log4net.dll".GetFileResource("Dll"));
-            ProjectContainer.Service.AddReference("Microsoft.Practices.Unity.dll".GetFileResource("Dll"));
-
+        void context_HandledOne(object sender, EventHandledArg arg)
+        {
+            int currentCount = _currentTotalCount - arg.CurrentCount;
+            int percent = (int)(_totalPercent * (_processCurrentCount / _processTotalCount) * (currentCount / _currentTotalCount) * 100);
+            _work.ReportProgress(percent, string.Format(Properties.Resources.BeginReference, PrjCmdId.FindProjectName(arg.HandledId)));
         }
     }
 
